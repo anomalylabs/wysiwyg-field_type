@@ -1,4 +1,4 @@
-<?php namespace Addon\FieldType\Wysiwyg;
+<?php namespace Streams\Addon\FieldType\Wysiwyg;
 
 use Streams\Core\Addon\FieldTypeAbstract;
 
