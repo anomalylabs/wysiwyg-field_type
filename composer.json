@@ -1,5 +1,5 @@
 {
-    "name": "streams/wysiwyg-field-type",
+    "name": "anomalylabs/wysiwyg-field-type",
     "description": "WYSIWYG field type for Streams Platform",
     "type": "streams-field-type",
     "authors": [
