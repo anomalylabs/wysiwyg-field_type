@@ -1,7 +1,7 @@
 {
     "name": "anomalylabs/wysiwyg-field-type",
     "description": "WYSIWYG field type for Streams Platform",
-    "type": "streams-field-type",
+    "type": "field-type",
     "authors": [
         {
             "name": "AnomalyLabs",
@@ -9,7 +9,7 @@
         }
     ],
     "source" : {
-        "type" : "git",
+        "type" : "vcs",
         "url" : "git@github.com:anomalylabs/wysiwyg-field-type.git",
         "reference" : "master"
     },
