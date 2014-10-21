@@ -1,8 +1,8 @@
-<?php namespace Anomaly\Streams\FieldType\Wysiwyg;
+<?php namespace Anomaly\Streams\Addon\FieldType\Wysiwyg;
 
-use Streams\Core\Addon\FieldTypeAbstract;
+use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeAddon;
 
-class WysiwygFieldType extends FieldTypeAbstract
+class WysiwygFieldType extends FieldTypeAddon
 {
     /**
      * The database column type this field type uses.
