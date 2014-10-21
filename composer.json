@@ -1,17 +1,17 @@
 {
-    "name": "anomalylabs/wysiwyg-field-type",
-    "description": "WYSIWYG field type for Streams Platform",
-    "type": "field-type",
+    "name": "anomaly/wysiwyg-field-type",
+    "type": "streams-addon",
+    "description": "Wysiwyg field type.",
     "authors": [
         {
             "name": "AnomalyLabs",
-            "email": "projects@aiwebsystems.com"
+            "email": "hello@anomaly.is"
         }
     ],
-    "source" : {
-        "type" : "vcs",
-        "url" : "git@github.com:anomalylabs/wysiwyg-field-type.git",
-        "reference" : "master"
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "dev"
 }
