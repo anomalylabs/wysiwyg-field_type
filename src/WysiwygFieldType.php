@@ -4,6 +4,8 @@ use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeAddon;
 
 class WysiwygFieldType extends FieldTypeAddon
 {
+    protected $slug = 'wysiwyg';
+
     /**
      * The database column type this field type uses.
      *
