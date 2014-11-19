@@ -1,0 +1,1 @@
+window.CKEDITOR_BASEPATH = 'http://streams.app/assets/default/';

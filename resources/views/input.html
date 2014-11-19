@@ -1,0 +1,9 @@
+{{ asset.add group="streams.css" file="field_type.wysiwyg::ckeditor/skins/moono/editor.css" filters="live|filename:skins/moono/editor" }}
+
+{{ asset.add group="streams.js" file="field_type.wysiwyg::js/options.js" }}
+{{ asset.add group="streams.js" file="field_type.wysiwyg::ckeditor/ckeditor.js" }}
+{{ asset.add group="streams.js" file="field_type.wysiwyg::ckeditor/lang/en.js" filters="live|filename:lang/en" }}
+{{ asset.add group="streams.js" file="field_type.wysiwyg::ckeditor/config.js" filters="live|filename:ckeditor.config" }}
+{{ asset.add group="streams.js" file="field_type.wysiwyg::js/input.js" filters="live" }}
+
+<textarea name="{{ name }}" class="{{ class }} ckeditor" placeholder="{{ placeholder }}">{{ value }}</textarea>
