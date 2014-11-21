@@ -1,5 +1,3 @@
-{{ .asset.add group="streams.js" file="field_type.wysiwyg::ckeditor/ckeditor.js" }}
-
-<script src="http://streams.app/assets/default/ckeditor/ckeditor.js"></script>
+{{ asset.add group="streams.js" file="asset::ckeditor/ckeditor.js" }}
 
 <textarea name="{{ name }}" class="{{ class }} ckeditor" placeholder="{{ placeholder }}">{{ value }}</textarea>
