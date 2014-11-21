@@ -1,2 +1,2 @@
 extensions:
-    streams_ckeditor_integration
+    streams_ckeditor_integration: *
