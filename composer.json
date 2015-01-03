@@ -1,5 +1,5 @@
 {
-    "name": "anomaly/wysiwyg-field-type",
+    "name": "anomaly/wysiwyg-field_type",
     "type": "streams-addon",
     "description": "Wysiwyg field type.",
     "authors": [
