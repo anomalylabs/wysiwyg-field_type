@@ -25,5 +25,5 @@ class WysiwygFieldType extends FieldType
      *
      * @var string
      */
-    protected $inputView = 'field_type.wysiwyg::input';
+    protected $inputView = 'anomaly.field_type.wysiwyg::input';
 }
