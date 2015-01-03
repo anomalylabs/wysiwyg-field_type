@@ -1,4 +1,4 @@
-<?php namespace Anomaly\Streams\Addon\FieldType\Wysiwyg;
+<?php namespace Anomaly\WysiwygFieldType;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 
