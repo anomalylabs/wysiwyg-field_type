@@ -1,3 +1,5 @@
 {{ add_asset("streams.js", "asset::ckeditor/ckeditor.js") }}
 
-<textarea name="{{ name }}" class="{{ class }} ckeditor" placeholder="{{ placeholder }}">{{ value }}</textarea>
+<textarea name="{{ field_type.getFieldName() }}" class="ckeditor" placeholder="{{ field_type.placeholder }}">
+    {{ field_type.value }}
+</textarea>
