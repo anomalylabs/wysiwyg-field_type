@@ -2,7 +2,13 @@
     "name": "anomaly/wysiwyg-field_type",
     "type": "streams-addon",
     "description": "A WYSIWYG editor field type powered by CKEditor.",
-    "keywords": ["streams-addon", "wysiwyg", "ckeditor", "pyrocms", "laravel"],
+    "keywords": [
+        "streams-addon",
+        "wysiwyg",
+        "ckeditor",
+        "pyrocms",
+        "laravel"
+    ],
     "homepage": "http://anomaly.is/",
     "version": "1.0.0-alpha",
     "license": "MIT",
