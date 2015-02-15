@@ -1,3 +1,7 @@
-#WYSIWYG Field Type
+# WYSIWYG Field Type
 
-A WYSIWYG editor field type powered by CKEditor.
+*anomaly.field_type.wysiwyg*
+
+#### A WYSIWYG field type powered by Ace.
+
+The WYSIWYG field type provides a text editor input powered by CKEditor.
