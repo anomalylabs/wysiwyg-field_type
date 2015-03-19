@@ -2,6 +2,6 @@
 
 *anomaly.field_type.wysiwyg*
 
-#### A WYSIWYG field type powered by Ace.
+#### A WYSIWYG field type powered by RedactorJS.
 
-The WYSIWYG field type provides a text editor input powered by CKEditor.
+The WYSIWYG field type provides a WYSIWYG editor powered by RedactorJS.
