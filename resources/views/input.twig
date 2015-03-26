@@ -1,10 +1,14 @@
 {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/redactor.js") }}
+{{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/fullscreen.js") }}
 {{ asset_add("styles.css", "anomaly.field_type.wysiwyg::css/redactor.css") }}
 
 <script type="text/javascript">
     $(function () {
         $('#{{ field_type.getInputName() }}').redactor({
             buttons: ['{{ field_type.config.buttons|join("', '")|raw }}'],
+            {% if field_type.config.plugins %}
+            plugins: ['{{ field_type.config.plugins|join("', '")|raw }}'],
+            {% endif %}
             minHeight: {{ field_type.config.height }},
             placeholder: '{{ field_type.placeholder }}',
             lang: '{{ config_get('app.locale') }}'
