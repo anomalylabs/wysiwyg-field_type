@@ -1,3 +1,7 @@
 <?php
 
-return [];
+return [
+    'buttons' => [
+        'type' => 'anomaly.field_type.tags'
+    ]
+];
