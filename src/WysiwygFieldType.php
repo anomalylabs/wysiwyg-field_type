@@ -1,6 +1,8 @@
 <?php namespace Anomaly\WysiwygFieldType;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
+use Anomaly\Streams\Platform\Application\Application;
+use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 
 /**
  * Class WysiwygFieldType
@@ -89,6 +91,23 @@ class WysiwygFieldType extends FieldType
     ];
 
     /**
+     * The application utility.
+     *
+     * @var Application
+     */
+    protected $application;
+
+    /**
+     * Create a new WysiwygFieldType instance.
+     *
+     * @param Application $application
+     */
+    public function __construct(Application $application)
+    {
+        $this->application = $application;
+    }
+
+    /**
      * Get the config array.
      *
      * @return array
@@ -106,5 +125,50 @@ class WysiwygFieldType extends FieldType
         }
 
         return $config;
+    }
+
+    /**
+     * Get the storage path.
+     *
+     * @return null|string
+     */
+    public function getStoragePath()
+    {
+
+        // If it's manually set just return it.
+        if ($path = $this->configGet('path')) {
+            return $path;
+        }
+
+        // No entry, no path.
+        if (!$this->entry) {
+            return null;
+        }
+
+        // If the entry is not an EntryInterface skip it.
+        if (!$this->entry instanceof EntryInterface) {
+            return null;
+        }
+
+        if (!$this->entry->getTitle()) {
+            return null;
+        }
+
+        $slug      = $this->entry->getStreamSlug();
+        $namespace = $this->entry->getStreamNamespace();
+        $folder    = str_slug($this->entry->getTitle(), '_');
+        $file      = $this->getField() . '.html';
+
+        return $this->application->getStoragePath("{$namespace}/{$slug}/{$folder}/{$file}");
+    }
+
+    /**
+     * Get the application storage page.
+     *
+     * @return string
+     */
+    public function getAppStoragePath()
+    {
+        return str_replace(base_path(), '', $this->getStoragePath());
     }
 }

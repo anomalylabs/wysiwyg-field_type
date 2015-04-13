@@ -5,7 +5,7 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#{{ field_type.getInputName() }}').redactor({
+        $('#{{ field_type.input_name }}').redactor({
             buttons: ['{{ field_type.config.buttons|join("', '")|raw }}'],
             {% if field_type.config.plugins %}
             plugins: ['{{ field_type.config.plugins|join("', '")|raw }}'],
@@ -18,7 +18,9 @@
 </script>
 
 <textarea
-        id="{{ field_type.getInputName() }}"
-        name="{{ field_type.getInputName() }}"
+        id="{{ field_type.input_name }}"
+        name="{{ field_type.input_name }}"
         placeholder="{{ field_type.placeholder }}"
         >{{ field_type.value }}</textarea>
+
+<small><a href="#">{{ field_type.getAppStoragePath() }}</a></small>

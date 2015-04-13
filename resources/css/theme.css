@@ -1,6 +1,8 @@
+.redactor-box {
+    margin-bottom: 0;
+}
+
 .redactor-toolbar {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     box-shadow: none;
 }
 
