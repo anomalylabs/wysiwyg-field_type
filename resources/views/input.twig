@@ -5,7 +5,7 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#{{ field_type.input_name }}').redactor({
+        $('textarea[name="{{ field_type.input_name }}"]').redactor({
             buttons: ['{{ field_type.config.buttons|join("', '")|raw }}'],
             {% if field_type.config.plugins %}
             plugins: ['{{ field_type.config.plugins|join("', '")|raw }}'],
@@ -18,7 +18,6 @@
 </script>
 
 <textarea
-        id="{{ field_type.input_name }}"
         name="{{ field_type.input_name }}"
         placeholder="{{ field_type.placeholder }}"
         >{{ field_type.value }}</textarea>
