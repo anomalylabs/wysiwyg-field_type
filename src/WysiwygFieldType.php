@@ -16,6 +16,14 @@ class WysiwygFieldType extends FieldType
 {
 
     /**
+     * Defer processing so the
+     * title has been set already.
+     *
+     * @var bool
+     */
+    protected $deferred = true;
+
+    /**
      * The database column type.
      *
      * @var string

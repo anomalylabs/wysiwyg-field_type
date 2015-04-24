@@ -73,7 +73,7 @@ class WysiwygFieldTypeAccessor extends FieldTypeAccessor
      */
     public function get(EloquentModel $entry)
     {
-        if ($entry instanceof EntryInterface && $this->fieldType->setEntry($entry)) {
+        if ($entry instanceof EntryInterface && $entry->getTitle() && $this->fieldType->setEntry($entry)) {
 
             $path = $this->fieldType->getStoragePath($entry);
 
