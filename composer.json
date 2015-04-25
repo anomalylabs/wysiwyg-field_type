@@ -1,11 +1,11 @@
 {
     "name": "anomaly/wysiwyg-field_type",
     "type": "streams-addon",
-    "description": "A WYSIWYG editor field type powered by CKEditor.",
+    "description": "A WYSIWYG wysiwyg field type powered by CKEditor.",
     "keywords": [
         "streams-addon",
         "wysiwyg",
-        "ckeditor",
+        "ckwysiwyg",
         "pyrocms",
         "laravel"
     ],

@@ -461,7 +461,7 @@
 				set: function(type)
 				{
 					// focus
-					if (!this.utils.browser('msie')) this.$editor.focus();
+					if (!this.utils.browser('msie')) this.$wysiwyg.focus();
 
 					this.buffer.set();
 					this.selection.save();
@@ -639,7 +639,7 @@
 					this.block.isRemoveInline = (tag == 'pre' || tag.search(/h[1-6]/i) != -1);
 
 					// focus
-					if (!this.utils.browser('msie')) this.$editor.focus();
+					if (!this.utils.browser('msie')) this.$wysiwyg.focus();
 
 					this.block.blocks = this.selection.getBlocks();
 
@@ -954,7 +954,7 @@
 					document.execCommand('formatblock', false, tag);
 
 					this.clean.clearUnverified();
-					this.$editor.find('p:empty').remove();
+					this.$wysiwyg.find('p:empty').remove();
 
 					var formatted = this.selection.getBlock();
 
@@ -968,7 +968,7 @@
 						this.block.toggle($(formatted));
 					}
 
-					this.$editor.find('ul, ol, tr, blockquote, p').each($.proxy(this.utils.removeEmpty, this));
+					this.$wysiwyg.find('ul, ol, tr, blockquote, p').each($.proxy(this.utils.removeEmpty, this));
 
 					if (this.opts.linebreaks && tag == 'p')
 					{
@@ -1017,7 +1017,7 @@
 						this.block.toggle($formatted);
 					}
 
-					this.$editor.find('ul, ol, tr, blockquote, p').each($.proxy(this.utils.removeEmpty, this));
+					this.$wysiwyg.find('ul, ol, tr, blockquote, p').each($.proxy(this.utils.removeEmpty, this));
 					$formatted.find('blockquote:empty').remove();
 
 					if (this.block.isRemoveInline)
@@ -1141,26 +1141,26 @@
 				setUndo: function()
 				{
 					this.selection.save();
-					this.opts.buffer.push(this.$editor.html());
+					this.opts.buffer.push(this.$wysiwyg.html());
 					this.selection.restore();
 				},
 				setRedo: function()
 				{
 					this.selection.save();
-					this.opts.rebuffer.push(this.$editor.html());
+					this.opts.rebuffer.push(this.$wysiwyg.html());
 					this.selection.restore();
 				},
 				getUndo: function()
 				{
-					this.$editor.html(this.opts.buffer.pop());
+					this.$wysiwyg.html(this.opts.buffer.pop());
 				},
 				getRedo: function()
 				{
-					this.$editor.html(this.opts.rebuffer.pop());
+					this.$wysiwyg.html(this.opts.rebuffer.pop());
 				},
 				add: function()
 				{
-					this.opts.buffer.push(this.$editor.html());
+					this.opts.buffer.push(this.$wysiwyg.html());
 				},
 				undo: function()
 				{
@@ -1220,7 +1220,7 @@
 				},
 				enableEditor: function()
 				{
-					this.$editor.attr({ 'contenteditable': true, 'dir': this.opts.direction });
+					this.$wysiwyg.attr({ 'contenteditable': true, 'dir': this.opts.direction });
 				},
 				loadEditor: function()
 				{
@@ -1229,19 +1229,19 @@
 				},
 				fromTextarea: function()
 				{
-					this.$editor = $('<div />');
+					this.$wysiwyg = $('<div />');
 					this.$textarea = this.$element;
-					this.$box.insertAfter(this.$element).append(this.$editor).append(this.$element);
-					this.$editor.addClass('redactor-editor');
+					this.$box.insertAfter(this.$element).append(this.$wysiwyg).append(this.$element);
+					this.$wysiwyg.addClass('redactor-wysiwyg');
 
 					this.$element.hide();
 				},
 				fromElement: function()
 				{
-					this.$editor = this.$element;
+					this.$wysiwyg = this.$element;
 					this.build.createTextarea();
-					this.$box.insertAfter(this.$editor).append(this.$editor).append(this.$textarea);
-					this.$editor.addClass('redactor-editor');
+					this.$box.insertAfter(this.$wysiwyg).append(this.$wysiwyg).append(this.$textarea);
+					this.$wysiwyg.addClass('redactor-wysiwyg');
 
 					this.$textarea.hide();
 				},
@@ -1287,12 +1287,12 @@
 					// textarea direction
 					$(this.$textarea).attr('dir', this.opts.direction);
 
-					if (this.opts.linebreaks) this.$editor.addClass('redactor-linebreaks');
+					if (this.opts.linebreaks) this.$wysiwyg.addClass('redactor-linebreaks');
 
-					if (this.opts.tabindex) this.$editor.attr('tabindex', this.opts.tabindex);
+					if (this.opts.tabindex) this.$wysiwyg.attr('tabindex', this.opts.tabindex);
 
-					if (this.opts.minHeight) this.$editor.css('minHeight', this.opts.minHeight);
-					if (this.opts.maxHeight) this.$editor.css('maxHeight', this.opts.maxHeight);
+					if (this.opts.minHeight) this.$wysiwyg.css('minHeight', this.opts.minHeight);
+					if (this.opts.maxHeight) this.$wysiwyg.css('maxHeight', this.opts.maxHeight);
 
 				},
 				setEventDropUpload: function(e)
@@ -1313,7 +1313,7 @@
 				setEvents: function()
 				{
 					// drop
-					this.$editor.on('drop.redactor', $.proxy(function(e)
+					this.$wysiwyg.on('drop.redactor', $.proxy(function(e)
 					{
 						e = e.originalEvent || e;
 
@@ -1335,7 +1335,7 @@
 
 
 					// click
-					this.$editor.on('click.redactor', $.proxy(function(e)
+					this.$wysiwyg.on('click.redactor', $.proxy(function(e)
 					{
 						var event = this.core.getEvent();
 						var type = (event == 'click' || event == 'arrow') ? false : 'click';
@@ -1347,13 +1347,13 @@
 					}, this));
 
 					// paste
-					this.$editor.on('paste.redactor', $.proxy(this.paste.init, this));
+					this.$wysiwyg.on('paste.redactor', $.proxy(this.paste.init, this));
 
 					// keydown
-					this.$editor.on('keydown.redactor', $.proxy(this.keydown.init, this));
+					this.$wysiwyg.on('keydown.redactor', $.proxy(this.keydown.init, this));
 
 					// keyup
-					this.$editor.on('keyup.redactor', $.proxy(this.keyup.init, this));
+					this.$wysiwyg.on('keyup.redactor', $.proxy(this.keyup.init, this));
 
 					// textarea keydown
 					if ($.isFunction(this.opts.codeKeydownCallback))
@@ -1370,14 +1370,14 @@
 					// focus
 					if ($.isFunction(this.opts.focusCallback))
 					{
-						this.$editor.on('focus.redactor', $.proxy(this.opts.focusCallback, this));
+						this.$wysiwyg.on('focus.redactor', $.proxy(this.opts.focusCallback, this));
 					}
 
 					var clickedElement;
 					$(document).on('mousedown', function(e) { clickedElement = e.target; });
 
 					// blur
-					this.$editor.on('blur.redactor', $.proxy(function(e)
+					this.$wysiwyg.on('blur.redactor', $.proxy(function(e)
 					{
 						if (this.rtePaste) return;
 						if (!this.build.isBlured(clickedElement)) return;
@@ -1706,7 +1706,7 @@
 				{
 					// focus
 					// disabled in 10.0.7
-					// if (!this.utils.browser('msie')) this.$editor.focus();
+					// if (!this.utils.browser('msie')) this.$wysiwyg.focus();
 
 					orgn = orgn[0] || orgn;
 					focn = focn[0] || focn;
@@ -1783,7 +1783,7 @@
 				setAfterOrBefore: function(node, type)
 				{
 					// focus
-					if (!this.utils.browser('msie')) this.$editor.focus();
+					if (!this.utils.browser('msie')) this.$wysiwyg.focus();
 
 					node = node[0] || node;
 
@@ -1832,7 +1832,7 @@
 				    {
 				        var range = window.getSelection().getRangeAt(0);
 				        var caretRange = range.cloneRange();
-				        caretRange.selectNodeContents(this.$editor[0]);
+				        caretRange.selectNodeContents(this.$wysiwyg[0]);
 				        caretRange.setEnd(range.endContainer, range.endOffset);
 				        offset = caretRange.toString().length;
 				    }
@@ -1846,7 +1846,7 @@
 
 					var sel = this.selection.get();
 					var node, offset = 0;
-					var walker = document.createTreeWalker(this.$editor[0], NodeFilter.SHOW_TEXT, null, null);
+					var walker = document.createTreeWalker(this.$wysiwyg[0], NodeFilter.SHOW_TEXT, null, null);
 
 					while (node = walker.nextNode())
 					{
@@ -2478,20 +2478,20 @@
 				{
 					if (this.utils.browser('msie')) return;
 
-					this.clean.clearUnverifiedRemove(this.$editor);
+					this.clean.clearUnverifiedRemove(this.$wysiwyg);
 
-					var headers = this.$editor.find('h1, h2, h3, h4, h5, h6');
+					var headers = this.$wysiwyg.find('h1, h2, h3, h4, h5, h6');
 					headers.find('span').removeAttr('style');
 					headers.find(this.opts.verifiedTags.join(', ')).removeAttr('style');
 
 					this.code.sync();
 				},
-				clearUnverifiedRemove: function($editor)
+				clearUnverifiedRemove: function($wysiwyg)
 				{
-					$editor.find(this.opts.verifiedTags.join(', ')).removeAttr('style');
-					$editor.find('span').not('[data-verified="redactor"]').removeAttr('style');
+					$wysiwyg.find(this.opts.verifiedTags.join(', ')).removeAttr('style');
+					$wysiwyg.find('span').not('[data-verified="redactor"]').removeAttr('style');
 
-					$editor.find('span[data-verified="redactor"], img[data-verified="redactor"]').each(function(i, s)
+					$wysiwyg.find('span[data-verified="redactor"], img[data-verified="redactor"]').each(function(i, s)
 					{
 						var $s = $(s);
 						$s.attr('style', $s.attr('rel'));
@@ -2552,7 +2552,7 @@
 				},
 				normalizeLists: function()
 				{
-					this.$editor.find('li').each(function(i,s)
+					this.$wysiwyg.find('li').each(function(i,s)
 					{
 						var $next = $(s).next();
 						if ($next.length !== 0 && ($next[0].tagName == 'UL' || $next[0].tagName == 'OL'))
@@ -2629,7 +2629,7 @@
 					// clean
 					html = this.clean.onSet(html);
 
-					this.$editor.html(html);
+					this.$wysiwyg.html(html);
 					this.code.sync();
 
 					if (html !== '') this.placeholder.remove();
@@ -2653,7 +2653,7 @@
 				},
 				startSync: function()
 				{
-					var html = this.$editor.html();
+					var html = this.$wysiwyg.html();
 
 					// is there a need to synchronize
 					if (this.code.syncCode && this.code.syncCode == html)
@@ -2703,9 +2703,9 @@
 					this.code.offset = this.caret.getOffset();
 					var scroll = $(window).scrollTop();
 
-					var height = this.$editor.innerHeight();
+					var height = this.$wysiwyg.innerHeight();
 
-					this.$editor.hide();
+					this.$wysiwyg.hide();
 
 					var html = this.$textarea.val();
 					this.modified = this.clean.removeSpaces(html);
@@ -2742,7 +2742,7 @@
 						this.code.set(html);
 					}
 
-					this.$editor.show();
+					this.$wysiwyg.show();
 
 					if (!this.utils.isEmpty(html))
 					{
@@ -2782,7 +2782,7 @@
 				},
 				getEditor: function()
 				{
-					return this.$editor;
+					return this.$wysiwyg;
 				},
 				getBox: function()
 				{
@@ -2826,7 +2826,7 @@
 
 					// off events and remove data
 					this.$element.off('.redactor').removeData('redactor');
-					this.$editor.off('.redactor');
+					this.$wysiwyg.off('.redactor');
 
 					$(document).off('click.redactor-image-delete.' + this.uuid);
 					$(document).off('click.redactor-image-resize-hide.' + this.uuid);
@@ -2835,8 +2835,8 @@
 					$(this.opts.toolbarFixedTarget).off('scroll.redactor.' + this.uuid);
 
 					// common
-					this.$editor.removeClass('redactor-editor redactor-linebreaks redactor-placeholder');
-					this.$editor.removeAttr('contenteditable');
+					this.$wysiwyg.removeClass('redactor-wysiwyg redactor-linebreaks redactor-placeholder');
+					this.$wysiwyg.removeAttr('contenteditable');
 
 					var html = this.code.get();
 
@@ -2860,7 +2860,7 @@
 					}
 					else
 					{
-						this.$box.after(this.$editor);
+						this.$box.after(this.$wysiwyg);
 						this.$box.remove();
 						this.$element.html(html).show();
 					}
@@ -3015,7 +3015,7 @@
 					}
 
 					$(document).one('click', $.proxy(this.dropdown.hide, this));
-					this.$editor.one('click', $.proxy(this.dropdown.hide, this));
+					this.$wysiwyg.one('click', $.proxy(this.dropdown.hide, this));
 
 					// disable scroll whan dropdown scroll
 					var $body = $(document.body);
@@ -3115,7 +3115,7 @@
 
 					if (typeof json == 'string') return;
 
-					var linkmarker = $(this.$editor.find('a#filelink-marker'));
+					var linkmarker = $(this.$wysiwyg.find('a#filelink-marker'));
 					if (linkmarker.length !== 0)
 					{
 						linkmarker.removeAttr('id').removeAttr('style');
@@ -3132,9 +3132,9 @@
 			return {
 				setStart: function()
 				{
-					this.$editor.focus();
+					this.$wysiwyg.focus();
 
-					var first = this.$editor.children().first();
+					var first = this.$wysiwyg.children().first();
 
 					if (first.length === 0) return;
 					if (first[0].length === 0 || first[0].tagName == 'BR' || first[0].nodeType == 3)
@@ -3156,8 +3156,8 @@
 					if (this.opts.linebreaks && !this.utils.isBlockTag(first[0].tagName))
 					{
 						this.selection.get();
-						this.range.setStart(this.$editor[0], 0);
-						this.range.setEnd(this.$editor[0], 0);
+						this.range.setStart(this.$wysiwyg[0], 0);
+						this.range.setEnd(this.$wysiwyg[0], 0);
 						this.selection.addRange();
 
 						return;
@@ -3170,9 +3170,9 @@
 				{
 					if (this.utils.browser('mozilla') || this.utils.browser('msie'))
 					{
-						var last = this.$editor.children().last();
+						var last = this.$wysiwyg.children().last();
 
-						this.$editor.focus();
+						this.$wysiwyg.focus();
 						this.caret.setEnd(last);
 					}
 					else
@@ -3180,7 +3180,7 @@
 						this.selection.get();
 
 						try {
-							this.range.selectNodeContents(this.$editor[0]);
+							this.range.selectNodeContents(this.$wysiwyg[0]);
 							this.range.collapse(false);
 
 							this.selection.addRange();
@@ -3197,7 +3197,7 @@
 					if (this.opts.linebreaks && $(focusNode.parentNode).hasClass('redactor-linebreaks')) return true;
 					else if (!this.utils.isRedactorParent(focusNode.parentNode)) return false;
 
-					return this.$editor.is(':focus');
+					return this.$wysiwyg.is(':focus');
 				}
 			};
 		},
@@ -3358,12 +3358,12 @@
 					{
 						this.observe.image = $image;
 
-						if (this.$editor.find('#redactor-image-box').length !== 0) return false;
+						if (this.$wysiwyg.find('#redactor-image-box').length !== 0) return false;
 
 						this.image.resizer = this.image.loadEditableControls($image);
 
 						$(document).on('click.redactor-image-resize-hide.' + this.uuid, $.proxy(this.image.hideResize, this));
-						this.$editor.on('click.redactor-image-resize-hide.' + this.uuid, $.proxy(this.image.hideResize, this));
+						this.$wysiwyg.on('click.redactor-image-resize-hide.' + this.uuid, $.proxy(this.image.hideResize, this));
 
 						// resize
 						if (!this.opts.imageResizable) return;
@@ -3434,13 +3434,13 @@
 				},
 				onDrag: function(e)
 				{
-					if (this.$editor.find('#redactor-image-box').length !== 0)
+					if (this.$wysiwyg.find('#redactor-image-box').length !== 0)
 					{
 						e.preventDefault();
 						return false;
 					}
 
-					this.$editor.on('drop.redactor-image-inside-drop', $.proxy(function()
+					this.$wysiwyg.on('drop.redactor-image-inside-drop', $.proxy(function()
 					{
 						setTimeout($.proxy(this.image.onDrop, this), 1);
 
@@ -3450,13 +3450,13 @@
 				{
 					this.image.fixImageSourceAfterDrop();
 					this.observe.images();
-					this.$editor.off('drop.redactor-image-inside-drop');
+					this.$wysiwyg.off('drop.redactor-image-inside-drop');
 					this.clean.clearUnverified();
 					this.code.sync();
 				},
 				fixImageSourceAfterDrop: function()
 				{
-					this.$editor.find('img[data-save-url]').each(function()
+					this.$wysiwyg.find('img[data-save-url]').each(function()
 					{
 						var $el = $(this);
 						$el.attr('src', $el.attr('data-save-url'));
@@ -3472,7 +3472,7 @@
 						$image.attr('data-save-url', $image.attr('src'));
 					}
 
-					var imageBox = this.$editor.find('#redactor-image-box');
+					var imageBox = this.$wysiwyg.find('#redactor-image-box');
 					if (imageBox.length === 0) return;
 
 					if (this.opts.imageEditable)
@@ -3497,7 +3497,7 @@
 					});
 
 					$(document).off('click.redactor-image-resize-hide.' + this.uuid);
-					this.$editor.off('click.redactor-image-resize-hide.' + this.uuid);
+					this.$wysiwyg.off('click.redactor-image-resize-hide.' + this.uuid);
 
 					if (typeof this.image.resizeHandle !== 'undefined')
 					{
@@ -3665,7 +3665,7 @@
 
 					this.insert.html(this.utils.getOuterHtml(node), false);
 
-					var $image = this.$editor.find('img[data-redactor-inserted-image=true]').removeAttr('data-redactor-inserted-image');
+					var $image = this.$wysiwyg.find('img[data-redactor-inserted-image=true]').removeAttr('data-redactor-inserted-image');
 
 					if (isP)
 					{
@@ -3689,7 +3689,7 @@
 				increase: function()
 				{
 					// focus
-					if (!this.utils.browser('msie')) this.$editor.focus();
+					if (!this.utils.browser('msie')) this.$wysiwyg.focus();
 
 					this.buffer.set();
 					this.selection.save();
@@ -3775,7 +3775,7 @@
 					if (!this.opts.linebreaks && $item.length === 0)
 					{
 						document.execCommand('formatblock', false, 'p');
-						this.$editor.find('ul, ol, blockquote, p').each($.proxy(this.utils.removeEmpty, this));
+						this.$wysiwyg.find('ul, ol, blockquote, p').each($.proxy(this.utils.removeEmpty, this));
 					}
 
 					this.clean.clearUnverified();
@@ -3854,7 +3854,7 @@
 
 					if (!this.utils.browser('msie'))
 					{
-						this.$editor.focus();
+						this.$wysiwyg.focus();
 					}
 
 					this.selection.get();
@@ -3910,7 +3910,7 @@
 					this.selection.save();
 					document.execCommand('strikethrough');
 
-					this.$editor.find('strike').each($.proxy(function(i,s)
+					this.$wysiwyg.find('strike').each($.proxy(function(i,s)
 					{
 						var $el = $(s);
 
@@ -3957,7 +3957,7 @@
 					// clear text decoration
 					if (tag != 'span')
 					{
-						this.$editor.find(this.opts.inlineTags.join(', ')).each($.proxy(function(i,s)
+						this.$wysiwyg.find(this.opts.inlineTags.join(', ')).each($.proxy(function(i,s)
 						{
 							var $el = $(s);
 							var property = $el.css('text-decoration');
@@ -3972,7 +3972,7 @@
 					if (tag != 'del')
 					{
 						var _this = this;
-						this.$editor.find('inline').each(function(i,s)
+						this.$wysiwyg.find('inline').each(function(i,s)
 						{
 							_this.utils.replaceToTag(s, 'del');
 						});
@@ -4031,7 +4031,7 @@
 					var self = this;
 					if (tag != 'del')
 					{
-						this.$editor.find('del').each(function(i,s)
+						this.$wysiwyg.find('del').each(function(i,s)
 						{
 							self.utils.replaceToTag(s, 'inline');
 						});
@@ -4039,7 +4039,7 @@
 
 					if (tag != 'span')
 					{
-						this.$editor.find(tag).each(function()
+						this.$wysiwyg.find(tag).each(function()
 						{
 							var $el = $(this);
 							$el.replaceWith($('<strike />').html($el.contents()));
@@ -4047,7 +4047,7 @@
 						});
 					}
 
-					this.$editor.find('[data-redactor-tag="' + tag + '"]' + find).each(function()
+					this.$wysiwyg.find('[data-redactor-tag="' + tag + '"]' + find).each(function()
 					{
 						if (find === '' && tag == 'span' && this.tagName.toLowerCase() == tag) return;
 
@@ -4212,7 +4212,7 @@
 						html = this.clean.onPaste(html, false);
 					}
 
-					this.$editor.html(html);
+					this.$wysiwyg.html(html);
 					this.selection.remove();
 					this.focus.setEnd();
 					this.clean.normalizeLists();
@@ -4232,7 +4232,7 @@
 					text = $.trim(text);
 					text = this.clean.getPlainText(text, false);
 
-					this.$editor.focus();
+					this.$wysiwyg.focus();
 
 					if (this.utils.browser('msie'))
 					{
@@ -4276,7 +4276,7 @@
 
 					if (typeof clean == 'undefined') clean = true;
 
-					this.$editor.focus();
+					this.$wysiwyg.focus();
 
 					html = this.clean.setVerified(html);
 
@@ -4303,7 +4303,7 @@
 					// remove empty paragraphs finaly
 					if (!this.opts.linebreaks)
 					{
-						this.$editor.find('p').each($.proxy(this.utils.removeEmpty, this));
+						this.$wysiwyg.find('p').each($.proxy(this.utils.removeEmpty, this));
 					}
 
 					this.code.sync();
@@ -4850,7 +4850,7 @@
 				{
 					var blockElem = this.selection.getBlock();
 					var blockHtml = blockElem.innerHTML.replace(/<br\s?\/?>/gi, '');
-					if ((blockElem.tagName === 'DIV' || blockElem.tagName === 'P') && blockHtml === '' && !$(blockElem).hasClass('redactor-editor'))
+					if ((blockElem.tagName === 'DIV' || blockElem.tagName === 'P') && blockHtml === '' && !$(blockElem).hasClass('redactor-wysiwyg'))
 					{
 						var br = document.createElement('br');
 
@@ -4866,7 +4866,7 @@
 				{
 					var blockElem = this.selection.getBlock();
 					var blockHtml = blockElem.innerHTML.replace(/<br\s?\/?>/gi, '');
-					if (blockElem.tagName === 'DIV' && blockHtml === '' && !$(blockElem).hasClass('redactor-editor'))
+					if (blockElem.tagName === 'DIV' && blockHtml === '' && !$(blockElem).hasClass('redactor-wysiwyg'))
 					{
 						var p = document.createElement('p');
 						p.innerHTML = this.opts.invisibleSpace;
@@ -4940,7 +4940,7 @@
 
 					if (this.opts.linebreaks)
 					{
-						var contents = $('<div>').append($.trim(this.$editor.html())).contents();
+						var contents = $('<div>').append($.trim(this.$wysiwyg.html())).contents();
 						var last = contents.last()[0];
 						if (last.tagName == 'SPAN' && last.innerHTML === '')
 						{
@@ -4956,7 +4956,7 @@
 					}
 					else
 					{
-						if (this.$editor.contents().last()[0] !== element) return;
+						if (this.$wysiwyg.contents().last()[0] !== element) return;
 
 						var node = $(this.opts.emptyHtml);
 						$(element).after(node);
@@ -5137,7 +5137,7 @@
 						}
 
 						// remove empty paragraphs
-						this.$editor.find('p').each($.proxy(this.utils.removeEmpty, this));
+						this.$wysiwyg.find('p').each($.proxy(this.utils.removeEmpty, this));
 
 						// remove invisible space
 						if (this.opts.linebreaks && this.keyup.current && this.keyup.current.tagName == 'DIV' && this.utils.isEmpty(this.keyup.current.innerHTML))
@@ -5180,7 +5180,7 @@
 				},
 				formatEmpty: function(e)
 				{
-					var html = $.trim(this.$editor.html());
+					var html = $.trim(this.$wysiwyg.html());
 
 					if (!this.utils.isEmpty(html)) return;
 
@@ -5188,14 +5188,14 @@
 
 					if (this.opts.linebreaks)
 					{
-						this.$editor.html(this.selection.getMarkerAsHtml());
+						this.$wysiwyg.html(this.selection.getMarkerAsHtml());
 						this.selection.restore();
 					}
 					else
 					{
 						html = '<p><br /></p>';
 
-						this.$editor.html(html);
+						this.$wysiwyg.html(html);
 						this.focus.setStart();
 					}
 
@@ -5228,7 +5228,7 @@
 					var blocks = this.selection.getBlocks();
  					if (blocks[0] !== false && this.line.isExceptLastOrFirst(blocks))
 	 				{
-	 					if (!this.utils.browser('msie')) this.$editor.focus();
+	 					if (!this.utils.browser('msie')) this.$wysiwyg.focus();
 	 					return;
 					}
 
@@ -5282,7 +5282,7 @@
 				},
 				setFocus: function()
 				{
-					var node = this.$editor.find('#redactor-insert-line');
+					var node = this.$wysiwyg.find('#redactor-insert-line');
 					var next = $(node).next()[0];
 
 					if (next)
@@ -5548,7 +5548,7 @@
 				toggle: function(cmd)
 				{
 					this.placeholder.remove();
-					if (!this.utils.browser('msie')) this.$editor.focus();
+					if (!this.utils.browser('msie')) this.$wysiwyg.focus();
 
 					this.buffer.set();
 					this.selection.save();
@@ -5649,7 +5649,7 @@
 
 					if (!this.utils.browser('msie'))
 					{
-						this.$editor.focus();
+						this.$wysiwyg.focus();
 					}
 
 					this.clean.clearUnverified();
@@ -5666,7 +5666,7 @@
 					{
 						tmpLi.append(this.selection.getMarkerAsHtml());
 						tmpList.append(tmpLi);
-						this.$editor.find('#selection-marker-1').replaceWith(tmpList);
+						this.$wysiwyg.find('#selection-marker-1').replaceWith(tmpList);
 					}
 					else
 					{
@@ -5701,7 +5701,7 @@
 					if (!this.opts.linebreaks && $current.closest('li, th, td').length === 0)
 					{
 						document.execCommand('formatblock', false, 'p');
-						this.$editor.find('ul, ol, blockquote').each($.proxy(this.utils.removeEmpty, this));
+						this.$wysiwyg.find('ul, ol, blockquote').each($.proxy(this.utils.removeEmpty, this));
 					}
 
 					var $table = $(this.selection.getCurrent()).closest('table');
@@ -6001,14 +6001,14 @@
 				{
 					this.$modalClose.on('click.redactor-modal', $.proxy(this.modal.close, this));
 					$(document).on('keyup.redactor-modal', $.proxy(this.modal.closeHandler, this));
-					this.$editor.on('keyup.redactor-modal', $.proxy(this.modal.closeHandler, this));
+					this.$wysiwyg.on('keyup.redactor-modal', $.proxy(this.modal.closeHandler, this));
 					this.$modalBox.on('click.redactor-modal', $.proxy(this.modal.close, this));
 				},
 				disableEvents: function()
 				{
 					this.$modalClose.off('click.redactor-modal');
 					$(document).off('keyup.redactor-modal');
-					this.$editor.off('keyup.redactor-modal');
+					this.$wysiwyg.off('keyup.redactor-modal');
 					this.$modalBox.off('click.redactor-modal');
 					$(window).off('resize.redactor-modal');
 				},
@@ -6111,7 +6111,7 @@
 				},
 				images: function()
 				{
-					this.$editor.find('img').each($.proxy(function(i, img)
+					this.$wysiwyg.find('img').each($.proxy(function(i, img)
 					{
 						var $img = $(img);
 
@@ -6139,8 +6139,8 @@
 				{
 					if (!this.opts.linkTooltip) return;
 
-					this.$editor.find('a').on('touchstart.redactor.' + this.uuid + ' click.redactor.' + this.uuid, $.proxy(this.observe.showTooltip, this));
-					this.$editor.on('touchstart.redactor.' + this.uuid + ' click.redactor.' + this.uuid, $.proxy(this.observe.closeTooltip, this));
+					this.$wysiwyg.find('a').on('touchstart.redactor.' + this.uuid + ' click.redactor.' + this.uuid, $.proxy(this.observe.showTooltip, this));
+					this.$wysiwyg.on('touchstart.redactor.' + this.uuid + ' click.redactor.' + this.uuid, $.proxy(this.observe.closeTooltip, this));
 					$(document).on('touchstart.redactor.' + this.uuid + ' click.redactor.' + this.uuid, $.proxy(this.observe.closeTooltip, this));
 				},
 				getTooltipPosition: function($link)
@@ -6426,7 +6426,7 @@
 					// clean empty spans
 					setTimeout($.proxy(function()
 					{
-						var spans = this.$editor.find('span');
+						var spans = this.$wysiwyg.find('span');
 						$.each(spans, function(i,s)
 						{
 							var html = s.innerHTML.replace(/[\u200B-\u200D\uFEFF]/, '');
@@ -6445,21 +6445,21 @@
 				{
 					if (!this.placeholder.is()) return;
 
-					this.$editor.attr('placeholder', this.$element.attr('placeholder'));
+					this.$wysiwyg.attr('placeholder', this.$element.attr('placeholder'));
 
 					this.placeholder.toggle();
-					this.$editor.on('keyup.redactor-placeholder', $.proxy(this.placeholder.toggle, this));
+					this.$wysiwyg.on('keyup.redactor-placeholder', $.proxy(this.placeholder.toggle, this));
 
 				},
 				toggle: function()
 				{
 					var func = 'removeClass';
-					if (this.utils.isEmpty(this.$editor.html(), false)) func = 'addClass';
-					this.$editor[func]('redactor-placeholder');
+					if (this.utils.isEmpty(this.$wysiwyg.html(), false)) func = 'addClass';
+					this.$wysiwyg[func]('redactor-placeholder');
 				},
 				remove: function()
 				{
-					this.$editor.removeClass('redactor-placeholder');
+					this.$wysiwyg.removeClass('redactor-placeholder');
 				},
 				is: function()
 				{
@@ -6546,7 +6546,7 @@
 					{
 						if (this.utils.isBlockTag(node.tagName))
 						{
-							return ($(node).hasClass('redactor-editor')) ? false : node;
+							return ($(node).hasClass('redactor-wysiwyg')) ? false : node;
 						}
 
 						node = node.parentNode;
@@ -6666,7 +6666,7 @@
 					var counter = 0;
 
 					var self = this;
-					this.$editor.find('*').each(function()
+					this.$wysiwyg.find('*').each(function()
 					{
 						if (this == startNode)
 						{
@@ -6725,7 +6725,7 @@
 				removeNodesMarkers: function()
 				{
 					$(document).find('span.redactor-nodes-marker').remove();
-					this.$editor.find('span.redactor-nodes-marker').remove();
+					this.$wysiwyg.find('span.redactor-nodes-marker').remove();
 				},
 				fromPoint: function(start, end)
 				{
@@ -6750,7 +6750,7 @@
 				selectAll: function()
 				{
 					this.selection.get();
-					this.range.selectNodeContents(this.$editor[0]);
+					this.range.selectNodeContents(this.$wysiwyg[0]);
 					this.selection.addRange();
 				},
 				remove: function()
@@ -6776,7 +6776,7 @@
 						this.selection.setMarker(this.range, node2, false);
 					}
 
-					this.savedSel = this.$editor.html();
+					this.savedSel = this.$wysiwyg.html();
 				},
 				getMarker: function(num)
 				{
@@ -6803,8 +6803,8 @@
 				},
 				restore: function()
 				{
-					var node1 = this.$editor.find('span#selection-marker-1');
-					var node2 = this.$editor.find('span#selection-marker-2');
+					var node1 = this.$wysiwyg.find('span#selection-marker-1');
+					var node2 = this.$wysiwyg.find('span#selection-marker-2');
 
 					if (node1.length !== 0 && node2.length !== 0)
 					{
@@ -6816,7 +6816,7 @@
 					}
 					else
 					{
-						this.$editor.focus();
+						this.$wysiwyg.focus();
 					}
 
 					this.selection.removeMarkers();
@@ -6825,7 +6825,7 @@
 				},
 				removeMarkers: function()
 				{
-					this.$editor.find('span.redactor-selection-marker').each(function(i,s)
+					this.$wysiwyg.find('span.redactor-selection-marker').each(function(i,s)
 					{
 						var text = $(s).text().replace(/[\u200B-\u200D\uFEFF]/g, '');
 						if (text === '') $(s).remove();
@@ -7671,7 +7671,7 @@
 					// buttons response
 					if (this.opts.activeButtons)
 					{
-						this.$editor.on('mouseup.redactor keyup.redactor focus.redactor', $.proxy(this.observe.buttons, this));
+						this.$wysiwyg.on('mouseup.redactor keyup.redactor focus.redactor', $.proxy(this.observe.buttons, this));
 					}
 
 				},
@@ -8252,7 +8252,7 @@
 					}
 					else
 					{
-						return $(el).closest(this.opts.alignmentTags.toString().toLowerCase(), this.$editor[0]);
+						return $(el).closest(this.opts.alignmentTags.toString().toLowerCase(), this.$wysiwyg[0]);
 					}
 				},
 				removeEmptyAttr: function(el, attr)
@@ -8288,7 +8288,7 @@
 				// save and restore scroll
 				saveScroll: function()
 				{
-					this.saveEditorScroll = this.$editor.scrollTop();
+					this.saveEditorScroll = this.$wysiwyg.scrollTop();
 					this.saveBodyScroll = $(window).scrollTop();
 
 					if (this.opts.scrollTarget) this.saveTargetScroll = $(this.opts.scrollTarget).scrollTop();
@@ -8298,7 +8298,7 @@
 					if (typeof this.saveScroll === 'undefined' && typeof this.saveBodyScroll === 'undefined') return;
 
 					$(window).scrollTop(this.saveBodyScroll);
-					this.$editor.scrollTop(this.saveEditorScroll);
+					this.$wysiwyg.scrollTop(this.saveEditorScroll);
 
 					if (this.opts.scrollTarget) $(this.opts.scrollTarget).scrollTop(this.saveTargetScroll);
 				},
@@ -8381,7 +8381,7 @@
 				},
 				isEndOfEditor: function()
 				{
-					var block = this.$editor[0];
+					var block = this.$wysiwyg[0];
 
 					var offset = this.caret.getOffsetOfElement(block);
 					var text = $.trim($(block).html().replace(/(<([^>]+)>)/gi,''));
@@ -8437,7 +8437,7 @@
 						return false;
 					}
 
-					if ($(el).parents('.redactor-editor').length === 0 || $(el).hasClass('redactor-editor'))
+					if ($(el).parents('.redactor-wysiwyg').length === 0 || $(el).hasClass('redactor-wysiwyg'))
 					{
 						return false;
 					}
@@ -8533,7 +8533,7 @@
 		var rProtocol = /(https?|ftp):\/\//i;
 		var urlImage = new RegExp('(?:([^:/?#]+):)?(?:\/\/([^/?#]*))?([^?#]*\\.(?:jpg|gif|png))(?:\\?([^#]*))?(?:#(.*))?', 'gi');
 
-		var childNodes = (this.$editor ? this.$editor[0] : this).childNodes, i = childNodes.length;
+		var childNodes = (this.$wysiwyg ? this.$wysiwyg[0] : this).childNodes, i = childNodes.length;
 		while (i--)
 		{
 			var n = childNodes[i];

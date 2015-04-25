@@ -30,10 +30,10 @@ if (!RedactorPlugins) var RedactorPlugins = {};
 					this.fullscreen.boxcss.top = this.$box.css('top');
 				}
 
-				this.fullscreen.height = this.$editor.height();
+				this.fullscreen.height = this.$wysiwyg.height();
 
-				if (this.opts.maxHeight) this.$editor.css('max-height', '');
-				if (this.opts.minHeight) this.$editor.css('min-height', '');
+				if (this.opts.maxHeight) this.$wysiwyg.css('max-height', '');
+				if (this.opts.minHeight) this.$wysiwyg.css('min-height', '');
 
 				if (!this.$fullscreenPlaceholder) this.$fullscreenPlaceholder = $('<div/>');
 				this.$fullscreenPlaceholder.insertAfter(this.$box);
@@ -48,7 +48,7 @@ if (!RedactorPlugins) var RedactorPlugins = {};
 				$(document).scrollTop(0, 0);
 
 				$('.redactor-toolbar-tooltip').hide();
-				this.$editor.focus();
+				this.$wysiwyg.focus();
 				this.observe.load();
 			},
 			disable: function()
@@ -77,12 +77,12 @@ if (!RedactorPlugins) var RedactorPlugins = {};
 					});
 				}
 
-				if (this.opts.minHeight) this.$editor.css('minHeight', this.opts.minHeight);
-				if (this.opts.maxHeight) this.$editor.css('maxHeight', this.opts.maxHeight);
+				if (this.opts.minHeight) this.$wysiwyg.css('minHeight', this.opts.minHeight);
+				if (this.opts.maxHeight) this.$wysiwyg.css('maxHeight', this.opts.maxHeight);
 
 				$('.redactor-toolbar-tooltip').hide();
-				this.$editor.css('height', 'auto');
-				this.$editor.focus();
+				this.$wysiwyg.css('height', 'auto');
+				this.$wysiwyg.focus();
 				this.observe.load();
 			},
 			toggle: function()
@@ -102,7 +102,7 @@ if (!RedactorPlugins) var RedactorPlugins = {};
 
 				var toolbarHeight = this.$toolbar.height();
 
-				var height = $(window).height() - toolbarHeight - this.utils.normalize(this.$editor.css('padding-top')) - this.utils.normalize(this.$editor.css('padding-bottom'));
+				var height = $(window).height() - toolbarHeight - this.utils.normalize(this.$wysiwyg.css('padding-top')) - this.utils.normalize(this.$wysiwyg.css('padding-bottom'));
 				this.$box.width($(window).width()).height(height);
 
 				if (this.opts.toolbarExternal)
@@ -116,7 +116,7 @@ if (!RedactorPlugins) var RedactorPlugins = {};
 					this.$box.css('top', toolbarHeight + 'px');
 				}
 
-				this.$editor.height(height);
+				this.$wysiwyg.height(height);
 			}
 		};
 	};
