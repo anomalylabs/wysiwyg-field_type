@@ -47,6 +47,14 @@ class RenameDirectory implements SelfHandling
             GLOB_ONLYDIR
         );
 
+        /**
+         * Remove the target directory
+         * if it exists already.
+         */
+        if ($files->isDirectory(dirname($path))) {
+            $files->deleteDirectory(dirname($path), true);
+        }
+
         if ($path && $files->isDirectory(dirname($old = array_shift($paths)))) {
             $files->move($old, dirname($path));
         }
