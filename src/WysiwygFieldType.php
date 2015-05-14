@@ -127,6 +127,10 @@ class WysiwygFieldType extends FieldType
             $config['buttons'] = array_get($this->buttons, $config['buttons'], $this->buttons['default']);
         }
 
+        if (!array_filter($config['buttons'])) {
+            $config['buttons'] = $this->buttons['default'];
+        }
+
         return $config;
     }
 

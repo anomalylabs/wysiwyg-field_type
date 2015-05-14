@@ -1,25 +1,17 @@
 {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/redactor.js") }}
 {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/fullscreen.js") }}
+{{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/input.js") }}
 {{ asset_add("styles.css", "anomaly.field_type.wysiwyg::css/redactor.css") }}
 {{ asset_add("styles.css", "anomaly.field_type.wysiwyg::css/theme.css") }}
 
-<script type="text/javascript">
-    $(function () {
-        $('textarea[name="{{ field_type.input_name }}"]').redactor({
-            buttons: ['{{ field_type.config.buttons|join("', '")|raw }}'],
-            {% if field_type.config.plugins %}
-            plugins: ['{{ field_type.config.plugins|join("', '")|raw }}'],
-            {% endif %}
-            minHeight: {{ field_type.config.height }},
-            placeholder: '{{ field_type.placeholder }}',
-            lang: '{{ config_get('app.locale') }}'
-        });
-    });
-</script>
-
 <textarea
+        class="wysiwyg"
         name="{{ field_type.input_name }}"
         placeholder="{{ field_type.placeholder }}"
+        data-height="{{ field_type.config.height }}"
+        data-buttons="{{ field_type.config.buttons|join(',') }}"
+        data-plugins="{{ field_type.config.plugins|join(',') }}"
+        data-locale="{{ field_type.locale ?: config_get('app.locale') }}"
         >{{ field_type.value }}</textarea>
 
 <small><a href="#">{{ field_type.getAppStoragePath() }}</a></small>
