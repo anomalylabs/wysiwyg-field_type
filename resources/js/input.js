@@ -6,8 +6,7 @@ $(function () {
             buttons: $(this).data('buttons').split(','),
             plugins: $(this).data('plugins').split(','),
             minHeight: $(this).data('height'),
-            placeholder: $(this).attr('placeholder'),
-            lang: $(this).data('locale')
+            placeholder: $(this).attr('placeholder')
         });
     });
 });
