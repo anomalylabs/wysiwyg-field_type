@@ -2,8 +2,6 @@
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Application\Application;
-use Anomaly\WysiwygFieldType\Command\DeleteDirectory;
-use Anomaly\WysiwygFieldType\Command\PutFile;
 
 /**
  * Class WysiwygFieldType
@@ -196,41 +194,5 @@ class WysiwygFieldType extends FieldType
     protected function getStorageFileName()
     {
         return trim($this->getField() . '_' . $this->getLocale(), '_') . '.html';
-    }
-
-    /**
-     * Fired after an entry is saved.
-     */
-    public function onEntrySaved()
-    {
-        if (!$this->getLocale()) {
-            $this->dispatch(new PutFile($this));
-        }
-    }
-
-    /**
-     * Fired after an entry translation is saved.
-     */
-    public function onEntryTranslationSaved()
-    {
-        $this->dispatch(new PutFile($this));
-    }
-
-    /**
-     * Fired after an entry is deleted.
-     */
-    public function onEntryDeleted()
-    {
-        if (!$this->getLocale()) {
-            $this->dispatch(new DeleteDirectory($this));
-        }
-    }
-
-    /**
-     * Fired after an entry translation is deleted.
-     */
-    public function onEntryTranslationDeleted()
-    {
-        $this->dispatch(new DeleteDirectory($this));
     }
 }
