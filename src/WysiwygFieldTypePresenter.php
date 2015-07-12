@@ -28,6 +28,6 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      */
     public function path()
     {
-        return $this->object->getStoragePath();
+        return $this->object->getViewPath();
     }
 }

@@ -162,28 +162,38 @@ class WysiwygFieldType extends FieldType
     }
 
     /**
-     * Get the storage path.
+     * Get the file path.
      *
-     * @return null|string
+     * @return string
      */
-    public function getStoragePath()
+    public function getFilePath()
     {
         $slug      = $this->entry->getStreamSlug();
         $namespace = $this->entry->getStreamNamespace();
         $directory = $this->entry->getEntryId();
         $file      = $this->getStorageFileName();
 
-        return $this->application->getStoragePath("{$namespace}/types/{$slug}/{$directory}/{$file}");
+        return "{$namespace}/types/{$slug}/{$directory}/{$file}";
     }
 
     /**
-     * Get the application storage page.
+     * Get the storage path.
      *
      * @return string
      */
-    public function getAppStoragePath()
+    public function getStoragePath()
     {
-        return str_replace(base_path(), '', $this->getStoragePath());
+        return $this->application->getStoragePath($this->getFilePath());
+    }
+
+    /**
+     * Get the view path.
+     *
+     * @return string
+     */
+    public function getViewPath()
+    {
+        return 'storage::' . str_replace('.html', '', $this->getFilePath());
     }
 
     /**
