@@ -2,10 +2,8 @@
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Application\Application;
-use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\WysiwygFieldType\Command\DeleteDirectory;
 use Anomaly\WysiwygFieldType\Command\PutFile;
-use Anomaly\WysiwygFieldType\Command\RenameDirectory;
 
 /**
  * Class WysiwygFieldType
@@ -38,9 +36,10 @@ class WysiwygFieldType extends FieldType
      * @var array
      */
     protected $config = [
-        'linebreaks' => false,
-        'buttons'    => 'default',
-        'height'     => 200
+        'line_breaks' => false,
+        'buttons'     => 'default',
+        'plugins'     => 'default',
+        'height'      => 200
     ];
 
     /**
@@ -59,8 +58,6 @@ class WysiwygFieldType extends FieldType
             'orderedlist',
             'outdent',
             'indent',
-            'image',
-            'file',
             'link',
             'alignment',
             'horizontalrule',
@@ -78,7 +75,8 @@ class WysiwygFieldType extends FieldType
             'indent',
             'link',
             'alignment',
-            'horizontalrule'
+            'horizontalrule',
+            'underline'
         ],
         'basic'    => [
             'formatting',
@@ -90,6 +88,17 @@ class WysiwygFieldType extends FieldType
             'formatting',
             'bold',
             'italic'
+        ]
+    ];
+
+    /**
+     * The available plugin sets.
+     *
+     * @var array
+     */
+    protected $plugins = [
+        'default' => [
+            'fullscreen'
         ]
     ];
 
@@ -120,15 +129,35 @@ class WysiwygFieldType extends FieldType
         $config = parent::getConfig();
 
         /**
-         * If the button config is a button set then
-         * use the corresponding set's buttons.
+         * If the buttons config is a button set then
+         * use the corresponding set of buttons.
          */
         if (is_string($config['buttons'])) {
             $config['buttons'] = array_get($this->buttons, $config['buttons'], $this->buttons['default']);
         }
 
+        /**
+         * If the plugins config is a plugin set then
+         * use the corresponding set of plugins.
+         */
+        if (is_string($config['plugins'])) {
+            $config['plugins'] = array_get($this->plugins, $config['plugins'], $this->plugins['default']);
+        }
+
+        /**
+         * If no buttons are specified
+         * use the default set.
+         */
         if (!array_filter($config['buttons'])) {
             $config['buttons'] = $this->buttons['default'];
+        }
+
+        /**
+         * If no plugins are specified
+         * use the default set.
+         */
+        if (!array_filter($config['plugins'])) {
+            $config['plugins'] = $this->plugins['default'];
         }
 
         return $config;
@@ -141,38 +170,12 @@ class WysiwygFieldType extends FieldType
      */
     public function getStoragePath()
     {
-        // No entry, no path.
-        if (!$this->entry) {
-            return null;
-        }
-
-        // If the entry is not an EntryInterface skip it.
-        if (!$this->entry instanceof EntryInterface) {
-            return null;
-        }
-
-        if (!$this->entry->getTitle()) {
-            return null;
-        }
-
         $slug      = $this->entry->getStreamSlug();
         $namespace = $this->entry->getStreamNamespace();
-        $directory = $this->getStorageDirectoryName();
+        $directory = $this->entry->getEntryId();
         $file      = $this->getStorageFileName();
 
-        return $this->application->getStoragePath("{$namespace}/{$slug}/{$directory}/{$file}");
-    }
-
-    /**
-     * Get the file extension for the config mode.
-     *
-     * @return mixed
-     */
-    protected function getFileExtension()
-    {
-        $mode = array_get($this->getConfig(), 'mode');
-
-        return array_get($this->extensions, $mode, $mode);
+        return $this->application->getStoragePath("{$namespace}/types/{$slug}/{$directory}/{$file}");
     }
 
     /**
@@ -186,29 +189,29 @@ class WysiwygFieldType extends FieldType
     }
 
     /**
-     * Get the storage directory name.
-     *
-     * @return string
-     */
-    protected function getStorageDirectoryName()
-    {
-        return str_slug($this->entry->getTitle() . '_' . $this->entry->getId(), '_');
-    }
-
-    /**
      * Get the storage file name.
      *
      * @return string
      */
     protected function getStorageFileName()
     {
-        return $this->getField() . '.html';
+        return trim($this->getField() . '_' . $this->getLocale(), '_') . '.html';
     }
 
     /**
      * Fired after an entry is saved.
      */
     public function onEntrySaved()
+    {
+        if (!$this->getLocale()) {
+            $this->dispatch(new PutFile($this));
+        }
+    }
+
+    /**
+     * Fired after an entry translation is saved.
+     */
+    public function onEntryTranslationSaved()
     {
         $this->dispatch(new PutFile($this));
     }
@@ -218,14 +221,16 @@ class WysiwygFieldType extends FieldType
      */
     public function onEntryDeleted()
     {
-        $this->dispatch(new DeleteDirectory($this));
+        if (!$this->getLocale()) {
+            $this->dispatch(new DeleteDirectory($this));
+        }
     }
 
     /**
-     * Fired after an entry is deleted.
+     * Fired after an entry translation is deleted.
      */
-    public function onEntryUpdated()
+    public function onEntryTranslationDeleted()
     {
-        $this->dispatch(new RenameDirectory($this));
+        $this->dispatch(new DeleteDirectory($this));
     }
 }
