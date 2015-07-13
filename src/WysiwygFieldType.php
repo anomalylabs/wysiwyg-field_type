@@ -173,7 +173,7 @@ class WysiwygFieldType extends FieldType
         $directory = $this->entry->getEntryId();
         $file      = $this->getStorageFileName();
 
-        return "{$namespace}/types/{$slug}/{$directory}/{$file}";
+        return "{$namespace}/{$slug}/{$directory}/{$file}";
     }
 
     /**
