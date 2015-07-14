@@ -168,6 +168,10 @@ class WysiwygFieldType extends FieldType
      */
     public function getFilePath()
     {
+        if (!$this->entry->exists) {
+            return null;
+        }
+
         $slug      = $this->entry->getStreamSlug();
         $namespace = $this->entry->getStreamNamespace();
         $directory = $this->entry->getEntryId();
@@ -183,7 +187,11 @@ class WysiwygFieldType extends FieldType
      */
     public function getStoragePath()
     {
-        return $this->application->getStoragePath($this->getFilePath());
+        if (!$path = $this->getFilePath()) {
+            return null;
+        }
+
+        return $this->application->getStoragePath($path);
     }
 
     /**
@@ -193,7 +201,25 @@ class WysiwygFieldType extends FieldType
      */
     public function getViewPath()
     {
-        return 'storage::' . str_replace('.html', '', $this->getFilePath());
+        if (!$path = $this->getFilePath()) {
+            return null;
+        }
+
+        return 'storage::' . str_replace('.html', '', $path);
+    }
+
+    /**
+     * Get the asset path.
+     *
+     * @return string
+     */
+    public function getAssetPath()
+    {
+        if (!$path = $this->getFilePath()) {
+            return null;
+        }
+
+        return 'storage::' . $path;
     }
 
     /**
