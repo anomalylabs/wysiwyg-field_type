@@ -168,7 +168,8 @@ class WysiwygFieldType extends FieldType
      */
     public function getFilePath()
     {
-        if (!$this->entry->exists) {
+        // If the entry is not an object or doesn't exist, skip it.
+        if (!is_object($this->entry) || !$this->entry || !$this->entry->exists) {
             return null;
         }
 

@@ -2,7 +2,7 @@
 
 use Anomaly\WysiwygFieldType\Command\DeleteDirectory;
 use Anomaly\WysiwygFieldType\Command\PutFile;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class WysiwygFieldTypeCallbacks
@@ -15,7 +15,7 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 class WysiwygFieldTypeCallbacks
 {
 
-    use DispatchesCommands;
+    use DispatchesJobs;
 
     /**
      * Fired after an entry is saved.

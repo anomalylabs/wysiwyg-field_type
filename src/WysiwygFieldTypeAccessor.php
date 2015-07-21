@@ -2,7 +2,7 @@
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeAccessor;
 use Anomaly\WysiwygFieldType\Command\GetFile;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class WysiwygFieldTypeAccessor
@@ -15,7 +15,7 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 class WysiwygFieldTypeAccessor extends FieldTypeAccessor
 {
 
-    use DispatchesCommands;
+    use DispatchesJobs;
 
     /**
      * Get the value off the entry.
