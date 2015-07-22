@@ -1,6 +1,8 @@
 <?php namespace Anomaly\WysiwygFieldType;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
+use Anomaly\Streams\Platform\Support\String;
+use Illuminate\View\Factory;
 
 /**
  * Class WysiwygFieldTypePresenter
@@ -14,6 +16,20 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
 {
 
     /**
+     * The view factory.
+     *
+     * @var Factory
+     */
+    protected $view;
+
+    /**
+     * The string parser.
+     *
+     * @var String
+     */
+    protected $string;
+
+    /**
      * The decorated field type.
      * This is for IDE hinting.
      *
@@ -22,12 +38,47 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     protected $object;
 
     /**
-     * Return the storage path.
+     * Create a new EditorFieldTypePresenter instance.
+     *
+     * @param Factory $view
+     * @param String  $string
+     * @param         $object
+     */
+    public function __construct(Factory $view, String $string, $object)
+    {
+        $this->view   = $view;
+        $this->string = $string;
+
+        parent::__construct($object);
+    }
+
+    /**
+     * Return the applicable path.
      *
      * @return null|string
      */
     public function path()
     {
         return $this->object->getViewPath();
+    }
+
+    /**
+     * Return the rendered content.
+     *
+     * @return string
+     */
+    public function render()
+    {
+        return $this->view->make($this->path())->render();
+    }
+
+    /**
+     * Return the parse the content.
+     *
+     * @return string
+     */
+    public function parse()
+    {
+        return $this->string->render(file_get_contents($this->object->getStoragePath()));
     }
 }

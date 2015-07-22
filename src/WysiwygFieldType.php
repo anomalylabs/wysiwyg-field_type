@@ -164,19 +164,18 @@ class WysiwygFieldType extends FieldType
     /**
      * Get the file path.
      *
-     * @return string
+     * @return null|string
      */
     public function getFilePath()
     {
-        // If the entry is not an object or doesn't exist, skip it.
-        if (!is_object($this->entry) || !$this->entry || !$this->entry->exists) {
+        if (!$this->entry->exists) {
             return null;
         }
 
         $slug      = $this->entry->getStreamSlug();
         $namespace = $this->entry->getStreamNamespace();
         $directory = $this->entry->getEntryId();
-        $file      = $this->getStorageFileName();
+        $file      = $this->getFileName();
 
         return "{$namespace}/{$slug}/{$directory}/{$file}";
     }
@@ -184,7 +183,7 @@ class WysiwygFieldType extends FieldType
     /**
      * Get the storage path.
      *
-     * @return string
+     * @return null|string
      */
     public function getStoragePath()
     {
@@ -206,7 +205,7 @@ class WysiwygFieldType extends FieldType
             return null;
         }
 
-        return 'storage::' . str_replace('.html', '', $path);
+        return 'storage::' . str_replace(['.html', '.twig'], '', $path);
     }
 
     /**
@@ -228,7 +227,7 @@ class WysiwygFieldType extends FieldType
      *
      * @return string
      */
-    protected function getStorageFileName()
+    protected function getFileName()
     {
         return trim($this->getField() . '_' . $this->getLocale(), '_') . '.html';
     }
