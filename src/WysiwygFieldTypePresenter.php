@@ -81,4 +81,14 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     {
         return $this->string->render(file_get_contents($this->object->getStoragePath()));
     }
+
+    /**
+     * Return the parsed content.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
+    }
 }
