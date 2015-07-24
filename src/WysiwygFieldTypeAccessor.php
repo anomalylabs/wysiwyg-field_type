@@ -2,6 +2,7 @@
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeAccessor;
 use Anomaly\WysiwygFieldType\Command\GetFile;
+use Anomaly\WysiwygFieldType\Command\PutFile;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -24,6 +25,10 @@ class WysiwygFieldTypeAccessor extends FieldTypeAccessor
      */
     public function get()
     {
+        if (!file_exists($this->fieldType->getStoragePath())) {
+            $this->dispatch(new PutFile($this->fieldType));
+        }
+
         return $this->dispatch(new GetFile($this->fieldType));
     }
 }
