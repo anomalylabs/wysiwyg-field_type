@@ -67,7 +67,7 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      *
      * @return string
      */
-    public function render()
+    public function rendered()
     {
         return $this->view->make($this->path())->render();
     }
@@ -77,9 +77,19 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      *
      * @return string
      */
-    public function parse()
+    public function parsed()
     {
-        return $this->string->render(file_get_contents($this->object->getStoragePath()));
+        return $this->string->render($this->content());
+    }
+
+    /**
+     * Return the file contents.
+     *
+     * @return string
+     */
+    public function content()
+    {
+        return file_get_contents($this->object->getStoragePath());
     }
 
     /**
@@ -89,6 +99,6 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      */
     public function __toString()
     {
-        return $this->render();
+        return $this->rendered();
     }
 }
