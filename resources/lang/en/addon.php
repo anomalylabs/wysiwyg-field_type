@@ -1,6 +1,7 @@
 <?php
 
 return [
-    'name'        => 'WYSIWYG',
+    'title'       => 'WYSIWYG',
+    'name'        => 'WYSIWYG Field Type',
     'description' => 'A WYSIWYG editor field type.'
 ];
