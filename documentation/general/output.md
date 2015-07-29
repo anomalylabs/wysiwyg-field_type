@@ -1,26 +1,14 @@
 # Output
 
-This field type returns the parsed content by default
-
-### Path
-
-Returns the storage path for the editor.
-
-```
-// Twig usage
-{{ entry.example.path }}
-
-// API usage
-$entry->example->path;
-```
+This field type returns the rendered content by default
 
 ### Rendered
 
-Returns the rendered content
+Returns the rendered content.
 
 ```
 // Twig usage
-{{ entry.example.rendered }}
+{{ entry.example.rendered|raw }}
 
 // API usage
 $entry->example->rendered;
@@ -28,11 +16,11 @@ $entry->example->rendered;
 
 ### Parsed
 
-Returns the parsed content
+Returns the content parsed through the parser.
 
 ```
 // Twig usage
-{{ entry.example.parsed }}
+{{ entry.example.parsed|raw }}
 
 // API usage
 $entry->example->parsed }}
@@ -44,7 +32,7 @@ Returns the un-parsed and un-rendered file content.
 
 ```
 // Twig usage
-{{ entry.example.content }}
+{{ entry.example.content|raw }}
 
 // API usage
 $entry->example->content;

@@ -53,23 +53,13 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     }
 
     /**
-     * Return the applicable path.
-     *
-     * @return null|string
-     */
-    public function path()
-    {
-        return $this->object->getViewPath();
-    }
-
-    /**
      * Return the rendered content.
      *
      * @return string
      */
     public function rendered()
     {
-        return $this->view->make($this->path())->render();
+        return $this->view->make($this->object->getViewPath())->render();
     }
 
     /**

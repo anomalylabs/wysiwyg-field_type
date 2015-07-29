@@ -22,8 +22,9 @@ If line breaks is set to true then the break tag will be used rather than paragr
 
 ### `buttons`
 
-The button set to be used for the editor. Available options are `advanced`, `default`, `basic`, and `simple`. The default value is `default`.  
-Below are the buttons included in each set.
+The button set to be used for the editor. Valid options are `advanced`, `default`, `basic`, and `simple`. You may also pass an array of buttons. The default value is the `default` button set.
+
+Below are the buttons included in each set:
 
 ```
     'advanced' => [
@@ -71,8 +72,9 @@ Below are the buttons included in each set.
 
 ### `plugins`
 
-Plugins that are enabled for the editor. Available options are `default`. The default value is `default`.  
-Below are the plugins included in each set.
+Plugins that are enabled for the editor. Valid options are `default`. You may also pass an array of plugins. The default value is the `default` set.  
+
+Below are the plugins included in each set:
 
 ```
     'default' => [
@@ -82,4 +84,4 @@ Below are the plugins included in each set.
 
 ### `height`
 
-The height in pixels of the editor. The default is `200`.
+The height in pixels of the editor. The default is `300`.

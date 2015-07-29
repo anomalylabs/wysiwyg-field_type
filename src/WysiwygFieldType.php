@@ -37,7 +37,7 @@ class WysiwygFieldType extends FieldType
         'line_breaks' => false,
         'buttons'     => 'default',
         'plugins'     => 'default',
-        'height'      => 200
+        'height'      => 300
     ];
 
     /**
