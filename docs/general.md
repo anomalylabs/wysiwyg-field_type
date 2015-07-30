@@ -120,7 +120,7 @@ Returns the content parsed through the parser.
     {{ entry.example.parsed|raw }}
     
     // API usage
-    $entry->example->parsed }}
+    $entry->example->parsed;
 
 ### `content()`
 
