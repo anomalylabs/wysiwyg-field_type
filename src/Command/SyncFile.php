@@ -1,0 +1,61 @@
+<?php namespace Anomaly\WysiwygFieldType\Command;
+
+use Anomaly\WysiwygFieldType\WysiwygFieldType;
+use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
+use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+
+/**
+ * Class SyncFile
+ *
+ * @link          http://anomaly.is/streams-platform
+ * @author        AnomalyLabs, Inc. <hello@anomaly.is>
+ * @author        Ryan Thompson <ryan@anomaly.is>
+ * @package       Anomaly\WysiwygFieldType\Command
+ */
+class SyncFile implements SelfHandling
+{
+
+    use DispatchesJobs;
+
+    /**
+     * The field type instance.
+     *
+     * @var WysiwygFieldType
+     */
+    protected $fieldType;
+
+    /**
+     * Create a new SyncFile instance.
+     *
+     * @param WysiwygFieldType $fieldType
+     */
+    public function __construct(WysiwygFieldType $fieldType)
+    {
+        $this->fieldType = $fieldType;
+    }
+
+    /**
+     * Handle the command.
+     *
+     * @param EntryRepositoryInterface $repository
+     * @return string
+     */
+    public function handle(EntryRepositoryInterface $repository)
+    {
+        $path  = $this->fieldType->getStoragePath();
+        $entry = $this->fieldType->getEntry();
+
+        $content = $this->dispatch(new GetFile($this->fieldType));
+
+        if (md5($content) == md5($entry->getRawAttribute($this->fieldType->getField()))) {
+            return $content;
+        }
+
+        if (filemtime($path) > $entry->lastModified()->timestamp) {
+            $repository->save($entry->setRawAttribute($this->fieldType->getField(), $content));
+        }
+
+        return $content;
+    }
+}
