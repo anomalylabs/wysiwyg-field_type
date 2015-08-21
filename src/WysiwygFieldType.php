@@ -229,6 +229,6 @@ class WysiwygFieldType extends FieldType
      */
     protected function getFileName()
     {
-        return trim($this->getField() . '_' . $this->getLocale(), '_') . '.html';
+        return trim($this->getField() . '_' . $this->getLocale(), '_') . '.twig';
     }
 }
