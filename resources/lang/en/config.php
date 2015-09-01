@@ -16,5 +16,9 @@ return [
     'line_breaks' => [
         'label'        => 'Line Breaks',
         'instructions' => 'Use line beaks instead of paragraph tags?'
-    ]
+    ],
+    'disk'        => [
+        'label'        => 'Upload Disk',
+        'instructions' => 'Choose a disk to upload files to if using the image or file manager plugin.'
+    ],
 ];
