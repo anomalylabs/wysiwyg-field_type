@@ -71,6 +71,8 @@ class WysiwygFieldType extends FieldType
             'orderedlist',
             'outdent',
             'indent',
+            'image',
+            'file',
             'link',
             'alignment',
             'horizontalrule',
