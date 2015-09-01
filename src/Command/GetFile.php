@@ -16,7 +16,7 @@ class GetFile implements SelfHandling
 {
 
     /**
-     * The wysiwyg field type instance.
+     * The editor field type instance.
      *
      * @var WysiwygFieldType
      */
