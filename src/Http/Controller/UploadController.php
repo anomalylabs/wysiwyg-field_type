@@ -37,8 +37,10 @@ class UploadController extends PublicController
 
         $path = 'wysiwyg-field-type';
 
-        $file = $request->file('file');
-        $disk = $request->get('disk');
+        $file   = $request->file('file');
+        $disk   = $request->get('disk');
+        $field  = $request->get('field');
+        $folder = $request->get('folder');
 
         if (is_numeric($disk)) {
             $disk = $disks->find($disk);
@@ -55,7 +57,7 @@ class UploadController extends PublicController
 
         /* @var FileInterface|UploadedFile $file */
         $file = $manager->putStream(
-            $disk->path(ltrim(trim($path, '/') . '/' . $file->getClientOriginalName(), '/')),
+            $disk->path(ltrim(trim($path, '/') . "/{$field}/{$folder}/" . $file->getClientOriginalName(), '/')),
             fopen($file->getRealPath(), 'r+')
         );
 

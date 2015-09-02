@@ -19,7 +19,9 @@ class WysiwygFieldTypeServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $routes = [
-        'streams/wysiwyg-field_type/upload' => 'Anomaly\WysiwygFieldType\Http\Controller\UploadController@handle'
+        'streams/wysiwyg-field_type/upload'                => 'Anomaly\WysiwygFieldType\Http\Controller\UploadController@handle',
+        'streams/wysiwyg-field_type/images/{disk}/{field}' => 'Anomaly\WysiwygFieldType\Http\Controller\JsonController@images',
+        'streams/wysiwyg-field_type/files/{disk}/{field}'  => 'Anomaly\WysiwygFieldType\Http\Controller\JsonController@files'
     ];
 
 }
