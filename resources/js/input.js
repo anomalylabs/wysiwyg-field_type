@@ -9,7 +9,6 @@ $(function () {
              */
             cleanOnPaste: true,
             pastePlainText: true,
-            allowedTags: ['p', 'h1', 'h2', 'pre'],
             replaceTags: [
                 ['strike', 'del'],
                 ['i', 'em'],
