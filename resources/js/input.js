@@ -8,7 +8,6 @@ $(function () {
              * Settings
              */
             cleanOnPaste: true,
-            pastePlainText: true,
             replaceTags: [
                 ['strike', 'del'],
                 ['i', 'em'],
