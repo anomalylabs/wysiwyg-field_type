@@ -83,6 +83,16 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     }
 
     /**
+     * Return the text from the content.
+     *
+     * @return string
+     */
+    public function text()
+    {
+        return strip_tags($this->content());
+    }
+
+    /**
      * Return the parsed content.
      *
      * @return string

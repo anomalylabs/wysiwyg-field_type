@@ -131,3 +131,13 @@ Returns the un-parsed and un-rendered file content.
     
     // API usage
     $entry->example->content;
+
+### `text()`
+
+Returns the plain text version of the content.
+
+    // Twig usage
+    {{ entry.example.text|raw }}
+    
+    // API usage
+    $entry->example->text;
