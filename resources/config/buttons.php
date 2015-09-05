@@ -12,6 +12,7 @@ return [
         'outdent',
         'indent',
         'image',
+        'file',
         'link',
         'alignment',
         'horizontalrule',

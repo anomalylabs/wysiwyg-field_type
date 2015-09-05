@@ -11,6 +11,7 @@ return [
     'outdent'        => 'Outdent',
     'indent'         => 'Indent',
     'image'          => 'Image',
+    'file'           => 'File',
     'link'           => 'Link',
     'alignment'      => 'Alignment',
     'horizontalrule' => 'Horizontal Rule',

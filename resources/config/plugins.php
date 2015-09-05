@@ -5,8 +5,6 @@ return [
         'table',
         'video',
         'fontsize',
-        'fullscreen',
-        'filemanager',
-        'imagemanager'
+        'fullscreen'
     ]
 ];

@@ -45,6 +45,12 @@ return [
             }
         ]
     ],
+    'disk'        => [
+        'type'   => 'anomaly.field_type.relationship',
+        'config' => [
+            'related' => 'Anomaly\FilesModule\Disk\DiskModel'
+        ]
+    ],
     'height'      => [
         'type'     => 'anomaly.field_type.integer',
         'required' => true,

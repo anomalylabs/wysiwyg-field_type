@@ -71,6 +71,8 @@ class WysiwygFieldType extends FieldType
             'orderedlist',
             'outdent',
             'indent',
+            'image',
+            'file',
             'link',
             'alignment',
             'horizontalrule',
@@ -156,6 +158,20 @@ class WysiwygFieldType extends FieldType
          */
         if (!array_filter($config['plugins'])) {
             $config['plugins'] = $this->plugins['default'];
+        }
+
+        /**
+         * Insert the plugin for image button.
+         */
+        if (in_array('image', $config['buttons'])) {
+            $config['plugins'] = array_merge($config['plugins'], ['imagemanager']);
+        }
+
+        /**
+         * Insert the plugin for file button.
+         */
+        if (in_array('file', $config['buttons'])) {
+            $config['plugins'] = array_merge($config['plugins'], ['filemanager']);
         }
 
         return $config;

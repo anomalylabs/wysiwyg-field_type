@@ -12,6 +12,8 @@
         class="wysiwyg"
         name="{{ field_type.input_name }}"
         placeholder="{{ trans(field_type.placeholder) }}"
+        data-field="{{ field_type.field }}"
+        data-disk="{{ field_type.config.disk }}"
         data-height="{{ field_type.config.height }}"
         data-buttons="{{ field_type.config.buttons|join(',') }}"
         data-plugins="{{ field_type.config.plugins|join(',') }}"
