@@ -145,22 +145,6 @@ class WysiwygFieldType extends FieldType
         }
 
         /**
-         * If no buttons are specified
-         * use the default set.
-         */
-        if (!array_filter($config['buttons'])) {
-            $config['buttons'] = $this->buttons['default'];
-        }
-
-        /**
-         * If no plugins are specified
-         * use the default set.
-         */
-        if (!array_filter($config['plugins'])) {
-            $config['plugins'] = $this->plugins['default'];
-        }
-
-        /**
          * Insert the plugin for image button.
          */
         if (in_array('image', $config['buttons'])) {

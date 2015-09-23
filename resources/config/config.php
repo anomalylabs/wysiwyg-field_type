@@ -2,12 +2,11 @@
 
 return [
     'buttons'     => [
-        'type'     => 'anomaly.field_type.checkboxes',
-        'required' => true,
-        'rules'    => [
+        'type'   => 'anomaly.field_type.checkboxes',
+        'rules'  => [
             'array'
         ],
-        'config'   => [
+        'config' => [
             'options' => function (\Illuminate\Config\Repository $config) {
 
                 $keys = $config->get('anomaly.field_type.wysiwyg::buttons.available');
@@ -24,12 +23,11 @@ return [
         ]
     ],
     'plugins'     => [
-        'type'     => 'anomaly.field_type.checkboxes',
-        'required' => true,
-        'rules'    => [
+        'type'   => 'anomaly.field_type.checkboxes',
+        'rules'  => [
             'array'
         ],
-        'config'   => [
+        'config' => [
             'options' => function (\Illuminate\Config\Repository $config) {
 
                 $keys = $config->get('anomaly.field_type.wysiwyg::plugins.available');
