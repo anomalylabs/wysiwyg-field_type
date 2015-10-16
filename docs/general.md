@@ -20,7 +20,7 @@ The WYSIWYG field type provides a WYSIWYG editor powered by RedactorJS.
 
     protected $fields = [
         'example' => [
-            'type'   => 'anomaly.field_type.url',
+            'type'   => 'anomaly.field_type.wysiwyg',
             'config' => [
                 'line_breaks' => false,
                 'buttons'     => 'default',
