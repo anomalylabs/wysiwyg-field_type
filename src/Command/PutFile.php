@@ -3,7 +3,6 @@
 use Anomaly\WysiwygFieldType\WysiwygFieldType;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class PutFile
@@ -15,8 +14,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class PutFile implements SelfHandling
 {
-
-    use DispatchesJobs;
 
     /**
      * The editor field type instance.
@@ -52,7 +49,5 @@ class PutFile implements SelfHandling
         if ($path) {
             $files->put($path, array_get($entry->getAttributes(), $this->fieldType->getField()));
         }
-
-        $this->dispatch(new ClearCache());
     }
 }

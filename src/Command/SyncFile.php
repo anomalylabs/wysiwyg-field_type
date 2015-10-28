@@ -1,7 +1,7 @@
 <?php namespace Anomaly\WysiwygFieldType\Command;
 
-use Anomaly\WysiwygFieldType\WysiwygFieldType;
 use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
+use Anomaly\WysiwygFieldType\WysiwygFieldType;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
@@ -64,8 +64,10 @@ class SyncFile implements SelfHandling
 
             $this->dispatch(new PutFile($this->fieldType));
 
-            return $entry->getRawAttribute($this->fieldType->getField(), false);
+            $content = $entry->getRawAttribute($this->fieldType->getField(), false);
         }
+
+        $this->dispatch(new ClearCache());
 
         return $content;
     }
