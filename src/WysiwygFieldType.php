@@ -34,72 +34,9 @@ class WysiwygFieldType extends FieldType
      * @var array
      */
     protected $config = [
-        'line_breaks' => false,
-        'buttons'     => 'default',
-        'plugins'     => 'default',
-        'height'      => 300
-    ];
-
-    /**
-     * The available button sets.
-     *
-     * @var array
-     */
-    protected $buttons = [
-        'advanced' => [
-            'html',
-            'formatting',
-            'bold',
-            'italic',
-            'deleted',
-            'unorderedlist',
-            'orderedlist',
-            'outdent',
-            'indent',
-            'link',
-            'alignment',
-            'horizontalrule',
-            'underline'
-        ],
-        'default'  => [
-            'html',
-            'formatting',
-            'bold',
-            'italic',
-            'deleted',
-            'unorderedlist',
-            'orderedlist',
-            'outdent',
-            'indent',
-            'image',
-            'file',
-            'link',
-            'alignment',
-            'horizontalrule',
-            'underline'
-        ],
-        'basic'    => [
-            'formatting',
-            'bold',
-            'italic',
-            'link'
-        ],
-        'simple'   => [
-            'formatting',
-            'bold',
-            'italic'
-        ]
-    ];
-
-    /**
-     * The available plugin sets.
-     *
-     * @var array
-     */
-    protected $plugins = [
-        'default' => [
-            'fullscreen'
-        ]
+        'configuration' => 'default',
+        'line_breaks'   => false,
+        'height'        => 400
     ];
 
     /**
@@ -129,33 +66,10 @@ class WysiwygFieldType extends FieldType
         $config = parent::getConfig();
 
         /**
-         * If the buttons config is a button set then
-         * use the corresponding set of buttons.
+         * Set the real configuration values.
          */
-        if (is_string($config['buttons'])) {
-            $config['buttons'] = array_get($this->buttons, $config['buttons'], $this->buttons['default']);
-        }
-
-        /**
-         * If the plugins config is a plugin set then
-         * use the corresponding set of plugins.
-         */
-        if (is_string($config['plugins'])) {
-            $config['plugins'] = array_get($this->plugins, $config['plugins'], $this->plugins['default']);
-        }
-
-        /**
-         * Insert the plugin for image button.
-         */
-        if (in_array('image', $config['buttons'])) {
-            $config['plugins'] = array_merge($config['plugins'], ['imagemanager']);
-        }
-
-        /**
-         * Insert the plugin for file button.
-         */
-        if (in_array('file', $config['buttons'])) {
-            $config['plugins'] = array_merge($config['plugins'], ['filemanager']);
+        if ($configuration = $this->getNamespace('redactor.' . array_get($config, 'configuration', 'default'))) {
+            $config['configuration'] = config($configuration);
         }
 
         return $config;

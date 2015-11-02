@@ -1,55 +1,27 @@
 <?php
 
 return [
-    'buttons'     => [
-        'type'   => 'anomaly.field_type.checkboxes',
-        'rules'  => [
-            'array'
-        ],
-        'config' => [
+    'configuration' => [
+        'required' => true,
+        'type'     => 'anomaly.field_type.select',
+        'config'   => [
             'options' => function (\Illuminate\Config\Repository $config) {
 
-                $keys = $config->get('anomaly.field_type.wysiwyg::buttons.available');
+                $configurations = array_keys($config->get('anomaly.field_type.wysiwyg::redactor'));
 
-                $values = array_map(
-                    function ($button) {
-                        return trans('anomaly.field_type.wysiwyg::button.' . $button);
-                    },
-                    $keys
+                return array_combine(
+                    $configurations,
+                    array_map(
+                        function ($configuration) {
+                            return 'anomaly.field_type.wysiwyg::redactor.' . $configuration;
+                        },
+                        $configurations
+                    )
                 );
-
-                return array_combine($keys, $values);
             }
         ]
     ],
-    'plugins'     => [
-        'type'   => 'anomaly.field_type.checkboxes',
-        'rules'  => [
-            'array'
-        ],
-        'config' => [
-            'options' => function (\Illuminate\Config\Repository $config) {
-
-                $keys = $config->get('anomaly.field_type.wysiwyg::plugins.available');
-
-                $values = array_map(
-                    function ($button) {
-                        return trans('anomaly.field_type.wysiwyg::plugin.' . $button);
-                    },
-                    $keys
-                );
-
-                return array_combine($keys, $values);
-            }
-        ]
-    ],
-    'disk'        => [
-        'type'   => 'anomaly.field_type.relationship',
-        'config' => [
-            'related' => 'Anomaly\FilesModule\Disk\DiskModel'
-        ]
-    ],
-    'height'      => [
+    'height'        => [
         'type'     => 'anomaly.field_type.integer',
         'required' => true,
         'config'   => [
@@ -57,7 +29,7 @@ return [
             'min'  => 200
         ]
     ],
-    'line_breaks' => [
+    'line_breaks'   => [
         'type' => 'anomaly.field_type.boolean'
     ]
 ];
