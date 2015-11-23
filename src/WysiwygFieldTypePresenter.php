@@ -1,6 +1,7 @@
 <?php namespace Anomaly\WysiwygFieldType;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
+use Anomaly\Streams\Platform\Support\Decorator;
 use Anomaly\Streams\Platform\Support\String;
 use Illuminate\View\Factory;
 
@@ -55,21 +56,23 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     /**
      * Return the rendered content.
      *
+     * @param array $payload
      * @return string
      */
-    public function rendered()
+    public function rendered(array $payload = [])
     {
-        return $this->view->make($this->object->getViewPath())->render();
+        return $this->view->make($this->object->getViewPath(), $payload)->render();
     }
 
     /**
-     * Return the parse the content.
+     * Return the parsed content.
      *
+     * @param array $payload
      * @return string
      */
-    public function parsed()
+    public function parsed(array $payload = [])
     {
-        return $this->string->render($this->content());
+        return $this->string->render($this->content(), (new Decorator())->decorate($payload));
     }
 
     /**

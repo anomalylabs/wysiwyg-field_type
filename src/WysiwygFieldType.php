@@ -82,7 +82,7 @@ class WysiwygFieldType extends FieldType
      */
     public function getFilePath()
     {
-        if (!$this->entry->exists) {
+        if (!is_object($this->entry) && !$this->entry->getId()) {
             return null;
         }
 
