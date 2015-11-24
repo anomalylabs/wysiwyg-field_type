@@ -1,7 +1,7 @@
 $(function () {
 
     // Initialize WYSIWYG editors.
-    $('textarea.wysiwyg').each(function () {
+    $('.wysiwyg-field_type textarea').each(function () {
         $(this).redactor({
 
             /**
