@@ -1,8 +1,18 @@
 $(function () {
 
     // Initialize WYSIWYG editors.
-    $('.wysiwyg-field_type textarea').each(function () {
-        $(this).redactor({
+    $('.wysiwyg-field_type').each(function () {
+
+        var wrapper = $(this);
+        var field = wrapper.data('field');
+        var textarea = wrapper.find('textarea');
+
+        textarea.redactor({
+
+            /**
+             * Data
+             */
+            field: field,
 
             /**
              * Settings
@@ -20,42 +30,10 @@ $(function () {
             /**
              * Features
              */
-            buttons: $(this).data('buttons').split(','),
-            plugins: $(this).data('plugins').split(','),
-            minHeight: $(this).data('height'),
-            placeholder: $(this).attr('placeholder'),
-
-            /**
-             * File Manager
-             */
-            fileUpload: APPLICATION_URL + '/streams/wysiwyg-field_type/upload',
-            fileManagerJson: APPLICATION_URL + '/streams/wysiwyg-field_type/files/' + $(this).data('disk') + '/' + $(this).data('field'),
-            uploadFileFields: {
-                folder: 'files',
-                disk: $(this).data('disk'),
-                field: $(this).data('field'),
-                _token: CSRF_TOKEN
-
-            },
-            fileUploadErrorCallback: function () {
-                alert('There was an error uploading your file.');
-            },
-
-            /**
-             * File Manager
-             */
-            imageUpload: APPLICATION_URL + '/streams/wysiwyg-field_type/upload',
-            imageManagerJson: APPLICATION_URL + '/streams/wysiwyg-field_type/images/' + $(this).data('disk') + '/' + $(this).data('field'),
-            uploadImageFields: {
-                folder: 'images',
-                disk: $(this).data('disk'),
-                field: $(this).data('field'),
-                _token: CSRF_TOKEN
-
-            },
-            imageUploadErrorCallback: function () {
-                alert('There was an error uploading your image.');
-            }
+            buttons: textarea.data('buttons').split(','),
+            plugins: textarea.data('plugins').split(','),
+            placeholder: textarea.attr('placeholder'),
+            minHeight: textarea.data('height')
         });
     });
 });

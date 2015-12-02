@@ -396,6 +396,11 @@ body .redactor-box-fullscreen {
     content: "\e61f";
 }
 
+.re-upload:before {
+    content: "\f093";
+    font-family: 'FontAwesome';
+}
+
 /*
 	Toolbar tooltip
 */

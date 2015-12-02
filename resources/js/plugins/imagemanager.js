@@ -1,55 +1,41 @@
-(function($)
-{
-	$.Redactor.prototype.imagemanager = function()
-	{
-		return {
-			init: function()
-			{
-				if (!this.opts.imageManagerJson) return;
+(function ($) {
+    $.Redactor.prototype.imagemanager = function () {
+        return {
+            init: function () {
 
-				this.modal.addCallback('image', this.imagemanager.load);
-			},
-			load: function()
-			{
-				var $modal = this.modal.getModal();
+                var manager = this.button.add('image', 'Insert Image');
 
-				this.modal.createTabber($modal);
-				this.modal.addTab(1, 'Upload', 'active');
-				this.modal.addTab(2, 'Choose');
+                this.button.addCallback(manager, this.imagemanager.choose);
+            },
+            choose: function () {
 
-				$('#redactor-modal-image-droparea').addClass('redactor-tab redactor-tab1');
+                console.log(this.core.getElement().data('field'));
 
-				var $box = $('<div id="redactor-image-manager-box" style="overflow: auto; height: 300px;" class="redactor-tab redactor-tab2">').hide();
-				$modal.append($box);
+                var redactor = this;
 
-				$.ajax({
-				  dataType: "json",
-				  cache: false,
-				  url: this.opts.imageManagerJson,
-				  success: $.proxy(function(data)
-					{
-						$.each(data, $.proxy(function(key, val)
-						{
-							// title
-							var thumbtitle = '';
-							if (typeof val.title !== 'undefined') thumbtitle = val.title;
+                var modal = $('#' + this.opts.field + '-modal');
 
-							var img = $('<img src="' + val.thumb + '" rel="' + val.image + '" title="' + thumbtitle + '" style="width: 100px; height: 75px; cursor: pointer;" />');
-							$('#redactor-image-manager-box').append(img);
-							$(img).click($.proxy(this.imagemanager.insert, this));
+                modal.find('.modal-content').html('<div class="modal-loading"><div class="active loader"></div></div>');
+                modal.modal('show').find('.modal-content').load('/streams/wysiwyg-field_type/index');
 
-						}, this));
+                modal.unbind().on('click', '[data-file]', function (e) {
 
+                    e.preventDefault();
 
-					}, this)
-				});
+                    var text = redactor.selection.getText().length ? redactor.selection.getText() : APPLICATION_URL + '/files/' + $(this).data('entry');
 
+                    redactor.file.insert('<img src="' + APPLICATION_URL + '/files/' + $(this).data('entry') + '"/>');
 
-			},
-			insert: function(e)
-			{
-				this.image.insert('<img src="' + $(e.target).attr('rel') + '" alt="' + $(e.target).attr('title') + '">');
-			}
-		};
-	};
+                    $(this).closest('.modal').modal('hide');
+                });
+            },
+            upload: function () {
+
+                var modal = $('#' + this.opts.field + '-modal');
+
+                modal.find('.modal-content').html('<div class="modal-loading"><div class="active loader"></div></div>');
+                modal.modal('show').find('.modal-content').load('/streams/wysiwyg-field_type/choose/' + this.opts.field);
+            }
+        };
+    };
 })(jQuery);

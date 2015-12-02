@@ -1,65 +1,43 @@
-(function($)
-{
-	$.Redactor.prototype.filemanager = function()
-	{
-		return {
-			init: function()
-			{
-				var button = this.button.add('file', 'Insert File');
+(function ($) {
+    $.Redactor.prototype.filemanager = function () {
+        return {
+            init: function () {
 
-				this.button.addCallback(button, this.filemanager.load);
-			},
-			load: function() {
-				$('#entry_content-modal').modal('show').find('.modal-content').load('http://workbench.local:8888/posts');
-			},
-			loadBAK: function()
-			{
-				var $modal = this.modal.getModal();
+                var manager = this.button.add('file', 'Insert File');
+                var upload = this.button.add('upload', 'Upload File');
 
-				this.modal.createTabber($modal);
-				this.modal.addTab(1, 'Upload', 'active');
-				this.modal.addTab(2, 'Choose');
+                this.button.addCallback(upload, this.filemanager.upload);
+                this.button.addCallback(manager, this.filemanager.choose);
+            },
+            choose: function () {
 
-				$('#redactor-modal-file-upload-box').addClass('redactor-tab redactor-tab1');
+                console.log(this.core.getElement().data('field'));
 
-				var $box = $('<div id="redactor-file-manager-box" style="overflow: auto; height: 300px;" class="redactor-tab redactor-tab2">').hide();
-				$modal.append($box);
+                var redactor = this;
 
+                var modal = $('#' + this.opts.field + '-modal');
 
-				$.ajax({
-				  dataType: "json",
-				  cache: false,
-				  url: this.opts.fileManagerJson,
-				  success: $.proxy(function(data)
-					{
-						var ul = $('<ul id="redactor-modal-list">');
-						$.each(data, $.proxy(function(key, val)
-						{
-							var a = $('<a href="#" title="' + val.title + '" rel="' + val.link + '" class="redactor-file-manager-link">' + val.title + ' <span style="font-size: 11px; color: #888;">' + val.name + '</span> <span style="position: absolute; right: 10px; font-size: 11px; color: #888;">(' + val.size + ')</span></a>');
-							var li = $('<li />');
+                modal.find('.modal-content').html('<div class="modal-loading"><div class="active loader"></div></div>');
+                modal.modal('show').find('.modal-content').load('/streams/wysiwyg-field_type/index');
 
-							a.on('click', $.proxy(this.filemanager.insert, this));
+                modal.unbind().on('click', '[data-file]', function (e) {
 
-							li.append(a);
-							ul.append(li);
+                    e.preventDefault();
 
-						}, this));
+                    var text = redactor.selection.getText().length ? redactor.selection.getText() : APPLICATION_URL + '/files/' + $(this).data('entry');
 
-						$('#redactor-file-manager-box').append(ul);
+                    redactor.file.insert('<a href="' + APPLICATION_URL + '/files/' + $(this).data('entry') + '">' + text + '</a>');
 
+                    $(this).closest('.modal').modal('hide');
+                });
+            },
+            upload: function () {
 
-					}, this)
-				});
+                var modal = $('#' + this.opts.field + '-modal');
 
-			},
-			insert: function(e)
-			{
-				e.preventDefault();
-
-				var $target = $(e.target).closest('.redactor-file-manager-link');
-
-				this.file.insert('<a href="' + $target.attr('rel') + '">' + $target.attr('title') + '</a>');
-			}
-		};
-	};
+                modal.find('.modal-content').html('<div class="modal-loading"><div class="active loader"></div></div>');
+                modal.modal('show').find('.modal-content').load('/streams/wysiwyg-field_type/choose/' + this.opts.field);
+            }
+        };
+    };
 })(jQuery);

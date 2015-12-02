@@ -5,7 +5,7 @@
 {% endfor %}
 
 {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/input.js") }}
-{{ asset_add("styles.css", "anomaly.field_type.wysiwyg::css/redactor.css") }}
+{{ asset_add("styles.css", "anomaly.field_type.wysiwyg::less/redactor.less") }}
 {{ asset_add("styles.css", "anomaly.field_type.wysiwyg::css/theme.css") }}
 
 <textarea
@@ -25,11 +25,11 @@
 <small class="text-muted">{{ field_type.storage_path }}</small>
 
 <div class="modal remote" id="{{ field_type.field_name }}-modal">
-        <div class="modal-dialog">
-                <div class="modal-content">
-                        <div class="modal-loading">
-                                <div class="active loader"></div>
-                        </div>
-                </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-loading">
+                <div class="active loader"></div>
+            </div>
         </div>
+    </div>
 </div>

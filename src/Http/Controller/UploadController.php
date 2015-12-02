@@ -1,12 +1,11 @@
 <?php namespace Anomaly\WysiwygFieldType\Http\Controller;
 
-use Anomaly\FilesModule\Disk\Contract\DiskRepositoryInterface;
-use Anomaly\FilesModule\File\Contract\FileInterface;
-use Anomaly\Streams\Platform\Http\Controller\PublicController;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Http\Request;
-use League\Flysystem\MountManager;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Anomaly\WysiwygFieldType\Table\FileTableBuilder;
+use Anomaly\WysiwygFieldType\Table\UploadTableBuilder;
+use Anomaly\FilesModule\File\FileUploader;
+use Anomaly\FilesModule\Folder\Contract\FolderRepositoryInterface;
+use Anomaly\Streams\Platform\Http\Controller\AdminController;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class UploadController
@@ -16,51 +15,47 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\WysiwygFieldType\Http\Controller
  */
-class UploadController extends PublicController
+class UploadController extends AdminController
 {
 
     /**
-     * Handle the file upload.
+     * Return the uploader.
      *
-     * @param DiskRepositoryInterface $disks
-     * @param ResponseFactory         $response
-     * @param MountManager            $manager
-     * @param Request                 $request
+     * @param FolderRepositoryInterface $folders
+     * @param                           $folder
+     * @return \Illuminate\View\View
+     */
+    public function index(FolderRepositoryInterface $folders, $folder)
+    {
+        return $this->view->make('anomaly.field_type.wysiwyg::upload/index', ['folder' => $folders->find($folder)]);
+    }
+
+    /**
+     * Upload a file.
+     *
+     * @param FileUploader              $uploader
+     * @param FolderRepositoryInterface $folders
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function upload(FileUploader $uploader, FolderRepositoryInterface $folders)
+    {
+        if ($file = $uploader->upload($this->request->file('upload'), $folders->find($this->request->get('folder')))) {
+            return $this->response->json($file->getAttributes());
+        }
+
+        return $this->response->json(['error' => 'There was a problem uploading the file.'], 500);
+    }
+
+    /**
+     * Return the recently uploaded files.
+     *
+     * @param FileTableBuilder $table
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function handle(
-        DiskRepositoryInterface $disks,
-        ResponseFactory $response,
-        MountManager $manager,
-        Request $request
-    ) {
-
-        $path = 'wysiwyg-field-type';
-
-        $file   = $request->file('file');
-        $disk   = $request->get('disk');
-        $field  = $request->get('field');
-        $folder = $request->get('folder');
-
-        if (is_numeric($disk)) {
-            $disk = $disks->find($disk);
-        } elseif (is_string($disk)) {
-            $disk = $disks->findBySlug($disk);
-        }
-
-        if (!$disk) {
-            return $response->json(
-                'The configured upload disk [' . $request->get('disk') . '] does not exist!',
-                500
-            );
-        }
-
-        /* @var FileInterface|UploadedFile $file */
-        $file = $manager->putStream(
-            $disk->path(ltrim(trim($path, '/') . "/{$field}/{$folder}/" . $file->getClientOriginalName(), '/')),
-            fopen($file->getRealPath(), 'r+')
-        );
-
-        return stripslashes(json_encode(['filelink' => url($file->publicPath())]));
+    public function recent(UploadTableBuilder $table)
+    {
+        return $table->setUploaded(explode(',', $this->request->get('uploaded')))
+            ->make()
+            ->getTableContent();
     }
 }
