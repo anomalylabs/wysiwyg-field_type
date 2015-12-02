@@ -15,6 +15,13 @@ class FileTableBuilder extends TableBuilder
 {
 
     /**
+     * The table mode.
+     *
+     * @var string
+     */
+    protected $mode = 'file';
+
+    /**
      * The ajax flag.
      *
      * @var bool
@@ -60,18 +67,6 @@ class FileTableBuilder extends TableBuilder
     ];
 
     /**
-     * The table buttons.
-     *
-     * @var array
-     */
-    protected $buttons = [
-        'select' => [
-            'data-file'  => 'entry.id',
-            'data-entry' => '{entry.path}'
-        ]
-    ];
-
-    /**
      * The table options.
      *
      * @var array
@@ -80,4 +75,26 @@ class FileTableBuilder extends TableBuilder
         'title' => 'anomaly.field_type.wysiwyg::message.choose_file'
     ];
 
+    /**
+     * Get the mode.
+     *
+     * @return string
+     */
+    public function getMode()
+    {
+        return $this->mode;
+    }
+
+    /**
+     * Set the mode.
+     *
+     * @param $mode
+     * @return $this
+     */
+    public function setMode($mode)
+    {
+        $this->mode = $mode;
+
+        return $this;
+    }
 }

@@ -16,6 +16,13 @@ class UploadTableBuilder extends TableBuilder
 {
 
     /**
+     * The table mode.
+     *
+     * @var string
+     */
+    protected $mode = 'file';
+
+    /**
      * The uploaded IDs.
      *
      * @var array
@@ -61,17 +68,6 @@ class UploadTableBuilder extends TableBuilder
                 'keywords' => 'entry.keywords.labels',
                 'disk'     => 'entry.folder.disk.slug'
             ]
-        ]
-    ];
-
-    /**
-     * The table buttons.
-     *
-     * @var array
-     */
-    protected $buttons = [
-        'select' => [
-            'data-file' => 'entry.id'
         ]
     ];
 
@@ -122,6 +118,29 @@ class UploadTableBuilder extends TableBuilder
     public function setUploaded(array $uploaded)
     {
         $this->uploaded = $uploaded;
+
+        return $this;
+    }
+
+    /**
+     * Get the mode.
+     *
+     * @return string
+     */
+    public function getMode()
+    {
+        return $this->mode;
+    }
+
+    /**
+     * Set the mode.
+     *
+     * @param $mode
+     * @return $this
+     */
+    public function setMode($mode)
+    {
+        $this->mode = $mode;
 
         return $this;
     }

@@ -1,18 +1,11 @@
 $(function () {
 
     // Initialize WYSIWYG editors.
-    $('.wysiwyg-field_type').each(function () {
+    $('[data-provides="wysiwyg"]').each(function () {
 
-        var wrapper = $(this);
-        var field = wrapper.data('field');
-        var textarea = wrapper.find('textarea');
+        $(this).redactor({
 
-        textarea.redactor({
-
-            /**
-             * Data
-             */
-            field: field,
+            element: $(this),
 
             /**
              * Settings
@@ -30,10 +23,11 @@ $(function () {
             /**
              * Features
              */
-            buttons: textarea.data('buttons').split(','),
-            plugins: textarea.data('plugins').split(','),
-            placeholder: textarea.attr('placeholder'),
-            minHeight: textarea.data('height')
+            minHeight: $(this).data('height'),
+            placeholder: $(this).attr('placeholder'),
+            folders: $(this).data('folders').toString().split(','),
+            buttons: $(this).data('buttons').toString().split(','),
+            plugins: $(this).data('plugins').toString().split(',')
         });
     });
 });

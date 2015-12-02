@@ -68,7 +68,7 @@ class WysiwygFieldType extends FieldType
         /**
          * Set the real configuration values.
          */
-        if ($configuration = $this->getNamespace('redactor.' . array_get($config, 'configuration', 'default'))) {
+        if ($configuration = $this->getNamespace('redactor.configuration.' . array_get($config, 'configuration', 'default'))) {
             $config['configuration'] = config($configuration);
         }
 

@@ -73,6 +73,9 @@ $(function () {
 
         uploader.find('.uploaded .panel-body').html(element.data('loading') + '...');
 
-        uploader.find('.uploaded').load('/admin/files/upload/recent?uploaded=' + uploaded.join(','));
+        uploader.find('.uploaded').load('/streams/wysiwyg-field_type/recent?' + $.param({
+            mode: element.data('mode'),
+            uploaded: uploaded.join(',')
+        }));
     });
 });

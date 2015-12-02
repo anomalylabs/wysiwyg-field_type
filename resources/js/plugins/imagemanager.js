@@ -3,38 +3,50 @@
         return {
             init: function () {
 
-                var manager = this.button.add('image', 'Insert Image');
+                var editor = this;
 
-                this.button.addCallback(manager, this.imagemanager.choose);
-            },
-            choose: function () {
+                this.button.addDropdown(
+                    this.button.add('image', 'Image'),
+                    {
+                        select: {title: 'Select Image', func: this.imagemanager.select},
+                        upload: {title: 'Upload Image', func: this.imagemanager.upload}
+                    }
+                );
 
-                console.log(this.core.getElement().data('field'));
-
-                var redactor = this;
-
-                var modal = $('#' + this.opts.field + '-modal');
-
-                modal.find('.modal-content').html('<div class="modal-loading"><div class="active loader"></div></div>');
-                modal.modal('show').find('.modal-content').load('/streams/wysiwyg-field_type/index');
-
-                modal.unbind().on('click', '[data-file]', function (e) {
+                $('#' + this.opts.element.data('field') + '-modal').on('click', '[data-select="image"]', function (e) {
 
                     e.preventDefault();
 
-                    var text = redactor.selection.getText().length ? redactor.selection.getText() : APPLICATION_URL + '/files/' + $(this).data('entry');
+                    var url = APPLICATION_URL + '/files/' + $(this).data('entry');
 
-                    redactor.file.insert('<img src="' + APPLICATION_URL + '/files/' + $(this).data('entry') + '"/>');
+                    editor.file.insert('<img src="' + url + '"/>');
 
                     $(this).closest('.modal').modal('hide');
                 });
             },
+            select: function () {
+
+                var params = this.imagemanager.params();
+
+                $('#' + this.opts.element.data('field') + '-modal')
+                    .modal('show')
+                    .find('.modal-content')
+                    .load('/streams/wysiwyg-field_type/index?' + params);
+            },
             upload: function () {
 
-                var modal = $('#' + this.opts.field + '-modal');
+                var params = this.imagemanager.params();
 
-                modal.find('.modal-content').html('<div class="modal-loading"><div class="active loader"></div></div>');
-                modal.modal('show').find('.modal-content').load('/streams/wysiwyg-field_type/choose/' + this.opts.field);
+                $('#' + this.opts.element.data('field') + '-modal')
+                    .modal('show')
+                    .find('.modal-content')
+                    .load('/streams/wysiwyg-field_type/choose?' + params);
+            },
+            params: function() {
+                return $.param({
+                    mode: 'image',
+                    folders: this.opts.folders
+                });
             }
         };
     };

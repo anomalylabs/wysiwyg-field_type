@@ -1,23 +1,24 @@
+{{ asset_add("styles.css", "anomaly.field_type.wysiwyg::less/redactor.less") }}
+
 {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/redactor.min.js") }}
 
 {% for plugin in field_type.config.configuration.plugins %}
-    {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/plugins/" ~ plugin ~ ".js", ["live"]) }}
+    {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/plugins/" ~ plugin ~ ".js") }}
 {% endfor %}
 
 {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/input.js") }}
-{{ asset_add("styles.css", "anomaly.field_type.wysiwyg::less/redactor.less") }}
-{{ asset_add("styles.css", "anomaly.field_type.wysiwyg::css/theme.css") }}
 
 <textarea
-        class="wysiwyg"
+        data-provides="wysiwyg"
         name="{{ field_type.input_name }}"
-        placeholder="{{ trans(field_type.placeholder) }}"
-        data-field="{{ field_type.field }}"
+        data-field="{{ field_type.field_name }}"
         data-disk="{{ field_type.config.disk }}"
         data-height="{{ field_type.config.height }}"
+        placeholder="{{ trans(field_type.placeholder) }}"
+        data-folders="{{ field_type.config.folders|join(',') }}"
+        data-locale="{{ field_type.locale ?: config_get('app.locale') }}"
         data-buttons="{{ field_type.config.configuration.buttons|join(',') }}"
         data-plugins="{{ field_type.config.configuration.plugins|join(',') }}"
-        data-locale="{{ field_type.locale ?: config_get('app.locale') }}"
         {{ field_type.disabled ? 'disabled' }}
         {{ field_type.readonly ? 'readonly' }}
         >{{ field_type.value }}</textarea>

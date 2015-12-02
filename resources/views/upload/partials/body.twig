@@ -4,6 +4,7 @@
          data-folder="{{ folder.id }}"
          data-icon="{{ icon('upload')|escape }}"
          data-max-size="{{ max_upload_size() }}"
+         data-mode="{{ input_get('mode', 'file') }}"
          data-message="{{ trans('anomaly.field_type.wysiwyg::message.upload') }}"
          data-loading="{{ trans('anomaly.field_type.wysiwyg::message.loading') }}"
          data-uploading="{{ trans('anomaly.field_type.wysiwyg::message.uploading') }}"

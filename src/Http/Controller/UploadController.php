@@ -1,11 +1,10 @@
 <?php namespace Anomaly\WysiwygFieldType\Http\Controller;
 
-use Anomaly\WysiwygFieldType\Table\FileTableBuilder;
-use Anomaly\WysiwygFieldType\Table\UploadTableBuilder;
 use Anomaly\FilesModule\File\FileUploader;
 use Anomaly\FilesModule\Folder\Contract\FolderRepositoryInterface;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
-use Illuminate\Database\Eloquent\Builder;
+use Anomaly\WysiwygFieldType\Table\FileTableBuilder;
+use Anomaly\WysiwygFieldType\Table\UploadTableBuilder;
 
 /**
  * Class UploadController
@@ -55,6 +54,7 @@ class UploadController extends AdminController
     public function recent(UploadTableBuilder $table)
     {
         return $table->setUploaded(explode(',', $this->request->get('uploaded')))
+            ->setMode($this->request->get('mode', 'file'))
             ->make()
             ->getTableContent();
     }

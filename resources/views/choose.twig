@@ -10,7 +10,7 @@
         <ul class="nav nav-stacked">
             {% for folder in folders %}
                 <li>
-                    <a href="{{ url_to('streams/wysiwyg-field_type/upload/' ~ folder.id) }}"
+                    <a href="{{ url_to('streams/wysiwyg-field_type/upload/' ~ folder.id) }}?{{ input_get()|url_encode }}"
                        class="ajax">
                         <strong>{{ folder.name }}</strong>
                         <br>

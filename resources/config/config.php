@@ -7,17 +7,9 @@ return [
         'config'   => [
             'options' => function (\Illuminate\Config\Repository $config) {
 
-                $configurations = array_keys($config->get('anomaly.field_type.wysiwyg::redactor'));
+                $keys = $values = array_keys($config->get('anomaly.field_type.wysiwyg::redactor.configuration'));
 
-                return array_combine(
-                    $configurations,
-                    array_map(
-                        function ($configuration) {
-                            return 'anomaly.field_type.wysiwyg::redactor.' . $configuration;
-                        },
-                        $configurations
-                    )
-                );
+                return array_combine($keys, $values);
             }
         ]
     ],

@@ -24,7 +24,9 @@ class FilesController extends AdminController
      */
     public function index(FileTableBuilder $table)
     {
-        return $table->render();
+        return $table
+            ->setMode($this->request->get('mode', 'file'))
+            ->render();
     }
 
     /**
