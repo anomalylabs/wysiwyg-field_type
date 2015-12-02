@@ -5,11 +5,14 @@
 		return {
 			init: function()
 			{
-				if (!this.opts.fileManagerJson) return;
+				var button = this.button.add('file', 'Insert File');
 
-				this.modal.addCallback('file', this.filemanager.load);
+				this.button.addCallback(button, this.filemanager.load);
 			},
-			load: function()
+			load: function() {
+				$('#entry_content-modal').modal('show').find('.modal-content').load('http://workbench.local:8888/posts');
+			},
+			loadBAK: function()
 			{
 				var $modal = this.modal.getModal();
 

@@ -12,8 +12,8 @@ return [
             'orderedlist',
             'outdent',
             'indent',
-            'image',
-            'file',
+            //'image',
+            //'file',
             'link',
             'alignment',
             'horizontalrule',
@@ -23,7 +23,9 @@ return [
             'table',
             'video',
             'fontsize',
-            'fullscreen'
+            'fullscreen',
+            'filemanager',
+            'imagemanager'
         ]
     ],
     'basic'   => [

@@ -1,7 +1,7 @@
 {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/redactor.min.js") }}
 
 {% for plugin in field_type.config.configuration.plugins %}
-    {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/plugins/" ~ plugin ~ ".js") }}
+    {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/plugins/" ~ plugin ~ ".js", ["live"]) }}
 {% endfor %}
 
 {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/input.js") }}
@@ -23,3 +23,13 @@
         >{{ field_type.value }}</textarea>
 
 <small class="text-muted">{{ field_type.storage_path }}</small>
+
+<div class="modal remote" id="{{ field_type.field_name }}-modal">
+        <div class="modal-dialog">
+                <div class="modal-content">
+                        <div class="modal-loading">
+                                <div class="active loader"></div>
+                        </div>
+                </div>
+        </div>
+</div>
