@@ -66,11 +66,17 @@ class WysiwygFieldType extends FieldType
         $config = parent::getConfig();
 
         /**
-         * Set the real configuration values.
+         * Get the configuration preset.
          */
-        if ($configuration = $this->getNamespace('redactor.configuration.' . array_get($config, 'configuration', 'default'))) {
-            $config['configuration'] = config($configuration);
-        }
+        $configuration = config(
+            $this->getNamespace('redactor.configurations.' . $this->config('configuration', 'default'))
+        );
+
+        /**
+         * Set the buttons and plugins from config.
+         */
+        $config['buttons'] = $this->config('buttons', $configuration['buttons']);
+        $config['plugins'] = $this->config('plugins', $configuration['plugins']);
 
         return $config;
     }
@@ -86,10 +92,10 @@ class WysiwygFieldType extends FieldType
             return null;
         }
 
-        $slug      = $this->entry->getStreamSlug();
+        $slug = $this->entry->getStreamSlug();
         $namespace = $this->entry->getStreamNamespace();
         $directory = $this->entry->getEntryId();
-        $file      = $this->getFileName();
+        $file = $this->getFileName();
 
         return "{$namespace}/{$slug}/{$directory}/{$file}";
     }

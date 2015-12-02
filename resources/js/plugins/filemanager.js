@@ -6,7 +6,7 @@
                 var editor = this;
 
                 this.button.addDropdown(
-                    this.button.add('file', 'File'),
+                    this.button.add('file', 'Insert File'),
                     {
                         select: {title: 'Select File', func: this.filemanager.select},
                         upload: {title: 'Upload File', func: this.filemanager.upload}

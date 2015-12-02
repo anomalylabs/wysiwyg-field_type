@@ -6,7 +6,7 @@
                 var editor = this;
 
                 this.button.addDropdown(
-                    this.button.add('image', 'Image'),
+                    this.button.add('image', 'Insert Image'),
                     {
                         select: {title: 'Select Image', func: this.imagemanager.select},
                         upload: {title: 'Upload Image', func: this.imagemanager.upload}

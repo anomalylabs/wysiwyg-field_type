@@ -2,7 +2,7 @@
 
 {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/redactor.min.js") }}
 
-{% for plugin in field_type.config.configuration.plugins %}
+{% for plugin in field_type.config.plugins %}
     {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/plugins/" ~ plugin ~ ".js") }}
 {% endfor %}
 
@@ -17,8 +17,8 @@
         placeholder="{{ trans(field_type.placeholder) }}"
         data-folders="{{ field_type.config.folders|join(',') }}"
         data-locale="{{ field_type.locale ?: config_get('app.locale') }}"
-        data-buttons="{{ field_type.config.configuration.buttons|join(',') }}"
-        data-plugins="{{ field_type.config.configuration.plugins|join(',') }}"
+        data-buttons="{{ field_type.config.buttons|join(',') }}"
+        data-plugins="{{ field_type.config.plugins|join(',') }}"
         {{ field_type.disabled ? 'disabled' }}
         {{ field_type.readonly ? 'readonly' }}
         >{{ field_type.value }}</textarea>

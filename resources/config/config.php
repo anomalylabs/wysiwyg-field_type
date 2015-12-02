@@ -1,19 +1,44 @@
 <?php
 
 return [
-    'configuration' => [
+    'buttons'     => [
         'required' => true,
-        'type'     => 'anomaly.field_type.select',
+        'type'     => 'anomaly.field_type.checkboxes',
         'config'   => [
             'options' => function (\Illuminate\Config\Repository $config) {
 
-                $keys = $values = array_keys($config->get('anomaly.field_type.wysiwyg::redactor.configuration'));
+                $keys = $config->get('anomaly.field_type.wysiwyg::redactor.buttons');
+
+                $values = array_map(
+                    function ($value) {
+                        return trans('anomaly.field_type.wysiwyg::redactor.button.' . $value);
+                    },
+                    $keys
+                );
 
                 return array_combine($keys, $values);
             }
         ]
     ],
-    'height'        => [
+    'plugins'     => [
+        'type'   => 'anomaly.field_type.checkboxes',
+        'config' => [
+            'options' => function (\Illuminate\Config\Repository $config) {
+
+                $keys = $config->get('anomaly.field_type.wysiwyg::redactor.plugins');
+
+                $values = array_map(
+                    function ($value) {
+                        return trans('anomaly.field_type.wysiwyg::redactor.plugin.' . $value);
+                    },
+                    $keys
+                );
+
+                return array_combine($keys, $values);
+            }
+        ]
+    ],
+    'height'      => [
         'type'     => 'anomaly.field_type.integer',
         'required' => true,
         'config'   => [
@@ -21,7 +46,7 @@ return [
             'min'  => 200
         ]
     ],
-    'line_breaks'   => [
+    'line_breaks' => [
         'type' => 'anomaly.field_type.boolean'
     ]
 ];
