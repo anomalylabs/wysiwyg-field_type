@@ -20,9 +20,9 @@ return [
         'table',
         'video',
         'fontsize',
-        'fullscreen',
         'filemanager',
-        'imagemanager'
+        'imagemanager',
+        'fullscreen'
     ],
     'configurations' => [
         'default' => [
@@ -45,9 +45,9 @@ return [
                 'table',
                 'video',
                 'fontsize',
-                'fullscreen',
                 'filemanager',
-                'imagemanager'
+                'imagemanager',
+                'fullscreen'
             ]
         ],
         'basic'   => [
