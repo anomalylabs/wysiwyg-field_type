@@ -17,7 +17,7 @@
 
                     e.preventDefault();
 
-                    var url = APPLICATION_URL + '/files/' + $(this).data('entry');
+                    var url = APPLICATION_URL + '/files/download/' + $(this).data('entry');
 
                     var text = editor.selection.getText().length ? editor.selection.getText() : url;
 
