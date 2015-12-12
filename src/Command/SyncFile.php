@@ -52,7 +52,7 @@ class SyncFile implements SelfHandling
 
         $content = $this->dispatch(new GetFile($this->fieldType));
 
-        if (md5($content) == md5(array_get($entry->getAttributes(), $this->fieldType->getField())) {
+        if (md5($content) == md5(array_get($entry->getAttributes(), $this->fieldType->getField()))) {
             return $content;
         }
 
