@@ -24,9 +24,15 @@ class UploadController extends AdminController
      * @param                           $folder
      * @return \Illuminate\View\View
      */
-    public function index(FolderRepositoryInterface $folders, $folder)
+    public function index(FolderRepositoryInterface $folders, UploadTableBuilder $table, $folder)
     {
-        return $this->view->make('anomaly.field_type.wysiwyg::upload/index', ['folder' => $folders->find($folder)]);
+        return $this->view->make(
+            'anomaly.field_type.wysiwyg::upload/index',
+            [
+                'folder' => $folders->find($folder),
+                'table'  => $table->make()->getTable()
+            ]
+        );
     }
 
     /**

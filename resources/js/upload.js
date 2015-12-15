@@ -35,7 +35,7 @@ $(function () {
     // While file is in transit.
     dropzone.on('sending', function (file) {
 
-        uploader.find('.uploaded .panel-body').html(element.data('uploading') + '...');
+        uploader.find('.uploaded .modal-body').html(element.data('uploading') + '...');
 
         // If a preview is not possible - use no-preview.
         var images = ['jpeg', 'jpg', 'png', 'bmp', 'gif'];
@@ -71,7 +71,7 @@ $(function () {
     // When all files are processed.
     dropzone.on('queuecomplete', function () {
 
-        uploader.find('.uploaded .panel-body').html(element.data('loading') + '...');
+        uploader.find('.uploaded .modal-body').html(element.data('loading') + '...');
 
         uploader.find('.uploaded').load('/streams/wysiwyg-field_type/recent?' + $.param({
             mode: element.data('mode'),
