@@ -2,6 +2,7 @@
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Support\Decorator;
+use Anomaly\Streams\Platform\Support\Str;
 use Anomaly\Streams\Platform\Support\Template;
 use Illuminate\View\Factory;
 
@@ -15,6 +16,13 @@ use Illuminate\View\Factory;
  */
 class WysiwygFieldTypePresenter extends FieldTypePresenter
 {
+
+    /**
+     * The string utility.
+     *
+     * @var Str
+     */
+    protected $str;
 
     /**
      * The view factory.
@@ -41,12 +49,14 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     /**
      * Create a new EditorFieldTypePresenter instance.
      *
+     * @param Str      $str
      * @param Factory  $view
      * @param Template $template
      * @param          $object
      */
-    public function __construct(Factory $view, Template $template, $object)
+    public function __construct(Str $str, Factory $view, Template $template, $object)
     {
+        $this->str      = $str;
         $this->view     = $view;
         $this->template = $template;
 
@@ -105,6 +115,18 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     public function content()
     {
         return file_get_contents($this->object->getStoragePath());
+    }
+
+    /**
+     * Return an excerpt of the text.
+     *
+     * @param int    $length
+     * @param string $ending
+     * @return string
+     */
+    public function excerpt($length = 100, $ending = '...')
+    {
+        return $this->str->truncate($this->text(), $length, $ending);
     }
 
     /**
