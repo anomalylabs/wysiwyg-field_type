@@ -132,11 +132,12 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     /**
      * Return the text from the content.
      *
+     * @param null $allowed
      * @return string
      */
-    public function text()
+    public function text($allowed = null)
     {
-        return strip_tags($this->content());
+        return strip_tags($this->content(), $allowed);
     }
 
     /**
