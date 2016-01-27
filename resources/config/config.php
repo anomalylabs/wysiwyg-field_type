@@ -2,9 +2,8 @@
 
 return [
     'buttons'     => [
-        'required' => true,
-        'type'     => 'anomaly.field_type.checkboxes',
-        'config'   => [
+        'type'   => 'anomaly.field_type.checkboxes',
+        'config' => [
             'options' => function (\Illuminate\Config\Repository $config) {
 
                 $keys = $config->get('anomaly.field_type.wysiwyg::redactor.buttons');
