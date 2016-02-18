@@ -1,7 +1,7 @@
 $(function () {
 
     // Initialize WYSIWYG editors.
-    $('[data-provides="wysiwyg"]').each(function () {
+    $('textarea[data-provides="anomaly.field_type.wysiwyg"]').each(function () {
 
         $(this).redactor({
 
