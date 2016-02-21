@@ -21,7 +21,7 @@
         data-plugins="{{ field_type.config.plugins|join(',') }}"
         {{ html_attributes(field_type.attributes) }}
         {{ field_type.disabled ? 'disabled' }}
-        {{ field_type.required ? 'required' }}
+        {{ field_type.readonly ? 'readonly' }}
 >{{ field_type.value }}</textarea>
 
 <small class="text-muted hidden-xs">{{ field_type.storage_path }}</small>
