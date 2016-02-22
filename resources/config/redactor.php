@@ -24,6 +24,14 @@ return [
         'imagemanager',
         'fullscreen'
     ],
+    'paths'          => [
+        'table'        => 'anomaly.field_type.wysiwyg::js/plugins/table.js',
+        'video'        => 'anomaly.field_type.wysiwyg::js/plugins/video.js',
+        'fontsize'     => 'anomaly.field_type.wysiwyg::js/plugins/fontsize.js',
+        'filemanager'  => 'anomaly.field_type.wysiwyg::js/plugins/filemanager.js',
+        'imagemanager' => 'anomaly.field_type.wysiwyg::js/plugins/imagemanager.js',
+        'fullscreen'   => 'anomaly.field_type.wysiwyg::js/plugins/fullscreen.js'
+    ],
     'configurations' => [
         'default' => [
             'buttons' => [
