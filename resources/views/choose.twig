@@ -7,11 +7,11 @@
 
 <div class="modal-body">
     {% if not folders.isEmpty() %}
-        <ul class="nav nav-stacked">
+        <ul class="nav nav-pills nav-stacked">
             {% for folder in folders %}
-                <li>
+                <li class="nav-item">
                     <a href="{{ url_to('streams/wysiwyg-field_type/upload/' ~ folder.id) }}?{{ input_get()|url_encode }}"
-                       class="ajax">
+                       class="nav-link ajax">
                         <strong>{{ folder.name }}</strong>
                         <br>
                         <small>{{ folder.description }}</small>
