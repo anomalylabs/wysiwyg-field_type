@@ -90,8 +90,8 @@ class FileTableBuilder extends TableBuilder
      * @var array
      */
     protected $options = [
-        'disable_views' => true,
-        'title'         => 'anomaly.field_type.wysiwyg::message.choose_file'
+        'enable_views' => false,
+        'title'        => 'anomaly.field_type.wysiwyg::message.choose_file'
     ];
 
     /**

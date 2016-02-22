@@ -90,7 +90,7 @@ class UploadTableBuilder extends TableBuilder
      */
     protected $options = [
         'limit'              => 999,
-        'disable_views'      => true,
+        'enable_views'       => false,
         'sortable_headers'   => false,
         'no_results_message' => 'anomaly.field_type.wysiwyg::message.no_uploads'
     ];
