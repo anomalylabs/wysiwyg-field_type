@@ -66,17 +66,20 @@ class WysiwygFieldType extends FieldType
         $config = parent::getConfig();
 
         /**
-         * Get the configuration preset.
+         * Get the configuration values.
          */
         $configuration = config(
             $this->getNamespace('redactor.configurations.' . $this->config('configuration', 'default'))
         );
 
+        $buttons = config($this->getNamespace('redactor.buttons'));
+        $plugins = config($this->getNamespace('redactor.plugins'));
+
         /**
          * Set the buttons and plugins from config.
          */
-        $config['buttons'] = $this->config('buttons', $configuration['buttons']);
-        $config['plugins'] = $this->config('plugins', $configuration['plugins']);
+        $config['buttons'] = array_intersect($this->config('buttons', $configuration['buttons']), $buttons);
+        $config['plugins'] = array_intersect($this->config('plugins', $configuration['plugins']), $plugins);
 
         return $config;
     }
