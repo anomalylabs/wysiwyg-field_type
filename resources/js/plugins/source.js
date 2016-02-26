@@ -8,6 +8,8 @@
 				var button = this.button.addFirst('html', 'HTML');
 				this.button.addCallback(button, this.source.toggle);
 
+				this.button.setIcon(button, '<i class="fa fa-code"></i>');
+
 				var style = {
 					'width': '100%',
 					'margin': '0',

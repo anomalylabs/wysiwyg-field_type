@@ -30,28 +30,49 @@ return [
     ],
     'plugins'        => [
         'alignment'    => [
-            'icon' => 'fa fa-align-left',
-            'path' => 'anomaly.field_type.wysiwyg::js/plugins/alignment/alignment.js'
+            'icon'    => 'fa fa-align-left',
+            'scripts' => [
+                'anomaly.field_type.wysiwyg::js/plugins/alignment/alignment.js'
+            ],
+            'styles'  => [
+                'anomaly.field_type.wysiwyg::js/plugins/alignment/alignment.css'
+            ]
         ],
         'table'        => [
-            'icon' => 'fa fa-table',
-            'path' => 'anomaly.field_type.wysiwyg::js/plugins/table.js'
+            'icon'    => 'fa fa-table',
+            'scripts' => [
+                'anomaly.field_type.wysiwyg::js/plugins/table.js'
+            ]
         ],
         'video'        => [
-            'icon' => 'fa fa-video-camera',
-            'path' => 'anomaly.field_type.wysiwyg::js/plugins/video.js'
+            'icon'    => 'fa fa-video-camera',
+            'scripts' => [
+                'anomaly.field_type.wysiwyg::js/plugins/video.js'
+            ]
         ],
         'filemanager'  => [
-            'icon' => 'fa fa-paperclip',
-            'path' => 'anomaly.field_type.wysiwyg::js/plugins/filemanager.js'
+            'icon'    => 'fa fa-paperclip',
+            'scripts' => [
+                'anomaly.field_type.wysiwyg::js/plugins/filemanager.js'
+            ]
         ],
         'imagemanager' => [
-            'icon' => 'fa fa-picture-o',
-            'path' => 'anomaly.field_type.wysiwyg::js/plugins/imagemanager.js'
+            'icon'    => 'fa fa-picture-o',
+            'scripts' => [
+                'anomaly.field_type.wysiwyg::js/plugins/imagemanager.js'
+            ]
+        ],
+        'source'       => [
+            'icon'    => 'fa fa-code',
+            'scripts' => [
+                'anomaly.field_type.wysiwyg::js/plugins/source.js'
+            ]
         ],
         'fullscreen'   => [
-            'icon' => 'fa fa-arrows-alt',
-            'path' => 'anomaly.field_type.wysiwyg::js/plugins/fullscreen.js'
+            'icon'    => 'fa fa-arrows-alt',
+            'scripts' => [
+                'anomaly.field_type.wysiwyg::js/plugins/fullscreen.js'
+            ]
         ]
     ],
     'configurations' => [
@@ -67,6 +88,7 @@ return [
                 'underline'
             ],
             'plugins' => [
+                'source',
                 'table',
                 'video',
                 'fontsize',

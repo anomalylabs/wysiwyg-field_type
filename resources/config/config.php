@@ -6,7 +6,7 @@ return [
         'config' => [
             'options' => function (\Illuminate\Config\Repository $config) {
 
-                $keys = $config->get('anomaly.field_type.wysiwyg::redactor.buttons');
+                $keys = array_keys($config->get('anomaly.field_type.wysiwyg::redactor.buttons'));
 
                 $values = array_map(
                     function ($value) {
@@ -24,7 +24,7 @@ return [
         'config' => [
             'options' => function (\Illuminate\Config\Repository $config) {
 
-                $keys = $config->get('anomaly.field_type.wysiwyg::redactor.plugins');
+                $keys = array_keys($config->get('anomaly.field_type.wysiwyg::redactor.plugins'));
 
                 $values = array_map(
                     function ($value) {

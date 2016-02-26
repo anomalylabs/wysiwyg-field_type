@@ -3,7 +3,7 @@
 return [
     'button' => [
         'html'           => 'HTML',
-        'formatting'     => 'Formatting',
+        'format'         => 'Format',
         'bold'           => 'Bold',
         'italic'         => 'Italic',
         'deleted'        => 'Strikethrough',
@@ -15,11 +15,12 @@ return [
         'underline'      => 'Underline'
     ],
     'plugin' => [
-        'fontsize'     => 'Font Size',
+        'source'       => 'Source Code',
         'table'        => 'Table',
         'video'        => 'Video',
         'filemanager'  => 'File',
         'imagemanager' => 'Image',
+        'alignment'    => 'Alignment',
         'fullscreen'   => 'Fullscreen',
     ]
 ];

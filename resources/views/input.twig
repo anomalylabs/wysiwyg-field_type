@@ -4,7 +4,13 @@
 {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/redactor.js") }}
 
 {% for plugin in field_type.config.plugins %}
-    {{ asset_add("scripts.js", config_get("anomaly.field_type.wysiwyg::redactor.plugins." ~ plugin ~ ".path")) }}
+    {% for script in config_get("anomaly.field_type.wysiwyg::redactor.plugins." ~ plugin ~ ".scripts") %}
+        {{ asset_add("scripts.js", script) }}
+    {% endfor %}
+
+    {% for style in config_get("anomaly.field_type.wysiwyg::redactor.plugins." ~ plugin ~ ".styles") %}
+        {{ asset_add("styles.css", style) }}
+    {% endfor %}
 {% endfor %}
 
 {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/input.js") }}
