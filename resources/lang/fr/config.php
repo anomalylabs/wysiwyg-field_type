@@ -2,19 +2,23 @@
 
 return [
     'buttons'     => [
-        'label'        => 'Boutons',
-        'instructions' => 'Choisissez les boutons à afficher.'
+        'name'         => 'Boutons',
+        'instructions' => 'Choisissez les boutons de l\'éditeur à afficher.'
     ],
     'plugins'     => [
-        'label'        => 'Plugins',
+        'name'         => 'Plugins',
         'instructions' => 'Choisissez les plugins de l\'éditeur à activer.'
     ],
     'height'      => [
-        'label'        => 'Hauteur',
-        'instructions' => 'Choisissez la hauteur de l\'éditeur.'
+        'name'         => 'Hauteur',
+        'instructions' => 'Hauteur de l\'éditeur en pixel.'
     ],
     'line_breaks' => [
-        'label'        => 'Séparateur de ligne',
-        'instructions' => 'Souhaitez-vous utiliser des séparateurs de ligne plutôt que des paragraphes ?'
+        'name'         => 'Sauts de ligne',
+        'instructions' => 'Utilise des sautes de ligne plutôt que des paragraphes.'
+    ],
+    'folders'     => [
+        'name'         => 'Dossiers',
+        'instructions' => 'Quels dossiers sont disponibles pour les fichiers et les images ?'
     ]
 ];
