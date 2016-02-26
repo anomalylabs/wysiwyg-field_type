@@ -3,8 +3,6 @@
         return {
             init: function () {
 
-                var editor = this;
-
                 var button = this.button.add('image', 'Insert Image');
 
                 this.button.setIcon(button, '<i class="fa fa-picture-o"></i>');
@@ -17,18 +15,15 @@
                     }
                 );
 
-                $('#' + this.opts.element.data('field') + '-modal').on('click', '[data-select="image"]', function (e) {
-
-                    e.preventDefault();
-
-                    var url = APPLICATION_URL + '/files/' + $(this).data('entry');
-
-                    editor.file.insert('<img src="' + url + '"/>');
-
-                    $(this).closest('.modal').modal('hide');
-                });
+                $('#' + this.opts.element.data('field') + '-modal').on(
+                    'click',
+                    '[data-select="image"]',
+                    this.imagemanager.insert
+                );
             },
             select: function () {
+
+                this.selection.save();
 
                 var params = this.imagemanager.params();
 
@@ -39,6 +34,8 @@
             },
             upload: function () {
 
+                this.selection.save();
+
                 var params = this.imagemanager.params();
 
                 $('#' + this.opts.element.data('field') + '-modal')
@@ -46,7 +43,20 @@
                     .find('.modal-content')
                     .load('/streams/wysiwyg-field_type/choose?' + params);
             },
-            params: function() {
+            insert: function (e) {
+
+                this.selection.restore();
+
+                this.buffer.set();
+                this.air.collapsed();
+
+                var url = APPLICATION_URL + '/files/' + $(e.target).data('entry');
+
+                this.insert.node($('<img />').attr('src', url));
+
+                $(e.target).closest('.modal').modal('hide');
+            },
+            params: function () {
                 return $.param({
                     mode: 'image',
                     folders: this.opts.folders

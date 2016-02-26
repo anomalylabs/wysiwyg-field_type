@@ -47,10 +47,10 @@
 
                 this.selection.restore();
 
-                var url = APPLICATION_URL + '/files/download/' + $(e.target).data('entry');
-
                 this.buffer.set();
                 this.air.collapsed();
+
+                var url = APPLICATION_URL + '/files/download/' + $(e.target).data('entry');
 
                 this.insert.node($('<a />').attr('href', url).text(this.selection.is() ? this.selection.text() : url));
 
