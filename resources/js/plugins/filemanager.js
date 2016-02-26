@@ -3,8 +3,6 @@
         return {
             init: function () {
 
-                var editor = this;
-
                 var button = this.button.add('file', 'Insert File');
 
                 this.button.setIcon(button, '<i class="fa fa-paperclip"></i>');
@@ -17,20 +15,15 @@
                     }
                 );
 
-                $('#' + this.opts.element.data('field') + '-modal').on('click', '[data-select="file"]', function (e) {
-
-                    e.preventDefault();
-
-                    var url = APPLICATION_URL + '/files/download/' + $(this).data('entry');
-
-                    var text = editor.selection.getText().length ? editor.selection.getText() : url;
-
-                    editor.file.insert('<a href="' + url + '">' + text + '</a>');
-
-                    $(this).closest('.modal').modal('hide');
-                });
+                $('#' + this.opts.element.data('field') + '-modal').on(
+                    'click',
+                    '[data-select="file"]',
+                    this.filemanager.insert
+                );
             },
             select: function () {
+
+                this.selection.save();
 
                 var params = this.filemanager.params();
 
@@ -41,12 +34,28 @@
             },
             upload: function () {
 
+                this.selection.save();
+
                 var params = this.filemanager.params();
 
                 $('#' + this.opts.element.data('field') + '-modal')
                     .modal('show')
                     .find('.modal-content')
                     .load('/streams/wysiwyg-field_type/choose?' + params);
+            },
+            insert: function (e) {
+
+                this.selection.restore();
+
+                var url = APPLICATION_URL + '/files/download/' + $(e.target).data('entry');
+
+                this.buffer.set();
+                this.air.collapsed();
+
+                this.insert.node($('<a />').attr('href', url).text(this.selection.is() ? this.selection.text() : url));
+
+                $(e.target).closest('.modal').modal('hide');
+
             },
             params: function () {
                 return $.param({
