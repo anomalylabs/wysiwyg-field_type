@@ -5,8 +5,12 @@
 
                 var editor = this;
 
+                var button = this.button.add('file', 'Insert File');
+
+                this.button.setIcon(button, '<i class="fa fa-paperclip"></i>');
+
                 this.button.addDropdown(
-                    this.button.add('file', 'Insert File'),
+                    button,
                     {
                         select: {title: 'Select File', func: this.filemanager.select},
                         upload: {title: 'Upload File', func: this.filemanager.upload}

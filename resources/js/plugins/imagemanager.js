@@ -5,8 +5,12 @@
 
                 var editor = this;
 
+                var button = this.button.add('image', 'Insert Image');
+
+                this.button.setIcon(button, '<i class="fa fa-picture-o"></i>');
+
                 this.button.addDropdown(
-                    this.button.add('image', 'Insert Image'),
+                    button,
                     {
                         select: {title: 'Select Image', func: this.imagemanager.select},
                         upload: {title: 'Upload Image', func: this.imagemanager.upload}

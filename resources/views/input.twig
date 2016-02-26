@@ -4,7 +4,7 @@
 {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/redactor.js") }}
 
 {% for plugin in field_type.config.plugins %}
-    {{ asset_add("scripts.js", config_get("anomaly.field_type.wysiwyg::redactor.paths." ~ plugin)) }}
+    {{ asset_add("scripts.js", config_get("anomaly.field_type.wysiwyg::redactor.plugins." ~ plugin ~ ".path")) }}
 {% endfor %}
 
 {{ asset_add("scripts.js", "anomaly.field_type.wysiwyg::js/input.js") }}
@@ -19,6 +19,8 @@
         data-locale="{{ field_type.locale ?: config_get('app.locale') }}"
         data-buttons="{{ field_type.config.buttons|join(',') }}"
         data-plugins="{{ field_type.config.plugins|join(',') }}"
+        data-available_buttons="{{ config_get(field_type.getNamespace('redactor.buttons'))|json_encode }}"
+        data-available_plugins="{{ config_get(field_type.getNamespace('redactor.plugins'))|json_encode }}"
         {{ html_attributes(field_type.attributes) }}
         {{ field_type.disabled ? 'disabled' }}
         {{ field_type.readonly ? 'readonly' }}
