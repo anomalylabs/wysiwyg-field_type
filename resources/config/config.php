@@ -2,19 +2,15 @@
 
 return [
     'buttons'     => [
-        'type'     => 'anomaly.field_type.checkboxes',
-        'required' => true,
-        'rules'    => [
-            'array'
-        ],
-        'config'   => [
+        'type'   => 'anomaly.field_type.checkboxes',
+        'config' => [
             'options' => function (\Illuminate\Config\Repository $config) {
 
-                $keys = $config->get('anomaly.field_type.wysiwyg::buttons.available');
+                $keys = array_keys($config->get('anomaly.field_type.wysiwyg::redactor.buttons'));
 
                 $values = array_map(
-                    function ($button) {
-                        return trans('anomaly.field_type.wysiwyg::button.' . $button);
+                    function ($value) {
+                        return trans('anomaly.field_type.wysiwyg::redactor.button.' . $value);
                     },
                     $keys
                 );
@@ -24,19 +20,15 @@ return [
         ]
     ],
     'plugins'     => [
-        'type'     => 'anomaly.field_type.checkboxes',
-        'required' => true,
-        'rules'    => [
-            'array'
-        ],
-        'config'   => [
+        'type'   => 'anomaly.field_type.checkboxes',
+        'config' => [
             'options' => function (\Illuminate\Config\Repository $config) {
 
-                $keys = $config->get('anomaly.field_type.wysiwyg::plugins.available');
+                $keys = array_keys($config->get('anomaly.field_type.wysiwyg::redactor.plugins'));
 
                 $values = array_map(
-                    function ($button) {
-                        return trans('anomaly.field_type.wysiwyg::plugin.' . $button);
+                    function ($value) {
+                        return trans('anomaly.field_type.wysiwyg::redactor.plugin.' . $value);
                     },
                     $keys
                 );

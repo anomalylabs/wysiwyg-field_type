@@ -6,9 +6,9 @@ use Anomaly\Streams\Platform\Application\Application;
 /**
  * Class WysiwygFieldType
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\WysiwygFieldType
  */
 class WysiwygFieldType extends FieldType
@@ -34,70 +34,9 @@ class WysiwygFieldType extends FieldType
      * @var array
      */
     protected $config = [
-        'line_breaks' => false,
-        'buttons'     => 'default',
-        'plugins'     => 'default',
-        'height'      => 200
-    ];
-
-    /**
-     * The available button sets.
-     *
-     * @var array
-     */
-    protected $buttons = [
-        'advanced' => [
-            'html',
-            'formatting',
-            'bold',
-            'italic',
-            'deleted',
-            'unorderedlist',
-            'orderedlist',
-            'outdent',
-            'indent',
-            'link',
-            'alignment',
-            'horizontalrule',
-            'underline'
-        ],
-        'default'  => [
-            'html',
-            'formatting',
-            'bold',
-            'italic',
-            'deleted',
-            'unorderedlist',
-            'orderedlist',
-            'outdent',
-            'indent',
-            'link',
-            'alignment',
-            'horizontalrule',
-            'underline'
-        ],
-        'basic'    => [
-            'formatting',
-            'bold',
-            'italic',
-            'link'
-        ],
-        'simple'   => [
-            'formatting',
-            'bold',
-            'italic'
-        ]
-    ];
-
-    /**
-     * The available plugin sets.
-     *
-     * @var array
-     */
-    protected $plugins = [
-        'default' => [
-            'fullscreen'
-        ]
+        'configuration' => 'default',
+        'line_breaks'   => false,
+        'height'        => 400
     ];
 
     /**
@@ -127,36 +66,20 @@ class WysiwygFieldType extends FieldType
         $config = parent::getConfig();
 
         /**
-         * If the buttons config is a button set then
-         * use the corresponding set of buttons.
+         * Get the configuration values.
          */
-        if (is_string($config['buttons'])) {
-            $config['buttons'] = array_get($this->buttons, $config['buttons'], $this->buttons['default']);
-        }
+        $configuration = config(
+            $this->getNamespace('redactor.configurations.' . $this->config('configuration', 'default'))
+        );
+
+        $buttons = array_keys(config($this->getNamespace('redactor.buttons')));
+        $plugins = array_keys(config($this->getNamespace('redactor.plugins')));
 
         /**
-         * If the plugins config is a plugin set then
-         * use the corresponding set of plugins.
+         * Set the buttons and plugins from config.
          */
-        if (is_string($config['plugins'])) {
-            $config['plugins'] = array_get($this->plugins, $config['plugins'], $this->plugins['default']);
-        }
-
-        /**
-         * If no buttons are specified
-         * use the default set.
-         */
-        if (!array_filter($config['buttons'])) {
-            $config['buttons'] = $this->buttons['default'];
-        }
-
-        /**
-         * If no plugins are specified
-         * use the default set.
-         */
-        if (!array_filter($config['plugins'])) {
-            $config['plugins'] = $this->plugins['default'];
-        }
+        $config['buttons'] = array_intersect($this->config('buttons', $configuration['buttons']), $buttons);
+        $config['plugins'] = array_intersect($this->config('plugins', $configuration['plugins']), $plugins);
 
         return $config;
     }
@@ -164,18 +87,18 @@ class WysiwygFieldType extends FieldType
     /**
      * Get the file path.
      *
-     * @return string
+     * @return null|string
      */
     public function getFilePath()
     {
-        if (!$this->entry->exists) {
+        if ($this->entry === null || !is_object($this->entry) || !$this->entry->getId()) {
             return null;
         }
 
         $slug      = $this->entry->getStreamSlug();
         $namespace = $this->entry->getStreamNamespace();
         $directory = $this->entry->getEntryId();
-        $file      = $this->getStorageFileName();
+        $file      = $this->getFileName();
 
         return "{$namespace}/{$slug}/{$directory}/{$file}";
     }
@@ -183,7 +106,7 @@ class WysiwygFieldType extends FieldType
     /**
      * Get the storage path.
      *
-     * @return string
+     * @return null|string
      */
     public function getStoragePath()
     {
@@ -205,7 +128,7 @@ class WysiwygFieldType extends FieldType
             return null;
         }
 
-        return 'storage::' . str_replace('.html', '', $path);
+        return 'storage::' . str_replace(['.html', '.twig'], '', $path);
     }
 
     /**
@@ -227,8 +150,8 @@ class WysiwygFieldType extends FieldType
      *
      * @return string
      */
-    protected function getStorageFileName()
+    protected function getFileName()
     {
-        return trim($this->getField() . '_' . $this->getLocale(), '_') . '.html';
+        return trim($this->getField() . '_' . $this->getLocale(), '_') . '.twig';
     }
 }

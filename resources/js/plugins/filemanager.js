@@ -1,62 +1,68 @@
-(function($)
-{
-	$.Redactor.prototype.filemanager = function()
-	{
-		return {
-			init: function()
-			{
-				if (!this.opts.fileManagerJson) return;
+(function ($) {
+    $.Redactor.prototype.filemanager = function () {
+        return {
+            init: function () {
 
-				this.modal.addCallback('file', this.filemanager.load);
-			},
-			load: function()
-			{
-				var $modal = this.modal.getModal();
+                var button = this.button.add('file', 'Insert File');
 
-				this.modal.createTabber($modal);
-				this.modal.addTab(1, 'Upload', 'active');
-				this.modal.addTab(2, 'Choose');
+                this.button.setIcon(button, '<i class="fa fa-paperclip"></i>');
 
-				$('#redactor-modal-file-upload-box').addClass('redactor-tab redactor-tab1');
+                this.button.addDropdown(
+                    button,
+                    {
+                        select: {title: 'Select File', func: this.filemanager.select},
+                        upload: {title: 'Upload File', func: this.filemanager.upload}
+                    }
+                );
 
-				var $box = $('<div id="redactor-file-manager-box" style="overflow: auto; height: 300px;" class="redactor-tab redactor-tab2">').hide();
-				$modal.append($box);
+                $('#' + this.opts.element.data('field') + '-modal').on(
+                    'click',
+                    '[data-select="file"]',
+                    this.filemanager.insert
+                );
+            },
+            select: function () {
 
+                this.selection.save();
 
-				$.ajax({
-				  dataType: "json",
-				  cache: false,
-				  url: this.opts.fileManagerJson,
-				  success: $.proxy(function(data)
-					{
-						var ul = $('<ul id="redactor-modal-list">');
-						$.each(data, $.proxy(function(key, val)
-						{
-							var a = $('<a href="#" title="' + val.title + '" rel="' + val.link + '" class="redactor-file-manager-link">' + val.title + ' <span style="font-size: 11px; color: #888;">' + val.name + '</span> <span style="position: absolute; right: 10px; font-size: 11px; color: #888;">(' + val.size + ')</span></a>');
-							var li = $('<li />');
+                var params = this.filemanager.params();
 
-							a.on('click', $.proxy(this.filemanager.insert, this));
+                $('#' + this.opts.element.data('field') + '-modal')
+                    .modal('show')
+                    .find('.modal-content')
+                    .load('/streams/wysiwyg-field_type/index?' + params);
+            },
+            upload: function () {
 
-							li.append(a);
-							ul.append(li);
+                this.selection.save();
 
-						}, this));
+                var params = this.filemanager.params();
 
-						$('#redactor-file-manager-box').append(ul);
+                $('#' + this.opts.element.data('field') + '-modal')
+                    .modal('show')
+                    .find('.modal-content')
+                    .load('/streams/wysiwyg-field_type/choose?' + params);
+            },
+            insert: function (e) {
 
+                this.selection.restore();
 
-					}, this)
-				});
+                this.buffer.set();
+                this.air.collapsed();
 
-			},
-			insert: function(e)
-			{
-				e.preventDefault();
+                var url = APPLICATION_URL + '/files/download/' + $(e.target).data('entry');
 
-				var $target = $(e.target).closest('.redactor-file-manager-link');
+                this.insert.node($('<a />').attr('href', url).text(this.selection.is() ? this.selection.text() : url));
 
-				this.file.insert('<a href="' + $target.attr('rel') + '">' + $target.attr('title') + '</a>');
-			}
-		};
-	};
+                $(e.target).closest('.modal').modal('hide');
+
+            },
+            params: function () {
+                return $.param({
+                    mode: 'file',
+                    folders: this.opts.folders
+                });
+            }
+        };
+    };
 })(jQuery);

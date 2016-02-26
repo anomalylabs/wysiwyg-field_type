@@ -1,21 +1,29 @@
 <?php namespace Anomaly\WysiwygFieldType;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeAccessor;
-use Anomaly\WysiwygFieldType\Command\GetFile;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Anomaly\WysiwygFieldType\Command\SyncFile;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class WysiwygFieldTypeAccessor
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\WysiwygFieldType
  */
 class WysiwygFieldTypeAccessor extends FieldTypeAccessor
 {
 
-    use DispatchesCommands;
+    use DispatchesJobs;
+
+    /**
+     * The field type instance.
+     * This is for IDE hinting.
+     *
+     * @var WysiwygFieldType
+     */
+    protected $fieldType;
 
     /**
      * Get the value off the entry.
@@ -24,6 +32,6 @@ class WysiwygFieldTypeAccessor extends FieldTypeAccessor
      */
     public function get()
     {
-        return $this->dispatch(new GetFile($this->fieldType));
+        return $this->dispatch(new SyncFile($this->fieldType));
     }
 }
