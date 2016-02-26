@@ -30,7 +30,7 @@
                 $('#' + this.opts.element.data('field') + '-modal')
                     .modal('show')
                     .find('.modal-content')
-                    .load('/streams/wysiwyg-field_type/index?' + params);
+                    .load(APPLICATION_URL + '/streams/wysiwyg-field_type/index?' + params);
             },
             upload: function () {
 
@@ -41,7 +41,7 @@
                 $('#' + this.opts.element.data('field') + '-modal')
                     .modal('show')
                     .find('.modal-content')
-                    .load('/streams/wysiwyg-field_type/choose?' + params);
+                    .load(APPLICATION_URL + '/streams/wysiwyg-field_type/choose?' + params);
             },
             insert: function (e) {
 
