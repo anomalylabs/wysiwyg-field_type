@@ -38,6 +38,12 @@ return [
                 'anomaly.field_type.wysiwyg::js/plugins/alignment/alignment.css'
             ]
         ],
+        'fontsize'     => [
+            'icon'    => 'fa fa-font',
+            'scripts' => [
+                'anomaly.field_type.wysiwyg::js/plugins/fontsize.js'
+            ]
+        ],
         'table'        => [
             'icon'    => 'fa fa-table',
             'scripts' => [
@@ -78,12 +84,12 @@ return [
     'configurations' => [
         'default' => [
             'buttons' => [
-                'formatting',
                 'bold',
                 'italic',
                 'deleted',
                 'lists',
                 'link',
+                'format',
                 'horizontalrule',
                 'underline'
             ],
@@ -94,7 +100,8 @@ return [
                 'fontsize',
                 'filemanager',
                 'imagemanager',
-                'fullscreen'
+                'fullscreen',
+                'alignment'
             ]
         ],
         'basic'   => [
