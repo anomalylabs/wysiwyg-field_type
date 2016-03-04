@@ -17,6 +17,9 @@ return [
         'lists'          => [
             'icon' => 'fa fa-list'
         ],
+        'inline'         => [
+            'icon' => 'fa fa-quote-right'
+        ],
         'link'           => [
             'icon' => 'fa fa-link'
         ],
@@ -38,10 +41,10 @@ return [
                 'anomaly.field_type.wysiwyg::js/plugins/alignment/alignment.css'
             ]
         ],
-        'fontsize'     => [
-            'icon'    => 'fa fa-font',
+        'inlinestyle'  => [
+            'icon'    => 'fa fa-bold',
             'scripts' => [
-                'anomaly.field_type.wysiwyg::js/plugins/fontsize.js'
+                'anomaly.field_type.wysiwyg::js/plugins/inlinestyle.js'
             ]
         ],
         'table'        => [
@@ -97,7 +100,7 @@ return [
                 'source',
                 'table',
                 'video',
-                'fontsize',
+                'inlinestyle',
                 'filemanager',
                 'imagemanager',
                 'fullscreen',
