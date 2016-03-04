@@ -22,6 +22,6 @@ return [
         'imagemanager' => 'Image',
         'alignment'    => 'Alignment',
         'fullscreen'   => 'Fullscreen',
-        'fontsize'     => 'Font Size'
+        'inlinestyle'  => 'Inline Style',
     ]
 ];

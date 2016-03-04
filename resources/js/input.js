@@ -23,13 +23,13 @@ $(function () {
 
                     $.each(buttons, function (k, v) {
                         if (v.icon) {
-                            icons[k] = '<i class="' + v.icon + '"></i>';
+                            icons[v.button ? v.button : k] = '<i class="' + v.icon + '"></i>';
                         }
                     });
 
                     $.each(plugins, function (k, v) {
                         if (v.icon) {
-                            icons[k] = '<i class="' + v.icon + '"></i>';
+                            icons[v.button ? v.button : k] = '<i class="' + v.icon + '"></i>';
                         }
                     });
 

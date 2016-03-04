@@ -17,9 +17,6 @@ return [
         'lists'          => [
             'icon' => 'fa fa-list'
         ],
-        'inline'         => [
-            'icon' => 'fa fa-quote-right'
-        ],
         'link'           => [
             'icon' => 'fa fa-link'
         ],
@@ -42,7 +39,8 @@ return [
             ]
         ],
         'inlinestyle'  => [
-            'icon'    => 'fa fa-bold',
+            'button'  => 'inline',
+            'icon'    => 'fa fa-quote-right',
             'scripts' => [
                 'anomaly.field_type.wysiwyg::js/plugins/inlinestyle.js'
             ]
