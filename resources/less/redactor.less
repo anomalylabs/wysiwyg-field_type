@@ -180,7 +180,7 @@
 
 .redactor-air li a:hover {
     outline: none;
-    background-color: #2e2e2e;
+    background-color: #1f78d8;
     color: #ffffff;
 }
 
@@ -369,7 +369,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    background-color: #2e2e2e;
+    background-color: #3d58a8;
     background-size: 40px 40px;
 }
 
@@ -398,6 +398,13 @@
     to {
         background-position: 0 0;
     }
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
 }
 
 @-webkit-keyframes redactorSlideUp {
@@ -462,6 +469,11 @@
     }
 }
 
+.redactor-fadeIn {
+    -webkit-animation-name: redactorFadeIn;
+    animation-name: redactorFadeIn;
+}
+
 @-webkit-keyframes redactorFadeOut {
     from {
         opacity: 1;
@@ -481,8 +493,8 @@
 }
 
 .redactor-fadeOut {
-    opacity: 0;
-    display: none;
+    -webkit-animation-name: redactorFadeOut;
+    animation-name: redactorFadeOut;
 }
 
 .redactor-dropdown {
@@ -819,11 +831,11 @@
 #redactor-modal button#redactor-modal-button-action {
     background: none;
     color: #ffffff;
-    background-color: @brand-primary;
+    background-color: #2e2e2e;
 }
 
 #redactor-modal button#redactor-modal-button-action:hover {
-    color: #ffffff;
+    color: rgba(255, 255, 255, 0.6);
     background-color: lighten(@brand-primary, 10%);
 }
 
@@ -1204,7 +1216,7 @@
 }
 
 .redactor-editor samp {
-    background: #3e3e3e;
+    background: #46a9fc;
     color: rgba(255, 255, 255, 0.9);
 }
 
