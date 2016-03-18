@@ -50,6 +50,7 @@ $(function () {
             /**
              * Settings
              */
+            script: false,
             cleanOnPaste: true,
             replaceTags: [
                 ['strike', 'del'],
