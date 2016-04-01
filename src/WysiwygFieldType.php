@@ -78,8 +78,8 @@ class WysiwygFieldType extends FieldType
         /**
          * Set the buttons and plugins from config.
          */
-        $config['buttons'] = array_intersect($this->config('buttons', $configuration['buttons']), $buttons);
-        $config['plugins'] = array_intersect($this->config('plugins', $configuration['plugins']), $plugins);
+        $config['buttons'] = array_intersect((array)$this->config('buttons', $configuration['buttons']), $buttons);
+        $config['plugins'] = array_intersect((array)$this->config('plugins', $configuration['plugins']), $plugins);
 
         return $config;
     }
