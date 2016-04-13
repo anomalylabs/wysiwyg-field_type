@@ -1,0 +1,14 @@
+{
+    "setup": {
+        "title": {
+            "en": "General"
+        },
+        "pages": {
+            "general": {
+                "title": {
+                    "en": "General"
+                }
+            }
+        }
+    }
+}
