@@ -64,14 +64,13 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     }
 
     /**
-     * Return the rendered content.
+     * Return the applicable path.
      *
-     * @param array $payload
-     * @return string
+     * @return null|string
      */
-    public function render(array $payload = [])
+    public function path()
     {
-        return $this->rendered($payload);
+        return $this->object->getViewPath();
     }
 
     /**
@@ -80,9 +79,21 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      * @param array $payload
      * @return string
      */
-    public function rendered(array $payload = [])
+    public function render(array $payload = [])
     {
         return $this->view->make($this->object->getViewPath(), $payload)->render();
+    }
+
+    /**
+     * Return the rendered content.
+     *
+     * @param array $payload
+     * @return string
+     * @deprecated since version 2.0
+     */
+    public function rendered(array $payload = [])
+    {
+        return $this->render($payload);
     }
 
     /**
@@ -93,7 +104,7 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      */
     public function parse(array $payload = [])
     {
-        return $this->parsed($payload);
+        return $this->template->render($this->content(), (new Decorator())->decorate($payload));
     }
 
     /**
@@ -101,10 +112,11 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      *
      * @param array $payload
      * @return string
+     * @deprecated since version 2.0
      */
     public function parsed(array $payload = [])
     {
-        return $this->template->render($this->content(), (new Decorator())->decorate($payload));
+        return $this->parse($payload);
     }
 
     /**
