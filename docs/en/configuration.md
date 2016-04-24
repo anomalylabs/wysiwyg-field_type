@@ -49,6 +49,14 @@ The `default_value` is a core option. This field type accepts any string value.
 <a name="extra"></a>
 ## Extra Configuration
 
+### Line Breaks
+
+    {{ code('php', '"line_breaks" => true') }}
+
+When enabled, line breaks will be used instead of new paragraphs when pressing enter in the editor.
+
+<hr>
+
 ### Buttons
 
 {{ code('php', '"buttons" => ["bold", "italic"];') }}
