@@ -8,21 +8,19 @@
 
 Below is the full configuration available with defaults.
 
-{% code php %}
-protected $fields = [
-    "example" => [
-        "type"   => "anomaly.field_type.country",
-        "config" => [
-            "default_value" => null,
-            "configuration" => "default",
-            "line_breaks"   => false,
-            "height"        => 500,
-            "buttons"       => [],
-            "plugins"       => []
+    protected $fields = [
+        "example" => [
+            "type"   => "anomaly.field_type.country",
+            "config" => [
+                "default_value" => null,
+                "configuration" => "default",
+                "line_breaks"   => false,
+                "height"        => 500,
+                "buttons"       => [],
+                "plugins"       => []
+            ]
         ]
-    ]
-];
-{% endcode %}
+    ];
 
 <hr>
 
@@ -40,7 +38,7 @@ You can override these options by overloading the configuration file with a conf
 
 ### Default Value
 
-    {{ code('php', '"default_value" => "<h1>Hello World</h1>"') }}
+    "default_value" => "<h1>Hello World</h1>"
 
 The `default_value` is a core option. This field type accepts any string value.
 
@@ -51,7 +49,7 @@ The `default_value` is a core option. This field type accepts any string value.
 
 ### Line Breaks
 
-    {{ code('php', '"line_breaks" => true') }}
+    "line_breaks" => true
 
 When enabled, line breaks will be used instead of new paragraphs when pressing enter in the editor.
 
@@ -59,19 +57,19 @@ When enabled, line breaks will be used instead of new paragraphs when pressing e
 
 ### Buttons
 
-{{ code('php', '"buttons" => ["bold", "italic"];') }}
+    "buttons" => ["bold", "italic"]
 
 Specify the available buttons for the editor. By default, available options are `format`, `bold`, `italic`, `deleted`, `lists`, `link`, `horizontalrule`, and `underline`.
 
 ### Plugins
 
-{{ code('php', '"plugins" => ["filemanager", "imagemanager"];') }}
+    "plugins" => ["filemanager", "imagemanager"]
 
 Specify the available plugins for the editor. By default, available options are `alignment`, `inlinestyle`, `table`, `video`, `filemanager`, `imagemanager`, `source`, and `fullscreen`.
 
 ### Configuration Set
 
-{{ code('php', '"configuration" => "basic"') }}
+    "configuration" => "basic"
 
 Specify the configuration set to use. The configuration sets are determined by the `redactor.php` config file. The configuration set dictates sets of plugins and buttons displayed in the editor (instead of selecting them individually).
 
