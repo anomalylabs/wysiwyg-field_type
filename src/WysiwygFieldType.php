@@ -2,6 +2,7 @@
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Application\Application;
+use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 
 /**
  * Class WysiwygFieldType
@@ -92,6 +93,10 @@ class WysiwygFieldType extends FieldType
     public function getFilePath()
     {
         if ($this->entry === null || !is_object($this->entry) || !$this->entry->getId()) {
+            return null;
+        }
+
+        if (!$this->entry instanceof EntryInterface) {
             return null;
         }
 
