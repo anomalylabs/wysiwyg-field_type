@@ -3,6 +3,7 @@
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Application\Application;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
+use Anomaly\Streams\Platform\Entry\EntryTranslationsModel;
 
 /**
  * Class WysiwygFieldType
@@ -96,7 +97,7 @@ class WysiwygFieldType extends FieldType
             return null;
         }
 
-        if (!$this->entry instanceof EntryInterface) {
+        if (!$this->entry instanceof EntryInterface && !$this->entry instanceof EntryTranslationsModel) {
             return null;
         }
 
