@@ -59,7 +59,7 @@ $(function () {
                 ['big', 'strong'],
                 ['strike', 'del']
             ],
-            removeEmpty: ['strong', 'em', 'span', 'p'],
+            removeEmpty: ['strong', 'em', 'p'],
 
             /**
              * Features
