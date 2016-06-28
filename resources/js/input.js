@@ -52,13 +52,6 @@ $(function () {
              */
             script: false,
             cleanOnPaste: true,
-            replaceTags: [
-                ['strike', 'del'],
-                ['i', 'em'],
-                ['b', 'strong'],
-                ['big', 'strong'],
-                ['strike', 'del']
-            ],
             removeEmpty: ['strong', 'em', 'p'],
 
             /**
