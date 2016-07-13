@@ -51,6 +51,7 @@ $(function () {
              * Settings
              */
             script: false,
+            linkTooltip: true,
             cleanOnPaste: true,
             removeEmpty: ['strong', 'em', 'p'],
 
