@@ -15,7 +15,7 @@
                     }
                 );
 
-                $('#' + this.opts.element.data('field') + '-modal').on(
+                $('#' + this.opts.element.attr('name') + '-modal').on(
                     'click',
                     '[data-select="image"]',
                     this.imagemanager.insert
@@ -27,7 +27,7 @@
 
                 var params = this.imagemanager.params();
 
-                $('#' + this.opts.element.data('field') + '-modal')
+                $('#' + this.opts.element.attr('name') + '-modal')
                     .modal('show')
                     .find('.modal-content')
                     .load('/streams/wysiwyg-field_type/index?' + params);
@@ -38,7 +38,7 @@
 
                 var params = this.imagemanager.params();
 
-                $('#' + this.opts.element.data('field') + '-modal')
+                $('#' + this.opts.element.attr('name') + '-modal')
                     .modal('show')
                     .find('.modal-content')
                     .load('/streams/wysiwyg-field_type/choose?' + params);
