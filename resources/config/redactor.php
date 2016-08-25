@@ -3,28 +3,28 @@
 return [
     'buttons'        => [
         'format'         => [
-            'icon' => 'fa fa-paragraph'
+            'icon' => 'fa fa-paragraph',
         ],
         'bold'           => [
-            'icon' => 'fa fa-bold'
+            'icon' => 'fa fa-bold',
         ],
         'italic'         => [
-            'icon' => 'fa fa-italic'
+            'icon' => 'fa fa-italic',
         ],
         'deleted'        => [
-            'icon' => 'fa fa-strikethrough'
+            'icon' => 'fa fa-strikethrough',
         ],
         'lists'          => [
-            'icon' => 'fa fa-list'
+            'icon' => 'fa fa-list',
         ],
         'link'           => [
-            'icon' => 'fa fa-link'
+            'icon' => 'fa fa-link',
         ],
         'horizontalrule' => [
-            'icon' => 'fa fa-minus'
+            'icon' => 'fa fa-minus',
         ],
         'underline'      => [
-            'icon' => 'fa fa-underline'
+            'icon' => 'fa fa-underline',
         ],
 
     ],
@@ -32,55 +32,55 @@ return [
         'alignment'    => [
             'icon'    => 'fa fa-align-left',
             'scripts' => [
-                'anomaly.field_type.wysiwyg::js/plugins/alignment/alignment.js'
+                'anomaly.field_type.wysiwyg::js/plugins/alignment/alignment.js',
             ],
             'styles'  => [
-                'anomaly.field_type.wysiwyg::js/plugins/alignment/alignment.css'
-            ]
+                'anomaly.field_type.wysiwyg::js/plugins/alignment/alignment.css',
+            ],
         ],
         'inlinestyle'  => [
             'button'  => 'inline',
             'icon'    => 'fa fa-quote-right',
             'scripts' => [
-                'anomaly.field_type.wysiwyg::js/plugins/inlinestyle.js'
-            ]
+                'anomaly.field_type.wysiwyg::js/plugins/inlinestyle.js',
+            ],
         ],
         'table'        => [
             'icon'    => 'fa fa-table',
             'scripts' => [
-                'anomaly.field_type.wysiwyg::js/plugins/table.js'
-            ]
+                'anomaly.field_type.wysiwyg::js/plugins/table.js',
+            ],
         ],
         'video'        => [
             'icon'    => 'fa fa-video-camera',
             'scripts' => [
-                'anomaly.field_type.wysiwyg::js/plugins/video.js'
-            ]
+                'anomaly.field_type.wysiwyg::js/plugins/video.js',
+            ],
         ],
         'filemanager'  => [
             'icon'    => 'fa fa-paperclip',
             'scripts' => [
-                'anomaly.field_type.wysiwyg::js/plugins/filemanager.js'
-            ]
+                'anomaly.field_type.wysiwyg::js/plugins/filemanager.js',
+            ],
         ],
         'imagemanager' => [
             'icon'    => 'fa fa-picture-o',
             'scripts' => [
-                'anomaly.field_type.wysiwyg::js/plugins/imagemanager.js'
-            ]
+                'anomaly.field_type.wysiwyg::js/plugins/imagemanager.js',
+            ],
         ],
         'source'       => [
             'icon'    => 'fa fa-code',
             'scripts' => [
-                'anomaly.field_type.wysiwyg::js/plugins/source.js'
-            ]
+                'anomaly.field_type.wysiwyg::js/plugins/source.js',
+            ],
         ],
         'fullscreen'   => [
             'icon'    => 'fa fa-arrows-alt',
             'scripts' => [
-                'anomaly.field_type.wysiwyg::js/plugins/fullscreen.js'
-            ]
-        ]
+                'anomaly.field_type.wysiwyg::js/plugins/fullscreen.js',
+            ],
+        ],
     ],
     'configurations' => [
         'default' => [
@@ -92,7 +92,7 @@ return [
                 'link',
                 'format',
                 'horizontalrule',
-                'underline'
+                'underline',
             ],
             'plugins' => [
                 'source',
@@ -102,8 +102,8 @@ return [
                 'filemanager',
                 'imagemanager',
                 'fullscreen',
-                'alignment'
-            ]
+                'alignment',
+            ],
         ],
         'basic'   => [
             'buttons' => [
@@ -111,11 +111,11 @@ return [
                 'italic',
                 'lists',
                 'link',
-                'underline'
+                'underline',
             ],
             'plugins' => [
-                'fullscreen'
-            ]
-        ]
-    ]
+                'fullscreen',
+            ],
+        ],
+    ],
 ];

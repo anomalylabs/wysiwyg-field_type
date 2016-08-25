@@ -7,5 +7,5 @@ return [
     'no_file_selected' => 'Aucun fichier choisi.',
     'no_uploads'       => 'Aucun fichier envoyer.',
     'uploading'        => 'Envoi en cours...',
-    'loading'          => 'Chargement'
+    'loading'          => 'Chargement',
 ];

@@ -1,7 +1,6 @@
 <?php namespace Anomaly\WysiwygFieldType\Command;
 
 use Anomaly\WysiwygFieldType\WysiwygFieldType;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Filesystem\Filesystem;
 
 /**
@@ -10,9 +9,8 @@ use Illuminate\Filesystem\Filesystem;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\WysiwygFieldType\Command
  */
-class PutFile implements SelfHandling
+class PutFile
 {
 
     /**

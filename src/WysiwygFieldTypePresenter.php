@@ -12,7 +12,6 @@ use Illuminate\View\Factory;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\WysiwygFieldType
  */
 class WysiwygFieldTypePresenter extends FieldTypePresenter
 {
@@ -76,7 +75,7 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     /**
      * Return the rendered content.
      *
-     * @param array $payload
+     * @param  array  $payload
      * @return string
      */
     public function render(array $payload = [])
@@ -87,7 +86,7 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     /**
      * Return the rendered content.
      *
-     * @param array $payload
+     * @param  array  $payload
      * @return string
      * @deprecated since version 2.0
      */
@@ -99,7 +98,7 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     /**
      * Return the parsed content.
      *
-     * @param array $payload
+     * @param  array  $payload
      * @return string
      */
     public function parse(array $payload = [])
@@ -110,7 +109,7 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     /**
      * Return the parsed content.
      *
-     * @param array $payload
+     * @param  array  $payload
      * @return string
      * @deprecated since version 2.0
      */
@@ -132,8 +131,8 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     /**
      * Return an excerpt of the text.
      *
-     * @param int    $length
-     * @param string $ending
+     * @param  int    $length
+     * @param  string $ending
      * @return string
      */
     public function excerpt($length = 100, $ending = '...')
@@ -144,7 +143,7 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     /**
      * Return the text from the content.
      *
-     * @param null $allowed
+     * @param  null   $allowed
      * @return string
      */
     public function text($allowed = null)

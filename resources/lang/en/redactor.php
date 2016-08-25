@@ -12,7 +12,7 @@ return [
         'link'           => 'Link',
         'alignment'      => 'Alignment',
         'horizontalrule' => 'Horizontal Rule',
-        'underline'      => 'Underline'
+        'underline'      => 'Underline',
     ],
     'plugin' => [
         'source'       => 'Source Code',
@@ -23,5 +23,5 @@ return [
         'alignment'    => 'Alignment',
         'fullscreen'   => 'Fullscreen',
         'inlinestyle'  => 'Inline Style',
-    ]
+    ],
 ];

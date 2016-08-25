@@ -12,7 +12,6 @@ use Anomaly\WysiwygFieldType\Table\UploadTableBuilder;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\WysiwygFieldType\Http\Controller
  */
 class UploadController extends AdminController
 {
@@ -20,8 +19,8 @@ class UploadController extends AdminController
     /**
      * Return the uploader.
      *
-     * @param FolderRepositoryInterface $folders
-     * @param                           $folder
+     * @param  FolderRepositoryInterface $folders
+     * @param                            $folder
      * @return \Illuminate\View\View
      */
     public function index(FolderRepositoryInterface $folders, UploadTableBuilder $table, $folder)
@@ -30,7 +29,7 @@ class UploadController extends AdminController
             'anomaly.field_type.wysiwyg::upload/index',
             [
                 'folder' => $folders->find($folder),
-                'table'  => $table->make()->getTable()
+                'table'  => $table->make()->getTable(),
             ]
         );
     }
@@ -38,8 +37,8 @@ class UploadController extends AdminController
     /**
      * Upload a file.
      *
-     * @param FileUploader              $uploader
-     * @param FolderRepositoryInterface $folders
+     * @param  FileUploader                  $uploader
+     * @param  FolderRepositoryInterface     $folders
      * @return \Illuminate\Http\JsonResponse
      */
     public function upload(FileUploader $uploader, FolderRepositoryInterface $folders)
@@ -54,7 +53,7 @@ class UploadController extends AdminController
     /**
      * Return the recently uploaded files.
      *
-     * @param FileTableBuilder $table
+     * @param  FileTableBuilder                           $table
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function recent(UploadTableBuilder $table)

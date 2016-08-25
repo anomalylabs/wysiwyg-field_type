@@ -3,22 +3,22 @@
 return [
     'buttons'     => [
         'name'         => 'Buttons',
-        'instructions' => 'Specify which editor buttons to display.'
+        'instructions' => 'Specify which editor buttons to display.',
     ],
     'plugins'     => [
         'name'         => 'Plugins',
-        'instructions' => 'Specify which plugins to display.'
+        'instructions' => 'Specify which plugins to display.',
     ],
     'height'      => [
         'name'         => 'Height',
-        'instructions' => 'Specify the editor height in pixels.'
+        'instructions' => 'Specify the editor height in pixels.',
     ],
     'line_breaks' => [
         'name'         => 'Line Breaks',
-        'instructions' => 'Use line beaks instead of paragraph tags?'
+        'instructions' => 'Use line beaks instead of paragraph tags?',
     ],
     'folders'     => [
         'name'         => 'Folders',
-        'instructions' => 'Which folders are available for files and images?'
-    ]
+        'instructions' => 'Which folders are available for files and images?',
+    ],
 ];

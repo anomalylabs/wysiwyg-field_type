@@ -11,7 +11,6 @@ use Anomaly\Streams\Platform\Entry\EntryTranslationsModel;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\WysiwygFieldType
  */
 class WysiwygFieldType extends FieldType
 {
@@ -38,7 +37,7 @@ class WysiwygFieldType extends FieldType
     protected $config = [
         'configuration' => 'default',
         'line_breaks'   => false,
-        'height'        => 500
+        'height'        => 500,
     ];
 
     /**
@@ -67,7 +66,7 @@ class WysiwygFieldType extends FieldType
     {
         $config = parent::getConfig();
 
-        /**
+        /*
          * Get the configuration values.
          */
         $configuration = config(
@@ -77,7 +76,7 @@ class WysiwygFieldType extends FieldType
         $buttons = array_keys(config($this->getNamespace('redactor.buttons')));
         $plugins = array_keys(config($this->getNamespace('redactor.plugins')));
 
-        /**
+        /*
          * Set the buttons and plugins from config.
          */
         $config['buttons'] = array_intersect((array)$this->config('buttons', $configuration['buttons']), $buttons);

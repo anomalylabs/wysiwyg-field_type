@@ -8,7 +8,6 @@ use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\WysiwygFieldType
  */
 class WysiwygFieldTypeServiceProvider extends AddonServiceProvider
 {
@@ -24,7 +23,7 @@ class WysiwygFieldTypeServiceProvider extends AddonServiceProvider
         'streams/wysiwyg-field_type/selected'        => 'Anomaly\WysiwygFieldType\Http\Controller\FilesController@selected',
         'streams/wysiwyg-field_type/upload/{folder}' => 'Anomaly\WysiwygFieldType\Http\Controller\UploadController@index',
         'streams/wysiwyg-field_type/handle'          => 'Anomaly\WysiwygFieldType\Http\Controller\UploadController@upload',
-        'streams/wysiwyg-field_type/recent'          => 'Anomaly\WysiwygFieldType\Http\Controller\UploadController@recent'
+        'streams/wysiwyg-field_type/recent'          => 'Anomaly\WysiwygFieldType\Http\Controller\UploadController@recent',
     ];
 
 }

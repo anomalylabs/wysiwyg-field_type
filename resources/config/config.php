@@ -16,8 +16,8 @@ return [
                 );
 
                 return array_combine($keys, $values);
-            }
-        ]
+            },
+        ],
     ],
     'plugins'     => [
         'type'   => 'anomaly.field_type.checkboxes',
@@ -34,18 +34,18 @@ return [
                 );
 
                 return array_combine($keys, $values);
-            }
-        ]
+            },
+        ],
     ],
     'height'      => [
         'type'     => 'anomaly.field_type.integer',
         'required' => true,
         'config'   => [
             'step' => 50,
-            'min'  => 200
-        ]
+            'min'  => 200,
+        ],
     ],
     'line_breaks' => [
-        'type' => 'anomaly.field_type.boolean'
-    ]
+        'type' => 'anomaly.field_type.boolean',
+    ],
 ];

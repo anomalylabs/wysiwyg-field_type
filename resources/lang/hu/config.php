@@ -2,23 +2,23 @@
 
 return [
     'buttons' => [
-        'name' => 'Gombok',
+        'name'     => 'Gombok',
     'instructions' => 'Határozd meg, hogy mely gombokat jelenítsük meg.',
     ],
     'plugins' => [
-        'name' => 'Beépülők',
+        'name'     => 'Beépülők',
     'instructions' => 'Határozd meg, hogy mely beépülőket jelenítsük meg.',
     ],
     'height' => [
-        'name' => 'Magasság',
+        'name'     => 'Magasság',
     'instructions' => 'Add meg a szerkesztő magasságát pixelben.',
     ],
     'line_breaks' => [
-        'name' => 'Sortörés',
+        'name'     => 'Sortörés',
     'instructions' => 'Használjunk sortörést a bekezdés jel helyett?',
     ],
     'folders' => [
-        'name' => 'Mappák',
+        'name'     => 'Mappák',
     'instructions' => 'Mely mappák elérhetőek a dokumentumoknak és képeknek?',
     ],
 ];

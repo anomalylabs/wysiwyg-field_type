@@ -6,7 +6,6 @@
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\WysiwygFieldType\Table
  */
 class UploadTableButtons
 {
@@ -22,8 +21,8 @@ class UploadTableButtons
             [
                 'select' => [
                     'data-select' => $builder->getMode(),
-                    'data-entry'  => '{entry.path}'
-                ]
+                    'data-entry'  => '{entry.path}',
+                ],
             ]
         );
     }

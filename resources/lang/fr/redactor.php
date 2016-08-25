@@ -12,7 +12,7 @@ return [
         'link'           => 'Lien',
         'alignment'      => 'Alignement',
         'horizontalrule' => 'Trait horizontal',
-        'underline'      => 'Souligné'
+        'underline'      => 'Souligné',
     ],
     'plugin' => [
         'source'       => 'Code source',
@@ -22,5 +22,5 @@ return [
         'imagemanager' => 'Image',
         'alignment'    => 'Alignement',
         'fullscreen'   => 'Plein écran',
-    ]
+    ],
 ];

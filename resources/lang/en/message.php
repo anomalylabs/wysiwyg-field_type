@@ -7,5 +7,5 @@ return [
     'no_file_selected' => 'No file selected.',
     'no_uploads'       => 'No files uploaded.',
     'uploading'        => 'Uploading',
-    'loading'          => 'Loading'
+    'loading'          => 'Loading',
 ];

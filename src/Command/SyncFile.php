@@ -2,7 +2,6 @@
 
 use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
 use Anomaly\WysiwygFieldType\WysiwygFieldType;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -11,9 +10,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\WysiwygFieldType\Command
  */
-class SyncFile implements SelfHandling
+class SyncFile
 {
 
     use DispatchesJobs;
@@ -38,7 +36,7 @@ class SyncFile implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param EntryRepositoryInterface $repository
+     * @param  EntryRepositoryInterface $repository
      * @return string
      */
     public function handle(EntryRepositoryInterface $repository)
