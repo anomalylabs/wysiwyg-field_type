@@ -1,17 +1,22 @@
-(function ($) {
-    $.Redactor.prototype.filemanager = function () {
+(function($) {
+    $.Redactor.prototype.filemanager = function() {
         return {
-            init: function () {
+            init: function() {
 
                 var button = this.button.add('file', 'Insert File');
 
                 this.button.setIcon(button, '<i class="fa fa-paperclip"></i>');
 
                 this.button.addDropdown(
-                    button,
-                    {
-                        select: {title: 'Select File', func: this.filemanager.select},
-                        upload: {title: 'Upload File', func: this.filemanager.upload}
+                    button, {
+                        select: {
+                            title: 'Select File',
+                            func: this.filemanager.select
+                        },
+                        upload: {
+                            title: 'Upload File',
+                            func: this.filemanager.upload
+                        }
                     }
                 );
 
@@ -21,7 +26,7 @@
                     this.filemanager.insert
                 );
             },
-            select: function () {
+            select: function() {
 
                 this.selection.save();
 
@@ -32,7 +37,7 @@
                     .find('.modal-content')
                     .load('/streams/wysiwyg-field_type/index?' + params);
             },
-            upload: function () {
+            upload: function() {
 
                 this.selection.save();
 
@@ -43,7 +48,7 @@
                     .find('.modal-content')
                     .load('/streams/wysiwyg-field_type/choose?' + params);
             },
-            insert: function (e) {
+            insert: function(e) {
 
                 this.selection.restore();
 
@@ -59,7 +64,7 @@
                 return false;
 
             },
-            params: function () {
+            params: function() {
                 return $.param({
                     mode: 'file',
                     folders: this.opts.folders
