@@ -1,17 +1,22 @@
-(function ($) {
-    $.Redactor.prototype.imagemanager = function () {
+(function($) {
+    $.Redactor.prototype.imagemanager = function() {
         return {
-            init: function () {
+            init: function() {
 
                 var button = this.button.add('image', 'Insert Image');
 
                 this.button.setIcon(button, '<i class="fa fa-picture-o"></i>');
 
                 this.button.addDropdown(
-                    button,
-                    {
-                        select: {title: 'Select Image', func: this.imagemanager.select},
-                        upload: {title: 'Upload Image', func: this.imagemanager.upload}
+                    button, {
+                        select: {
+                            title: 'Select Image',
+                            func: this.imagemanager.select
+                        },
+                        upload: {
+                            title: 'Upload Image',
+                            func: this.imagemanager.upload
+                        }
                     }
                 );
 
@@ -21,7 +26,7 @@
                     this.imagemanager.insert
                 );
             },
-            select: function () {
+            select: function() {
 
                 this.selection.save();
 
@@ -32,7 +37,7 @@
                     .find('.modal-content')
                     .load('/streams/wysiwyg-field_type/index?' + params);
             },
-            upload: function () {
+            upload: function() {
 
                 this.selection.save();
 
@@ -43,14 +48,25 @@
                     .find('.modal-content')
                     .load('/streams/wysiwyg-field_type/choose?' + params);
             },
-            insert: function (e) {
+            insert: function(e) {
 
                 this.selection.restore();
 
                 this.buffer.set();
                 this.air.collapsed();
 
-                var url = '/files/' + $(e.target).data('entry');
+                var file = $(e.target).data('entry');
+
+                if (file == undefined) {
+
+                    console.log(e);
+
+                    alert('There was a problem attaching this image. Please try again.');
+
+                    return false;
+                }
+
+                var url = '/files/' + file;
 
                 this.insert.node($('<img />').attr('src', url));
 
@@ -58,7 +74,7 @@
 
                 return false;
             },
-            params: function () {
+            params: function() {
                 return $.param({
                     mode: 'image',
                     folders: this.opts.folders

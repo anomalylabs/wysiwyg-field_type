@@ -58,8 +58,11 @@
                 var file = $(e.target).data('entry');
 
                 if (file == undefined) {
+
                     console.log(e);
-                    alert('Please try selecting the file again.')
+
+                    alert('There was a problem attaching this file. Please try again.');
+
                     return false;
                 }
 
