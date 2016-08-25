@@ -55,6 +55,14 @@
                 this.buffer.set();
                 this.air.collapsed();
 
+                var file = $(e.target).data('entry');
+
+                if (file == undefined) {
+                    console.log(e);
+                    alert('Please try selecting the file again.')
+                    return false;
+                }
+
                 var url = '/files/download/' + $(e.target).data('entry');
 
                 this.insert.node($('<a />').attr('href', url).text(this.selection.is() ? this.selection.text() : url));
