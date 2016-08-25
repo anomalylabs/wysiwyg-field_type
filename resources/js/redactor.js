@@ -274,6 +274,16 @@
                 "upload-label": "Drop file here or ",
                 "caption": "Caption",
 
+                "alignment": "Alignment",
+                "none": "None",
+                "left": "Left",
+                "right": "Right",
+                "center": "Center",
+
+                "height": "Height",
+                "width": "Width",
+                "class": "Class",
+
                 "bulletslist": "Bullets",
                 "numberslist": "Numbers",
 
@@ -3705,6 +3715,10 @@
 
                     $('#redactor-image-preview').html($('<img src="' + $image.attr('src') + '" style="max-width: 100%;">'));
                     $('#redactor-image-title').val($image.attr('alt'));
+                    $('#redactor-image-alignment').val($image.attr('align') ? $image.attr('align') : 'none');
+                    $('#redactor-image-height').val($image.attr('height') ? $image.attr('height') : null);
+                    $('#redactor-image-width').val($image.attr('width') ? $image.attr('width') : null);
+                    $('#redactor-image-class').val($image.attr('class') ? $image.attr('class') : null);
 
                     var $redactorImageLink = $('#redactor-image-link');
                     $redactorImageLink.attr('href', $image.attr('src'));
@@ -3732,6 +3746,18 @@
 
                     var title = $('#redactor-image-title').val().replace(/(<([^>]+)>)/ig, "");
                     $image.attr('alt', title).attr('title', title);
+
+                    var alignment = $('#redactor-image-alignment').val().replace(/(<([^>]+)>)/ig, "");
+                    $image.attr('align', alignment);
+
+                    var height = $('#redactor-image-height').val().replace(/(<([^>]+)>)/ig, "");
+                    $image.attr('height', height);
+
+                    var width = $('#redactor-image-width').val().replace(/(<([^>]+)>)/ig, "");
+                    $image.attr('width', width);
+
+                    var cssClass = $('#redactor-image-class').val().replace(/(<([^>]+)>)/ig, "");
+                    $image.attr('class', cssClass);
 
                     // as link
                     var link = $.trim($('#redactor-image-link').val()).replace(/(<([^>]+)>)/ig, "");
@@ -6152,6 +6178,27 @@
                             '<section>' +
                             '<label>' + this.lang.get('link') + '</label>' +
                             '<input type="text" id="redactor-image-link" aria-label="' + this.lang.get('link') + '" />' +
+                            '</section>' +
+                            '<section>' +
+                            '<label>' + this.lang.get('alignment') + '</label>' +
+                            '<select id="redactor-image-alignment" aria-label="' + this.lang.get('alignment') + '">' +
+                            '<option value="none" aria-label="' + this.lang.get('none') + '">' + this.lang.get('none') + '</option>' +
+                            '<option value="left" aria-label="' + this.lang.get('left') + '">' + this.lang.get('left') + '</option>' +
+                            '<option value="center" aria-label="' + this.lang.get('center') + '">' + this.lang.get('center') + '</option>' +
+                            '<option value="right" aria-label="' + this.lang.get('right') + '">' + this.lang.get('right') + '</option>' +
+                            '</select>' +
+                            '</section>' +
+                            '<section>' +
+                            '<label>' + this.lang.get('height') + '</label>' +
+                            '<input type="text" id="redactor-image-height" aria-label="' + this.lang.get('height') + '" />' +
+                            '</section>' +
+                            '<section>' +
+                            '<label>' + this.lang.get('width') + '</label>' +
+                            '<input type="text" id="redactor-image-width" aria-label="' + this.lang.get('width') + '" />' +
+                            '</section>' +
+                            '<section>' +
+                            '<label>' + this.lang.get('class') + '</label>' +
+                            '<input type="text" id="redactor-image-class" aria-label="' + this.lang.get('class') + '" />' +
                             '</section>' +
                             '<section>' +
                             '<label class="checkbox"><input type="checkbox" id="redactor-image-link-blank" aria-label="' + this.lang.get('link-in-new-tab') + '"> ' + this.lang.get('link-in-new-tab') + '</label>' +
