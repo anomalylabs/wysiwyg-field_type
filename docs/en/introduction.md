@@ -1,11 +1,11 @@
 # WYSIWYG Field Type
 
-- [General Information](#general)
+- [Introduction](#introduction)
 
 <hr>
 
-<a name="general"></a>
-## General Information
+<a name="introduction"></a>
+## Introduction
 
 `anomaly.field_type.wysiwyg`
 
