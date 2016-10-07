@@ -3,7 +3,7 @@
 return [
     'buttons'        => [
         'format'         => [
-            'icon' => 'fa fa-paragraph',
+            'icon' => 'fa fa-font',
         ],
         'bold'           => [
             'icon' => 'fa fa-bold',
