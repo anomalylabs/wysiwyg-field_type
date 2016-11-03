@@ -2,6 +2,7 @@
 
 use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
 use Anomaly\WysiwygFieldType\WysiwygFieldType;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -37,9 +38,10 @@ class SyncFile
      * Handle the command.
      *
      * @param  EntryRepositoryInterface $repository
+     * @param Repository                $config
      * @return string
      */
-    public function handle(EntryRepositoryInterface $repository)
+    public function handle(EntryRepositoryInterface $repository, Repository $config)
     {
         $path  = $this->fieldType->getStoragePath();
         $entry = $this->fieldType->getEntry();
@@ -50,14 +52,37 @@ class SyncFile
 
         $content = $this->dispatch(new GetFile($this->fieldType));
 
+        /**
+         * If content is the same then
+         * use the content - doesn't matter.
+         */
         if (md5($content) == md5(array_get($entry->getAttributes(), $this->fieldType->getField()))) {
             return $content;
         }
 
-        if (filemtime($path) > $entry->lastModified()->timestamp) {
+        /**
+         * If the file is newer and we're debugging
+         * then update with the file's content.
+         */
+        if (filemtime($path) > $entry->lastModified()->timestamp && $config->get('app.debug')) {
             $repository->save($entry->setRawAttribute($this->fieldType->getField(), $content));
         }
 
+        /**
+         * If the file is newer and we're NOT debugging
+         * then update with the file with the database.
+         */
+        if (filemtime($path) > $entry->lastModified()->timestamp && !$config->get('app.debug')) {
+
+            $this->dispatch(new PutFile($this->fieldType));
+
+            $content = array_get($entry->getAttributes(), $this->fieldType->getField());
+        }
+
+        /**
+         * If the database is newer then update the file
+         * since that is what we use anyways.
+         */
         if (filemtime($path) < $entry->lastModified()->timestamp) {
 
             $this->dispatch(new PutFile($this->fieldType));
