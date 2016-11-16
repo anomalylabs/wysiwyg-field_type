@@ -54,6 +54,9 @@ $(function () {
             structure: true,
             linkTooltip: true,
             cleanOnPaste: true,
+            imagePosition: true,
+            imageResizable: true,
+            imageFloatMargin: '20px',
             removeEmpty: ['strong', 'em', 'p'],
 
             /**
