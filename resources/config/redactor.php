@@ -2,9 +2,7 @@
 
 return [
     'buttons'        => [
-        'format'         => [
-            'icon' => 'fa fa-paragraph',
-        ],
+        'format'         => [],
         'bold'           => [
             'icon' => 'fa fa-bold',
         ],
@@ -40,7 +38,6 @@ return [
         ],
         'inlinestyle'  => [
             'button'  => 'inline',
-            'icon'    => 'fa fa-quote-right',
             'scripts' => [
                 'anomaly.field_type.wysiwyg::js/plugins/inlinestyle.js',
             ],
@@ -85,12 +82,12 @@ return [
     'configurations' => [
         'default' => [
             'buttons' => [
+                'format',
                 'bold',
                 'italic',
                 'deleted',
                 'lists',
                 'link',
-                'format',
                 'horizontalrule',
                 'underline',
             ],
