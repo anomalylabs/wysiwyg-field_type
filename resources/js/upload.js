@@ -11,7 +11,7 @@ $(function() {
 
     var dropzone = new Dropzone('.dropzone', {
         paramName: 'upload',
-        url: '/streams/wysiwyg-field_type/handle',
+        url: REQUEST_ROOT_PATH + '/streams/wysiwyg-field_type/handle',
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
@@ -74,7 +74,7 @@ $(function() {
 
         uploader.find('.uploaded .modal-body').html(element.data('loading') + '...');
 
-        uploader.find('.uploaded').load('/streams/wysiwyg-field_type/recent?' + $.param({
+        uploader.find('.uploaded').load(REQUEST_ROOT_PATH + '/streams/wysiwyg-field_type/recent?' + $.param({
             mode: element.data('mode'),
             uploaded: uploaded.join(',')
         }));
