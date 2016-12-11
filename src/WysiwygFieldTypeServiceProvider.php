@@ -26,4 +26,16 @@ class WysiwygFieldTypeServiceProvider extends AddonServiceProvider
         'streams/wysiwyg-field_type/recent'          => 'Anomaly\WysiwygFieldType\Http\Controller\UploadController@recent',
     ];
 
+    /**
+     * Register the addon.
+     *
+     * @param WysiwygFieldType $fieldType
+     */
+    public function register(WysiwygFieldType $fieldType)
+    {
+        $fieldType->on('entry_saved', WysiwygFieldTypeCallbacks::class . '@onEntrySaved');
+        $fieldType->on('entry_deleted', WysiwygFieldTypeCallbacks::class . '@onEntryDeleted');
+        $fieldType->on('entry_translation_saved', WysiwygFieldTypeCallbacks::class . '@onEntryTranslationSaved');
+        $fieldType->on('entry_translation_deleted', WysiwygFieldTypeCallbacks::class . '@onEntryTranslationDeleted');
+    }
 }
