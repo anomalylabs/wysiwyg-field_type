@@ -35,7 +35,7 @@
                 $('#' + this.opts.element.attr('name') + '-modal')
                     .modal('show')
                     .find('.modal-content')
-                    .load('/streams/wysiwyg-field_type/index?' + params);
+                    .load(REQUEST_ROOT_PATH + '/streams/wysiwyg-field_type/index?' + params);
             },
             upload: function() {
 
@@ -46,7 +46,7 @@
                 $('#' + this.opts.element.attr('name') + '-modal')
                     .modal('show')
                     .find('.modal-content')
-                    .load('/streams/wysiwyg-field_type/choose?' + params);
+                    .load(REQUEST_ROOT_PATH + '/streams/wysiwyg-field_type/choose?' + params);
             },
             insert: function(e) {
 
@@ -66,7 +66,7 @@
                     return false;
                 }
 
-                var url = '/files/download/' + $(e.target).data('entry');
+                var url = REQUEST_ROOT_PATH + '/files/download/' + $(e.target).data('entry');
 
                 this.insert.node($('<a />').attr('href', url).text(this.selection.is() ? this.selection.text() : url));
 
