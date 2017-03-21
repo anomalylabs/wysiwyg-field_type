@@ -56,6 +56,7 @@ $(document).on('ajaxComplete ready', function () {
             structure: true,
             linkTooltip: true,
             cleanOnPaste: true,
+            toolbarFixed: false,
             imagePosition: true,
             imageResizable: true,
             imageFloatMargin: '20px',
