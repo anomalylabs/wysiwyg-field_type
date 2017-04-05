@@ -66,12 +66,33 @@ return [
                 'anomaly.field_type.wysiwyg::js/plugins/imagemanager.js',
             ],
         ],
-        'source'       => [
+        'codemirror'   => [
             'icon'    => 'fa fa-code',
+            'styles'  => [
+                'anomaly.field_type.wysiwyg::js/plugins/codemirror/lib/codemirror.css',
+                'anomaly.field_type.wysiwyg::js/plugins/codemirror/theme/mbo.css',
+            ],
             'scripts' => [
-                'anomaly.field_type.wysiwyg::js/plugins/source.js',
+                'anomaly.field_type.wysiwyg::js/plugins/codemirror/lib/codemirror.js',
+                'anomaly.field_type.wysiwyg::js/plugins/codemirror/keymap/sublime.js',
+                'anomaly.field_type.wysiwyg::js/plugins/codemirror/addon/emmet.js',
+                'anomaly.field_type.wysiwyg::js/plugins/codemirror/addon/mode/multiplex.js',
+                'anomaly.field_type.wysiwyg::js/plugins/codemirror/mode/xml/xml.js',
+                'anomaly.field_type.wysiwyg::js/plugins/codemirror/mode/javascript/javascript.js',
+                'anomaly.field_type.wysiwyg::js/plugins/codemirror/mode/css/css.js',
+                'anomaly.field_type.wysiwyg::js/plugins/codemirror/mode/htmlmixed/htmlmixed.js',
+                'anomaly.field_type.wysiwyg::js/plugins/codemirror/mode/clike/clike.js',
+                'anomaly.field_type.wysiwyg::js/plugins/codemirror/mode/php/php.js',
+                'anomaly.field_type.wysiwyg::js/plugins/codemirror/mode/twig/twig.js',
+                'anomaly.field_type.wysiwyg::js/plugins/codemirror.js',
             ],
         ],
+        // 'source'       => [
+        //     'icon'    => 'fa fa-code',
+        //     'scripts' => [
+        //         'anomaly.field_type.wysiwyg::js/plugins/source.js',
+        //     ],
+        // ],
         'fullscreen'   => [
             'icon'    => 'fa fa-arrows-alt',
             'scripts' => [
@@ -92,7 +113,7 @@ return [
                 'underline',
             ],
             'plugins' => [
-                'source',
+                'codemirror',
                 'table',
                 'video',
                 'inlinestyle',
