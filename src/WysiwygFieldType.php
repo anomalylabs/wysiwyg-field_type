@@ -37,7 +37,7 @@ class WysiwygFieldType extends FieldType
     protected $config = [
         'configuration' => 'default',
         'line_breaks'   => false,
-        'height'        => 500,
+        'height'        => 75,
     ];
 
     /**

@@ -41,8 +41,8 @@ return [
         'type'     => 'anomaly.field_type.integer',
         'required' => true,
         'config'   => [
-            'step' => 50,
-            'min'  => 200,
+            'step' => 25,
+            'min'  => 75,
         ],
     ],
     'line_breaks' => [
