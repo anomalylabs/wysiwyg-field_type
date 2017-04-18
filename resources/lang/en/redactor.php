@@ -16,6 +16,7 @@ return [
     ],
     'plugin' => [
         'source'       => 'Source Code',
+        'clips'        => 'Clips',
         'table'        => 'Table',
         'video'        => 'Video',
         'filemanager'  => 'File',

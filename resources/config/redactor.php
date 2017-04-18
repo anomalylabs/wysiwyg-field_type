@@ -36,6 +36,15 @@ return [
                 'anomaly.field_type.wysiwyg::js/plugins/alignment/alignment.css',
             ],
         ],
+        'clips'        => [
+            'icon'    => 'fa fa-scissors',
+            'scripts' => [
+                'anomaly.field_type.wysiwyg::js/plugins/clips/clips.js',
+            ],
+            'styles'  => [
+                'anomaly.field_type.wysiwyg::js/plugins/clips/clips.css',
+            ],
+        ],
         'inlinestyle'  => [
             'button'  => 'inline',
             'scripts' => [
