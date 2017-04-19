@@ -4,7 +4,7 @@ return [
     'buttons'     => [
         'type'   => 'anomaly.field_type.checkboxes',
         'config' => [
-            'options' => function (\Illuminate\Config\Repository $config) {
+            'options' => function (\Illuminate\Contracts\Config\Repository $config) {
 
                 $keys = array_keys($config->get('anomaly.field_type.wysiwyg::redactor.buttons'));
 
@@ -22,7 +22,7 @@ return [
     'plugins'     => [
         'type'   => 'anomaly.field_type.checkboxes',
         'config' => [
-            'options' => function (\Illuminate\Config\Repository $config) {
+            'options' => function (\Illuminate\Contracts\Config\Repository $config) {
 
                 $keys = array_keys($config->get('anomaly.field_type.wysiwyg::redactor.plugins'));
 
