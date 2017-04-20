@@ -102,7 +102,7 @@ class WysiwygFieldType extends FieldType
 
         $slug      = $this->entry->getStreamSlug();
         $namespace = $this->entry->getStreamNamespace();
-        $directory = $this->entry->getEntryId();
+        $directory = $this->entry->getAttribute('slug');
         $file      = $this->getFileName();
 
         return "{$namespace}/{$slug}/{$directory}/{$file}";

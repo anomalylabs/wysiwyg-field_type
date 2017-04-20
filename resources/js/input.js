@@ -46,6 +46,8 @@ $(document).on('ajaxComplete ready', function () {
                         }
 
                     }, this));
+
+                    emmetCodeMirror(this.codemirror.editor);
                 }
             },
 
@@ -69,7 +71,40 @@ $(document).on('ajaxComplete ready', function () {
             placeholder: $(this).attr('placeholder'),
             folders: $(this).data('folders').toString().split(','),
             buttons: $(this).data('buttons').toString().split(','),
-            plugins: $(this).data('plugins').toString().split(',')
+            plugins: $(this).data('plugins').toString().split(','),
+            codemirror: {
+                theme: 'mbo',
+                lineNumbers: true,
+                mode: 'php',
+                indentUnit: 4,
+                profile: 'xhtml',
+                lineWrapping: true,
+                tabSize: 4,
+                indentWithTabs: 'spaces',
+                showCursorWhenSelecting: true,
+                cursorScrollMargin: 2,
+                cursorHeight: 0.95,
+                lineWiseCopyCut: false,
+                viewportMargin: Infinity,
+                // allowDropFileTypes: ['image/jpg', 'image/png', 'image/gif'],
+                autoCloseBrackets: true,
+                highlightSelectionMatches: true,
+                keyMap: 'sublime',
+                // lint: true,
+                // matchBrackets: true,
+                styleActiveLine: false,
+                gutters: ['CodeMirror-lint-markers'],
+                extraKeys: {
+                    F10: function (cm) {
+                        cm.setOption('fullScreen', !cm.getOption('fullScreen'));
+                    },
+                    Esc: function (cm) {
+                        if (cm.getOption('fullScreen')) {
+                            cm.setOption('fullScreen', false);
+                        }
+                    }
+                }
+            }
         });
     });
 });
