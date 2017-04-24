@@ -1,17 +1,20 @@
-$(function () {
+$(document).on('ajaxComplete ready', function () {
 
     // Initialize WYSIWYG editors.
-    $('textarea[data-provides="anomaly.field_type.wysiwyg"]').each(function () {
+    $('textarea[data-provides="anomaly.field_type.wysiwyg"]:not(.hasEditor)').each(function () {
 
         /**
          * Gather available buttons / plugins.
          */
-        var buttons = $(this).data('available_buttons');
-        var plugins = $(this).data('available_plugins');
+        var $this = $(this);
+        var buttons = $this.data('available_buttons');
+        var plugins = $this.data('available_plugins');
 
-        $(this).redactor({
+        $this.addClass('hasEditor');
 
-            element: $(this),
+        $this.redactor({
+
+            element: $this,
 
             /**
              * Initialize the editor icons.
@@ -34,7 +37,6 @@ $(function () {
                     });
 
                     $.each(this.button.all(), $.proxy(function (i, s) {
-
                         var key = $(s).attr('rel');
 
                         if (typeof icons[key] !== 'undefined') {
@@ -42,9 +44,8 @@ $(function () {
                             var button = this.button.get(key);
                             this.button.setIcon(button, icon);
                         }
-
                     }, this));
-                }
+                },
             },
 
             /**
@@ -54,6 +55,7 @@ $(function () {
             structure: true,
             linkTooltip: true,
             cleanOnPaste: true,
+            toolbarFixed: false,
             imagePosition: true,
             imageResizable: true,
             imageFloatMargin: '20px',
@@ -62,11 +64,11 @@ $(function () {
             /**
              * Features
              */
-            minHeight: $(this).data('height'),
-            placeholder: $(this).attr('placeholder'),
-            folders: $(this).data('folders').toString().split(','),
-            buttons: $(this).data('buttons').toString().split(','),
-            plugins: $(this).data('plugins').toString().split(',')
+            minHeight: $this.data('height'),
+            placeholder: $this.attr('placeholder'),
+            folders: $this.data('folders').toString().split(','),
+            buttons: $this.data('buttons').toString().split(','),
+            plugins: $this.data('plugins').toString().split(',')
         });
     });
 });
