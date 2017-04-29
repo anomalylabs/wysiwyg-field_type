@@ -23,6 +23,7 @@
 			},
 			enable: function()
 			{
+				this.scrollTop = $(document).scrollTop();
 				this.fullscreen.isOpened = false;
 				this.button.setActive('fullscreen');
 				this.fullscreen.isOpen = true;
@@ -61,7 +62,6 @@
 
 				this.$fullscreenPlaceholder.insertAfter(this.$box);
 
-				this.core.box().appendTo(document.body);
 				this.core.box().addClass('redactor-box-fullscreen');
 
 				$('body').addClass('redactor-body-fullscreen');
@@ -76,7 +76,6 @@
 
 				this.toolbar.observeScrollDisable();
 				$(window).on('resize.redactor-plugin-fullscreen', $.proxy(this.fullscreen.resize, this));
-				$(document).scrollTop(0, 0);
 
 				var self = this;
 				setTimeout(function()
@@ -95,7 +94,6 @@
 				$(window).off('resize.redactor-plugin-fullscreen');
 				$('body, html').css('overflow', '');
 
-				this.core.box().insertBefore(this.$fullscreenPlaceholder);
 				this.$fullscreenPlaceholder.remove();
 
 				this.core.box().removeClass('redactor-box-fullscreen').css({ width: 'auto', height: 'auto' });
@@ -123,6 +121,7 @@
 
 				this.core.editor().css('height', 'auto');
 				this.selection.restore();
+				$(document).scrollTop(this.scrollTop, 0);
 			},
 			toggle: function()
 			{

@@ -6,14 +6,15 @@ $(document).on('ajaxComplete ready', function () {
         /**
          * Gather available buttons / plugins.
          */
-        var buttons = $(this).data('available_buttons');
-        var plugins = $(this).data('available_plugins');
+        var $this = $(this);
+        var buttons = $this.data('available_buttons');
+        var plugins = $this.data('available_plugins');
 
-        $(this).addClass('hasEditor');
+        $this.addClass('hasEditor');
 
-        $(this).redactor({
+        $this.redactor({
 
-            element: $(this),
+            element: $this,
 
             /**
              * Initialize the editor icons.
@@ -36,7 +37,6 @@ $(document).on('ajaxComplete ready', function () {
                     });
 
                     $.each(this.button.all(), $.proxy(function (i, s) {
-
                         var key = $(s).attr('rel');
 
                         if (typeof icons[key] !== 'undefined') {
@@ -44,9 +44,8 @@ $(document).on('ajaxComplete ready', function () {
                             var button = this.button.get(key);
                             this.button.setIcon(button, icon);
                         }
-
                     }, this));
-                }
+                },
             },
 
             /**
@@ -65,11 +64,11 @@ $(document).on('ajaxComplete ready', function () {
             /**
              * Features
              */
-            minHeight: $(this).data('height'),
-            placeholder: $(this).attr('placeholder'),
-            folders: $(this).data('folders').toString().split(','),
-            buttons: $(this).data('buttons').toString().split(','),
-            plugins: $(this).data('plugins').toString().split(',')
+            minHeight: $this.data('height'),
+            placeholder: $this.attr('placeholder'),
+            folders: $this.data('folders').toString().split(','),
+            buttons: $this.data('buttons').toString().split(','),
+            plugins: $this.data('plugins').toString().split(',')
         });
     });
 });
