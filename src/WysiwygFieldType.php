@@ -66,6 +66,11 @@ class WysiwygFieldType extends FieldType
     {
         $config = parent::getConfig();
 
+        /**
+         * Set default syncing behavior.
+         */
+        $config['sync'] = array_get($config, 'sync', config($this->getNamespace('storage.sync')));
+
         /*
          * Get the configuration values.
          */
