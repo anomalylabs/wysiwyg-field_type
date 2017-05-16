@@ -13,6 +13,7 @@
 				this.fullscreen.isOpen = false;
 
 				var button = this.button.add('fullscreen', this.lang.get('fullscreen'));
+				this.button.setIcon(button, '<i class="re-icon-expand"></i>');
 				this.button.addCallback(button, this.fullscreen.toggle);
 
 				if (this.opts.fullscreen)
@@ -23,8 +24,9 @@
 			},
 			enable: function()
 			{
+                this.scrollTop = $(document).scrollTop();
 				this.fullscreen.isOpened = false;
-				this.button.setActive('fullscreen');
+				this.button.changeIcon('fullscreen', 'retract');
 				this.fullscreen.isOpen = true;
 
 				if (!this.opts.fullscreen)
@@ -44,24 +46,18 @@
 
 				this.fullscreen.height = this.core.editor().height();
 
-				if (this.opts.maxHeight)
-				{
-					this.core.editor().css('max-height', '');
-				}
+				if (this.opts.maxHeight) this.core.editor().css('max-height', '');
+				if (this.opts.minHeight) this.core.editor().css('min-height', '');
+				if (!this.$fullscreenPlaceholder) this.$fullscreenPlaceholder = $('<div/>');
 
-				if (this.opts.minHeight)
-				{
-					this.core.editor().css('min-height', '');
-				}
-
-				if (!this.$fullscreenPlaceholder)
-				{
-					this.$fullscreenPlaceholder = $('<div/>');
-				}
+                if (this.opts.toolbarExternal)
+                {
+                    $(this.opts.toolbarExternal).css({ 'position': 'absolute', 'top': 0, 'left': 0, 'width': '100%' });
+                }
 
 				this.$fullscreenPlaceholder.insertAfter(this.$box);
 
-				this.core.box().appendTo(document.body);
+				//this.core.box().appendTo(document.body);
 				this.core.box().addClass('redactor-box-fullscreen');
 
 				$('body').addClass('redactor-body-fullscreen');
@@ -76,7 +72,7 @@
 
 				this.toolbar.observeScrollDisable();
 				$(window).on('resize.redactor-plugin-fullscreen', $.proxy(this.fullscreen.resize, this));
-				$(document).scrollTop(0, 0);
+				//$(document).scrollTop(0, 0);
 
 				var self = this;
 				setTimeout(function()
@@ -87,7 +83,7 @@
 			},
 			disable: function()
 			{
-				this.button.setInactive('fullscreen');
+				this.button.changeIcon('fullscreen', 'expand');
 				this.fullscreen.isOpened = undefined;
 				this.fullscreen.isOpen = false;
 				this.selection.save();
@@ -95,7 +91,7 @@
 				$(window).off('resize.redactor-plugin-fullscreen');
 				$('body, html').css('overflow', '');
 
-				this.core.box().insertBefore(this.$fullscreenPlaceholder);
+				//this.core.box().insertBefore(this.$fullscreenPlaceholder);
 				this.$fullscreenPlaceholder.remove();
 
 				this.core.box().removeClass('redactor-box-fullscreen').css({ width: 'auto', height: 'auto' });
@@ -104,7 +100,7 @@
 				if (this.opts.toolbarExternal)
 				{
 					this.core.box().css('top', this.fullscreen.boxcss.top);
-					this.core.toolbar().css({
+					$(this.opts.toolbarExternal).css({
 						'width': this.fullscreen.toolcss.width,
 						'top': this.fullscreen.toolcss.top,
 						'position': this.fullscreen.toolcss.position
@@ -123,6 +119,8 @@
 
 				this.core.editor().css('height', 'auto');
 				this.selection.restore();
+
+                $(document).scrollTop(this.scrollTop, 0);
 			},
 			toggle: function()
 			{
