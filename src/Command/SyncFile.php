@@ -72,7 +72,11 @@ class SyncFile
          * If the file is newer and we're NOT debugging
          * then update with the file with the database.
          */
-        if (filemtime($path) > $entry->lastModified()->timestamp && !$config->get('app.debug')) {
+        if (
+            $entry->lastModified()
+            && filemtime($path) > $entry->lastModified()->timestamp
+            && $config->get('app.debug')
+        ) {
 
             $this->dispatch(new PutFile($this->fieldType));
 
