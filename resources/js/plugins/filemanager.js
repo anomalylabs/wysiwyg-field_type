@@ -1,7 +1,7 @@
-(function($) {
-    $.Redactor.prototype.filemanager = function() {
+$(function () {
+    $.Redactor.prototype.filemanager = function () {
         return {
-            init: function() {
+            init: function () {
 
                 var button = this.button.add('file', 'Insert File');
 
@@ -20,35 +20,35 @@
                     }
                 );
 
-                $('#' + this.opts.element.attr('name') + '-modal').on(
+                $('#' + this.$element.attr('name') + '-modal').on(
                     'click',
                     '[data-select="file"]',
                     this.filemanager.insert
                 );
             },
-            select: function() {
+            select: function () {
 
                 this.selection.save();
 
                 var params = this.filemanager.params();
 
-                $('#' + this.opts.element.attr('name') + '-modal')
+                $('#' + this.$element.attr('name') + '-modal')
                     .modal('show')
                     .find('.modal-content')
                     .load(REQUEST_ROOT_PATH + '/streams/wysiwyg-field_type/index?' + params);
             },
-            upload: function() {
+            upload: function () {
 
                 this.selection.save();
 
                 var params = this.filemanager.params();
 
-                $('#' + this.opts.element.attr('name') + '-modal')
+                $('#' + this.$element.attr('name') + '-modal')
                     .modal('show')
                     .find('.modal-content')
                     .load(REQUEST_ROOT_PATH + '/streams/wysiwyg-field_type/choose?' + params);
             },
-            insert: function(e) {
+            insert: function (e) {
 
                 this.selection.restore();
 
@@ -75,7 +75,7 @@
                 return false;
 
             },
-            params: function() {
+            params: function () {
                 return $.param({
                     mode: 'file',
                     folders: this.opts.folders
@@ -83,4 +83,4 @@
             }
         };
     };
-})(jQuery);
+});
