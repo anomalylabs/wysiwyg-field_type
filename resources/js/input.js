@@ -2,12 +2,12 @@ $(document).on('ajaxComplete ready', function () {
 
     // Initialize WYSIWYG editors.
     $('textarea[data-provides="anomaly.field_type.wysiwyg"]:not(.hasEditor)')
-    .each(function () {
+    .each(function (e) {
 
         /**
          * Gather available buttons / plugins.
          */
-        var $this = $(this);
+        var $this = $(e.target);
 
         var buttons = $this.data('available_buttons');
         var plugins = $this.data('available_plugins');
