@@ -1,8 +1,8 @@
 <?php namespace Anomaly\WysiwygFieldType\Command;
 
 
+use Anomaly\Streams\Platform\View\Twig\Bridge;
 use Illuminate\Filesystem\Filesystem;
-use TwigBridge\Bridge;
 
 /**
  * Class ClearCache
