@@ -1,40 +1,19 @@
 <?php
 
+use Anomaly\WysiwygFieldType\Support\Config\ButtonsHandler;
+use Anomaly\WysiwygFieldType\Support\Config\PluginsHandler;
+
 return [
     'buttons'     => [
         'type'   => 'anomaly.field_type.checkboxes',
         'config' => [
-            'options' => function (\Illuminate\Contracts\Config\Repository $config) {
-
-                $keys = array_keys($config->get('anomaly.field_type.wysiwyg::redactor.buttons'));
-
-                $values = array_map(
-                    function ($value) {
-                        return trans('anomaly.field_type.wysiwyg::redactor.button.' . $value);
-                    },
-                    $keys
-                );
-
-                return array_combine($keys, $values);
-            },
+            'handler' => ButtonsHandler::class,
         ],
     ],
     'plugins'     => [
         'type'   => 'anomaly.field_type.checkboxes',
         'config' => [
-            'options' => function (\Illuminate\Contracts\Config\Repository $config) {
-
-                $keys = array_keys($config->get('anomaly.field_type.wysiwyg::redactor.plugins'));
-
-                $values = array_map(
-                    function ($value) {
-                        return trans('anomaly.field_type.wysiwyg::redactor.plugin.' . $value);
-                    },
-                    $keys
-                );
-
-                return array_combine($keys, $values);
-            },
+            'handler' => PluginsHandler::class,
         ],
     ],
     'height'      => [
