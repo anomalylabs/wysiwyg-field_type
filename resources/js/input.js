@@ -1,21 +1,20 @@
 $(document).on('ajaxComplete ready', function () {
 
     // Initialize WYSIWYG editors.
-    $('textarea[data-provides="anomaly.field_type.wysiwyg"]:not(.hasEditor)').each(function () {
+    $('textarea[data-provides="anomaly.field_type.wysiwyg"]:not(.hasEditor)')
+    .each(function (e) {
 
         /**
          * Gather available buttons / plugins.
          */
-        var textarea = $(this);
+        var $this = $(e.target);
 
-        var buttons = textarea.data('available_buttons');
-        var plugins = textarea.data('available_plugins');
+        var buttons = $this.data('available_buttons');
+        var plugins = $this.data('available_plugins');
 
-        textarea.addClass('hasEditor');
+        $this.addClass('hasEditor');
 
-        textarea.redactor({
-
-            element: $(this),
+        $this.redactor({
 
             /**
              * Initialize the editor icons.
@@ -67,15 +66,15 @@ $(document).on('ajaxComplete ready', function () {
             /**
              * Features
              */
-            minHeight: textarea.data('height'),
-            placeholder: textarea.attr('placeholder'),
-            folders: textarea.data('folders').toString().split(','),
-            buttons: textarea.data('buttons').toString().split(','),
-            plugins: textarea.data('plugins').toString().split(',')
+            minHeight: $this.data('height'),
+            placeholder: $this.attr('placeholder'),
+            folders: $this.data('folders').toString().split(','),
+            buttons: $this.data('buttons').toString().split(','),
+            plugins: $this.data('plugins').toString().split(',')
         });
 
-        textarea.closest('form').on('submit', function () {
-            textarea.val(textarea.redactor('code.get'));
+        $this.closest('form').on('submit', function () {
+            $this.val($this.redactor('code.get'));
         });
     });
 });

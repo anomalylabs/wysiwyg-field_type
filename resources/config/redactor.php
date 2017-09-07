@@ -24,7 +24,6 @@ return [
         'underline'      => [
             'icon' => 'fa fa-underline',
         ],
-
     ],
     'plugins'        => [
         'alignment'    => [
@@ -107,8 +106,8 @@ return [
                 'inlinestyle',
                 'filemanager',
                 'imagemanager',
-                'fullscreen',
                 'alignment',
+                'fullscreen',
             ],
         ],
         'basic'   => [

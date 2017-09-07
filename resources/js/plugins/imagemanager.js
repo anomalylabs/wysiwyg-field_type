@@ -1,7 +1,7 @@
-(function($) {
-    $.Redactor.prototype.imagemanager = function() {
+$(function () {
+    $.Redactor.prototype.imagemanager = function () {
         return {
-            init: function() {
+            init: function () {
 
                 var button = this.button.add('image', 'Insert Image');
 
@@ -20,35 +20,35 @@
                     }
                 );
 
-                $('#' + this.opts.element.attr('name') + '-modal').on(
+                $('#' + this.$element.attr('name') + '-modal').on(
                     'click',
                     '[data-select="image"]',
                     this.imagemanager.insert
                 );
             },
-            select: function() {
+            select: function () {
 
                 this.selection.save();
 
                 var params = this.imagemanager.params();
 
-                $('#' + this.opts.element.attr('name') + '-modal')
+                $('#' + this.$element.attr('name') + '-modal')
                     .modal('show')
                     .find('.modal-content')
                     .load(REQUEST_ROOT_PATH + '/streams/wysiwyg-field_type/index?' + params);
             },
-            upload: function() {
+            upload: function () {
 
                 this.selection.save();
 
                 var params = this.imagemanager.params();
 
-                $('#' + this.opts.element.attr('name') + '-modal')
+                $('#' + this.$element.attr('name') + '-modal')
                     .modal('show')
                     .find('.modal-content')
                     .load(REQUEST_ROOT_PATH + '/streams/wysiwyg-field_type/choose?' + params);
             },
-            insert: function(e) {
+            insert: function (e) {
 
                 this.selection.restore();
 
@@ -74,7 +74,7 @@
 
                 return false;
             },
-            params: function() {
+            params: function () {
                 return $.param({
                     mode: 'image',
                     folders: this.opts.folders
@@ -82,4 +82,4 @@
             }
         };
     };
-})(jQuery);
+});
