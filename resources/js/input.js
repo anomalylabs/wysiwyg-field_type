@@ -1,4 +1,4 @@
-$(document).on('ajaxComplete ready', function () {
+$(document).on('ajaxComplete ready shown.bs.tab', function () {
 
     // Initialize WYSIWYG editors.
     $('textarea[data-provides="anomaly.field_type.wysiwyg"]:not(.hasEditor)').each(function () {
