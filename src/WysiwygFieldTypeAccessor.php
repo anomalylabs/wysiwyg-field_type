@@ -31,6 +31,10 @@ class WysiwygFieldTypeAccessor extends FieldTypeAccessor
      */
     public function get()
     {
+        if ($this->fieldType->config('sync') === false) {
+            return parent::get();
+        }
+
         return $this->dispatch(new SyncFile($this->fieldType));
     }
 }

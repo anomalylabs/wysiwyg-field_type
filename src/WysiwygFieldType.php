@@ -4,6 +4,7 @@ use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Application\Application;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryTranslationsModel;
+use Anomaly\Streams\Platform\Support\Template;
 
 /**
  * Class WysiwygFieldType
@@ -65,6 +66,11 @@ class WysiwygFieldType extends FieldType
     public function getConfig()
     {
         $config = parent::getConfig();
+
+        /**
+         * Set default syncing behavior.
+         */
+        $config['sync'] = array_get($config, 'sync', config($this->getNamespace('storage.sync')));
 
         /*
          * Get the configuration values.
@@ -129,6 +135,10 @@ class WysiwygFieldType extends FieldType
      */
     public function getViewPath()
     {
+        if ($this->config('sync') === false) {
+            return app(Template::class)->path($this->getValue());
+        }
+
         if (!$path = $this->getFilePath()) {
             return null;
         }

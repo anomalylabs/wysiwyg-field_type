@@ -64,15 +64,20 @@ class SyncFile
          * If the file is newer and we're debugging
          * then update with the file's content.
          */
-        if (filemtime($path) > $entry->lastModified()->timestamp && $config->get('app.debug')) {
+        if (
+            $entry->lastModified()
+            && filemtime($path) > $entry->lastModified()->timestamp
+            && $config->get('app.debug')
+        ) {
             $repository->save($entry->setRawAttribute($this->fieldType->getField(), $content));
         }
 
         /**
-         * If the file is newer and we're NOT debugging
-         * then update with the file with the database.
+         * If we're NOT debugging and we got this
+         * far then we know that the content has been
+         * updated, so write the content to the file.
          */
-        if (filemtime($path) > $entry->lastModified()->timestamp && !$config->get('app.debug')) {
+        if (!$config->get('app.debug')) {
 
             $this->dispatch(new PutFile($this->fieldType));
 
@@ -83,7 +88,7 @@ class SyncFile
          * If the database is newer then update the file
          * since that is what we use anyways.
          */
-        if (filemtime($path) < $entry->lastModified()->timestamp) {
+        if ($entry->lastModified() && filemtime($path) < $entry->lastModified()->timestamp) {
 
             $this->dispatch(new PutFile($this->fieldType));
 
