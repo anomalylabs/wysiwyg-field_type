@@ -8,74 +8,76 @@ $(document).on('ajaxComplete ready shown.bs.tab', function () {
          */
         var textarea = $(this);
 
-        var buttons = textarea.data('available_buttons');
-        var plugins = textarea.data('available_plugins');
+        if (!textarea.attr('readonly')) {
+            var buttons = textarea.data('available_buttons');
+            var plugins = textarea.data('available_plugins');
 
-        textarea.addClass('hasEditor');
+            textarea.addClass('hasEditor');
 
-        textarea.redactor({
+            textarea.redactor({
 
-            element: $(this),
+                element: $(this),
 
-            /**
-             * Initialize the editor icons.
-             */
-            callbacks: {
-                init: function () {
+                /**
+                 * Initialize the editor icons.
+                 */
+                callbacks: {
+                    init: function () {
 
-                    var icons = {};
+                        var icons = {};
 
-                    $.each(buttons, function (k, v) {
-                        if (v.icon) {
-                            icons[v.button ? v.button : k] = '<i class="' + v.icon + '"></i>';
-                        }
-                    });
+                        $.each(buttons, function (k, v) {
+                            if (v.icon) {
+                                icons[v.button ? v.button : k] = '<i class="' + v.icon + '"></i>';
+                            }
+                        });
 
-                    $.each(plugins, function (k, v) {
-                        if (v.icon) {
-                            icons[v.button ? v.button : k] = '<i class="' + v.icon + '"></i>';
-                        }
-                    });
+                        $.each(plugins, function (k, v) {
+                            if (v.icon) {
+                                icons[v.button ? v.button : k] = '<i class="' + v.icon + '"></i>';
+                            }
+                        });
 
-                    $.each(this.button.all(), $.proxy(function (i, s) {
+                        $.each(this.button.all(), $.proxy(function (i, s) {
 
-                        var key = $(s).attr('rel');
+                            var key = $(s).attr('rel');
 
-                        if (typeof icons[key] !== 'undefined') {
-                            var icon = icons[key];
-                            var button = this.button.get(key);
-                            this.button.setIcon(button, icon);
-                        }
+                            if (typeof icons[key] !== 'undefined') {
+                                var icon = icons[key];
+                                var button = this.button.get(key);
+                                this.button.setIcon(button, icon);
+                            }
 
-                    }, this));
-                }
-            },
+                        }, this));
+                    }
+                },
 
-            /**
-             * Settings
-             */
-            script: false,
-            structure: true,
-            linkTooltip: true,
-            cleanOnPaste: true,
-            toolbarFixed: false,
-            imagePosition: true,
-            imageResizable: true,
-            imageFloatMargin: '20px',
-            removeEmpty: ['strong', 'em', 'p'],
+                /**
+                 * Settings
+                 */
+                script: false,
+                structure: true,
+                linkTooltip: true,
+                cleanOnPaste: true,
+                toolbarFixed: false,
+                imagePosition: true,
+                imageResizable: true,
+                imageFloatMargin: '20px',
+                removeEmpty: ['strong', 'em', 'p'],
 
-            /**
-             * Features
-             */
-            minHeight: textarea.data('height'),
-            placeholder: textarea.attr('placeholder'),
-            folders: textarea.data('folders').toString().split(','),
-            buttons: textarea.data('buttons').toString().split(','),
-            plugins: textarea.data('plugins').toString().split(',')
-        });
+                /**
+                 * Features
+                 */
+                minHeight: textarea.data('height'),
+                placeholder: textarea.attr('placeholder'),
+                folders: textarea.data('folders').toString().split(','),
+                buttons: textarea.data('buttons').toString().split(','),
+                plugins: textarea.data('plugins').toString().split(',')
+            });
 
-        textarea.closest('form').on('submit', function () {
-            textarea.val(textarea.redactor('code.get'));
-        });
+            textarea.closest('form').on('submit', function () {
+                textarea.val(textarea.redactor('code.get'));
+            });
+        }
     });
 });
