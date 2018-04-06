@@ -79,8 +79,8 @@ class WysiwygFieldType extends FieldType
             $this->getNamespace('redactor.configurations.' . $this->config('configuration', 'default'))
         );
 
-        $buttons = array_keys(config($this->getNamespace('redactor.buttons')));
-        $plugins = array_keys(config($this->getNamespace('redactor.plugins')));
+        $buttons = array_keys(config($this->getNamespace('redactor.buttons'), []));
+        $plugins = array_keys(config($this->getNamespace('redactor.plugins'), []));
 
         /*
          * Set the buttons and plugins from config.
