@@ -111,7 +111,15 @@ class WysiwygFieldType extends FieldType
         $directory = $this->entry->getEntryId();
         $file      = $this->getFileName();
 
-        return "{$namespace}/{$slug}/{$directory}/{$file}";
+        return implode(
+            DIRECTORY_SEPARATOR,
+            [
+                $namespace,
+                $slug,
+                $directory,
+                $file,
+            ]
+        );
     }
 
     /**
