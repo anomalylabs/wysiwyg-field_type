@@ -26,12 +26,6 @@
           data-available_buttons="{{ config_get(field_type.getNamespace('redactor.buttons'))|json_encode }}"
           data-available_plugins="{{ config_get(field_type.getNamespace('redactor.plugins'))|json_encode }}" {{ html_attributes(field_type.attributes) }} {{ field_type.disabled ? 'disabled' }} {{ field_type.readonly ? 'readonly' }}>{{ field_type.value }}</textarea>
 
-{% if config('app.debug') and field_type.storage_path %}
-    <small class="text-muted hidden-md">
-        {{ field_type.storage_path }}
-    </small>
-{% endif %}
-
 <div class="modal remote" id="{{ field_type.input_name }}-modal">
     <div class="modal-dialog modal-wide">
         <div class="modal-content"></div>
