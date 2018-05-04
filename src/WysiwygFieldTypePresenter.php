@@ -84,18 +84,6 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     }
 
     /**
-     * Return the rendered content.
-     *
-     * @param  array $payload
-     * @return string
-     * @deprecated since version 2.0
-     */
-    public function rendered(array $payload = [])
-    {
-        return $this->render($payload);
-    }
-
-    /**
      * Return the parsed content.
      *
      * @param  array $payload
@@ -104,18 +92,6 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     public function parse(array $payload = [])
     {
         return $this->template->render($this->content(), (new Decorator())->decorate($payload));
-    }
-
-    /**
-     * Return the parsed content.
-     *
-     * @param  array $payload
-     * @return string
-     * @deprecated since version 2.0
-     */
-    public function parsed(array $payload = [])
-    {
-        return $this->parse($payload);
     }
 
     /**
