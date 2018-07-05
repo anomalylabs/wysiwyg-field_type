@@ -15,7 +15,7 @@ return [
     ],
     'line_breaks' => [
         'name'         => 'Line Breaks',
-        'instructions' => 'Use line beaks instead of paragraph tags?',
+        'instructions' => 'Use line breaks instead of paragraph tags?',
     ],
     'folders'     => [
         'name'         => 'Folders',
