@@ -88,7 +88,7 @@ class SyncFile
          * If the database is newer then update the file
          * since that is what we use anyways.
          */
-        if ($entry->lastModified() && filemtime($path) < $entry->lastModified()->timestamp) {
+        if ($entry->lastModified() && filemtime($path) <= $entry->lastModified()->timestamp) {
 
             $this->dispatch(new PutFile($this->fieldType));
 
