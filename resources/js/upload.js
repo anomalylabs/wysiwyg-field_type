@@ -20,7 +20,6 @@ $(function() {
         },
         accept: function(file, done) {
             $.post(REQUEST_ROOT_PATH + '/streams/wysiwyg-field_type/exists/' + element.data('folder'), {'file': file.name}, function(data) {
-                console.log(data);
                 if (data.exists) {
                     if (!confirm(file.name + " " + element.data('overwrite'))) {
                         dropzone.removeFile(file);
