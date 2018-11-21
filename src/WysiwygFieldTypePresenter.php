@@ -4,6 +4,7 @@ use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Support\Decorator;
 use Anomaly\Streams\Platform\Support\Str;
 use Anomaly\Streams\Platform\Support\Template;
+use Anomaly\WysiwygFieldType\Command\PutFile;
 use Illuminate\View\Factory;
 
 /**
@@ -48,8 +49,8 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     /**
      * Create a new EditorFieldTypePresenter instance.
      *
-     * @param Str      $str
-     * @param Factory  $view
+     * @param Str $str
+     * @param Factory $view
      * @param Template $template
      * @param          $object
      */
@@ -80,6 +81,10 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      */
     public function render(array $payload = [])
     {
+        if (!file_exists($this->object->getStoragePath())) {
+            $this->dispatch(new PutFile($this->object));
+        }
+
         return $this->view->make($this->object->getViewPath(), $payload)->render();
     }
 
@@ -107,7 +112,7 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     /**
      * Return an excerpt of the text.
      *
-     * @param  int    $length
+     * @param  int $length
      * @param  string $ending
      * @return string
      */
