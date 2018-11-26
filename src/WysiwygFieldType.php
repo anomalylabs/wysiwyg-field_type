@@ -92,5 +92,55 @@ class WysiwygFieldType extends FieldType
 
         return $config;
     }
-    
+
+    /**
+     * Get the file path.
+     *
+     * @return null|string
+     */
+    public function getFilePath()
+    {
+        return str_replace('storage::', '', $this->template->asset($this->getValue(), 'twig'));
+    }
+
+    /**
+     * Get the storage path.
+     *
+     * @return null|string
+     */
+    public function getStoragePath()
+    {
+        return $this->application->getStoragePath($this->getFilePath());
+    }
+
+    /**
+     * Get the view path.
+     *
+     * @return string
+     */
+    public function getViewPath()
+    {
+        return 'storage::' . str_replace(['.html', '.twig'], '', $this->getFilePath());
+    }
+
+    /**
+     * Get the asset path.
+     *
+     * @return string
+     */
+    public function getAssetPath()
+    {
+        return 'storage::' . $this->getFilePath();
+    }
+
+    /**
+     * Get the storage file name.
+     *
+     * @return string
+     */
+    public function getFileName()
+    {
+        return basename($this->getFilePath());
+    }
+
 }
