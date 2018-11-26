@@ -1,10 +1,8 @@
 <?php namespace Anomaly\WysiwygFieldType;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
-use Anomaly\Streams\Platform\Support\Decorator;
 use Anomaly\Streams\Platform\Support\Str;
 use Anomaly\Streams\Platform\Support\Template;
-use Anomaly\WysiwygFieldType\Command\PutFile;
 use Illuminate\View\Factory;
 
 /**
@@ -64,13 +62,13 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     }
 
     /**
-     * Return the applicable path.
+     * Return the namespaced path.
      *
      * @return null|string
      */
     public function path()
     {
-        return $this->object->getViewPath();
+        return $this->template->make($this->object->getValue());
     }
 
     /**
@@ -81,11 +79,7 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      */
     public function render(array $payload = [])
     {
-        if (!file_exists($this->object->getStoragePath())) {
-            $this->dispatch(new PutFile($this->object));
-        }
-
-        return $this->view->make($this->object->getViewPath(), $payload)->render();
+        return $this->template->render($this->object->getValue(), $payload);
     }
 
     /**
@@ -93,10 +87,11 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      *
      * @param  array $payload
      * @return string
+     * @deprecated Use render. Removing in 3.2.
      */
     public function parse(array $payload = [])
     {
-        return $this->template->render($this->content(), (new Decorator())->decorate($payload));
+        return $this->render($payload);
     }
 
     /**
@@ -106,7 +101,7 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      */
     public function content()
     {
-        return file_get_contents($this->object->getStoragePath());
+        return $this->object->getValue();
     }
 
     /**
@@ -139,10 +134,6 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      */
     public function __toString()
     {
-        if (!$this->object->getValue()) {
-            return '';
-        }
-
         return $this->render();
     }
 }

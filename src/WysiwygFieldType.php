@@ -2,8 +2,6 @@
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Application\Application;
-use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
-use Anomaly\Streams\Platform\Entry\EntryTranslationsModel;
 use Anomaly\Streams\Platform\Support\Template;
 
 /**
@@ -42,6 +40,13 @@ class WysiwygFieldType extends FieldType
     ];
 
     /**
+     * The template utility.
+     *
+     * @var Template
+     */
+    protected $template;
+
+    /**
      * The application utility.
      *
      * @var Application
@@ -51,10 +56,12 @@ class WysiwygFieldType extends FieldType
     /**
      * Create a new WysiwygFieldType instance.
      *
+     * @param Template $template
      * @param Application $application
      */
-    public function __construct(Application $application)
+    public function __construct(Template $template, Application $application)
     {
+        $this->template    = $template;
         $this->application = $application;
     }
 
@@ -66,11 +73,6 @@ class WysiwygFieldType extends FieldType
     public function getConfig()
     {
         $config = parent::getConfig();
-
-        /**
-         * Set default syncing behavior.
-         */
-        $config['sync'] = array_get($config, 'sync', config($this->getNamespace('storage.sync')));
 
         /*
          * Get the configuration values.
@@ -90,91 +92,5 @@ class WysiwygFieldType extends FieldType
 
         return $config;
     }
-
-    /**
-     * Get the file path.
-     *
-     * @return null|string
-     */
-    public function getFilePath()
-    {
-        if ($this->entry === null || !is_object($this->entry) || !$this->entry->getId()) {
-            return null;
-        }
-
-        if (!$this->entry instanceof EntryInterface && !$this->entry instanceof EntryTranslationsModel) {
-            return null;
-        }
-
-        $slug      = $this->entry->getStreamSlug();
-        $namespace = $this->entry->getStreamNamespace();
-        $directory = $this->entry->getEntryId();
-        $file      = $this->getFileName();
-
-        return implode(
-            DIRECTORY_SEPARATOR,
-            [
-                $namespace,
-                $slug,
-                $directory,
-                $file,
-            ]
-        );
-    }
-
-    /**
-     * Get the storage path.
-     *
-     * @return null|string
-     */
-    public function getStoragePath()
-    {
-        if (!$path = $this->getFilePath()) {
-            return null;
-        }
-
-        return $this->application->getStoragePath($path);
-    }
-
-    /**
-     * Get the view path.
-     *
-     * @return string
-     */
-    public function getViewPath()
-    {
-        if ($this->config('sync') === false) {
-            return app(Template::class)->path($this->getValue());
-        }
-
-        if (!$path = $this->getFilePath()) {
-            return null;
-        }
-
-        return 'storage::' . str_replace(['.html', '.twig'], '', $path);
-    }
-
-    /**
-     * Get the asset path.
-     *
-     * @return string
-     */
-    public function getAssetPath()
-    {
-        if (!$path = $this->getFilePath()) {
-            return null;
-        }
-
-        return 'storage::' . $path;
-    }
-
-    /**
-     * Get the storage file name.
-     *
-     * @return string
-     */
-    protected function getFileName()
-    {
-        return trim($this->getField() . '_' . $this->getLocale(), '_') . '.twig';
-    }
+    
 }
