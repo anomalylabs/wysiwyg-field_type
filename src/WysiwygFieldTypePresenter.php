@@ -68,7 +68,7 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      */
     public function path()
     {
-        return $this->template->make($this->object->getValue());
+        return $this->object->getViewPath();
     }
 
     /**
