@@ -87,7 +87,6 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      *
      * @param  array $payload
      * @return string
-     * @deprecated Use render. Removing in 3.2.
      */
     public function parse(array $payload = [])
     {
