@@ -79,7 +79,7 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      */
     public function render(array $payload = [])
     {
-        return $this->template->render($this->object->getValue(), $payload);
+        return (string)$this->template->render($this->object->getValue(), $payload);
     }
 
     /**
@@ -133,6 +133,6 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      */
     public function __toString()
     {
-        return (string)$this->render();
+        return $this->render();
     }
 }
