@@ -1,19 +1,16 @@
 <?php
 
-use Anomaly\WysiwygFieldType\Support\Config\ButtonsHandler;
-use Anomaly\WysiwygFieldType\Support\Config\PluginsHandler;
-
 return [
     'buttons'     => [
         'type'   => 'anomaly.field_type.checkboxes',
         'config' => [
-            'handler' => ButtonsHandler::class,
+            'handler' => \Anomaly\WysiwygFieldType\Support\Config\ButtonsHandler::class,
         ],
     ],
     'plugins'     => [
         'type'   => 'anomaly.field_type.checkboxes',
         'config' => [
-            'handler' => PluginsHandler::class,
+            'handler' => \Anomaly\WysiwygFieldType\Support\Config\PluginsHandler::class,
         ],
     ],
     'height'      => [
