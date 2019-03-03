@@ -1,9 +1,9 @@
-(function($) {
-    $.Redactor.prototype.imagemanager = function() {
+(function ($) {
+    $.Redactor.prototype.imagemanager = function () {
         return {
-            init: function() {
+            init: function () {
 
-                var button = this.button.add('image', 'Insert Image');
+                let button = this.button.add('image', 'Insert Image');
 
                 this.button.setIcon(button, '<i class="fa fa-picture-o"></i>');
 
@@ -26,36 +26,36 @@
                     this.imagemanager.insert
                 );
             },
-            select: function() {
+            select: function () {
 
                 this.selection.save();
 
-                var params = this.imagemanager.params();
+                let params = this.imagemanager.params();
 
                 $('#' + this.opts.element.attr('name') + '-modal')
                     .modal('show')
                     .find('.modal-content')
                     .load(REQUEST_ROOT_PATH + '/streams/wysiwyg-field_type/index?' + params);
             },
-            upload: function() {
+            upload: function () {
 
                 this.selection.save();
 
-                var params = this.imagemanager.params();
+                let params = this.imagemanager.params();
 
                 $('#' + this.opts.element.attr('name') + '-modal')
                     .modal('show')
                     .find('.modal-content')
                     .load(REQUEST_ROOT_PATH + '/streams/wysiwyg-field_type/choose?' + params);
             },
-            insert: function(e) {
+            insert: function (e) {
 
                 this.selection.restore();
 
                 this.buffer.set();
                 this.air.collapsed();
 
-                var file = $(e.target).data('entry');
+                let file = $(e.target).data('entry');
 
                 if (file == undefined) {
 
@@ -66,15 +66,21 @@
                     return false;
                 }
 
-                var url = REQUEST_ROOT_PATH + '/files/' + file;
+                let url = REQUEST_ROOT_PATH + '/files/' + file;
 
-                this.insert.node($('<img />').attr('src', url));
+                let alt = url.substring(url.lastIndexOf('/') + 1);
+
+                alt = alt.substring(0, alt.lastIndexOf('.'));
+                alt = alt.toLowerCase().replace(/[_-]+/g, ' ').replace(/\s{2,}/g, ' ').trim();
+                alt = alt.charAt(0).toUpperCase() + alt.slice(1);
+
+                this.insert.node($('<img alt="' + alt + '" />').attr('src', url));
 
                 $(e.target).closest('.modal').modal('hide');
 
                 return false;
             },
-            params: function() {
+            params: function () {
                 return $.param({
                     mode: 'image',
                     folders: this.opts.folders
