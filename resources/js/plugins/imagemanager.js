@@ -66,7 +66,7 @@
                     return false;
                 }
 
-                let url = REQUEST_ROOT_PATH + '/files/' + file;
+                let url = file.indexOf('http') == 0 ? file : REQUEST_ROOT_PATH + '/files/' + file;
 
                 let alt = url.substring(url.lastIndexOf('/') + 1);
 
