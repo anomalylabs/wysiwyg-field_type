@@ -1,5 +1,8 @@
 <?php namespace Anomaly\WysiwygFieldType\Table;
 
+use Anomaly\FilesModule\File\Contract\FileInterface;
+use Anomaly\Streams\Platform\Application\Application;
+
 /**
  * Class UploadTableButtons
  *
@@ -13,15 +16,23 @@ class UploadTableButtons
     /**
      * Handle the table buttons.
      *
+     * @param Application $application
      * @param UploadTableBuilder $builder
      */
-    public function handle(UploadTableBuilder $builder)
+    public function handle(Application $application, UploadTableBuilder $builder)
     {
         $builder->setButtons(
             [
                 'select' => [
                     'data-select' => $builder->getMode(),
-                    'data-entry'  => '{entry.path}',
+                    'data-entry'  => function (FileInterface $entry) use ($application) {
+
+                        if (!strpos(asset($application->getAssetsPath('forms-module')), $url = $entry->url())) {
+                            return $entry->path();
+                        }
+
+                        return $url;
+                    },
                 ],
             ]
         );
