@@ -17,16 +17,19 @@ class FileTableButtons
      * Handle the table buttons.
      *
      * @param FileTableBuilder $builder
+     * @param Application $application
      */
-    public function handle(Application $application, FileTableBuilder $builder)
+    public function handle(FileTableBuilder $builder, Application $application)
     {
+        $segment = "app/{$application->getReference()}/files-module";
+
         $builder->setButtons(
             [
                 'select' => [
                     'data-select' => $builder->getMode(),
-                    'data-entry'  => function (FileInterface $entry) use ($application) {
+                    'data-entry'  => function (FileInterface $entry) use ($segment) {
 
-                        if (strpos(asset($application->getAssetsPath('files-module')), $url = $entry->url())) {
+                        if (strpos($url = $entry->url(), $segment)) {
                             return $entry->path();
                         }
 

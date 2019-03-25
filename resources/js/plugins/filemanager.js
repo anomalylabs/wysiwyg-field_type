@@ -3,7 +3,7 @@
         return {
             init: function() {
 
-                var button = this.button.add('file', 'Insert File');
+                let button = this.button.add('file', 'Insert File');
 
                 this.button.setIcon(button, '<i class="fa fa-paperclip"></i>');
 
@@ -30,7 +30,7 @@
 
                 this.selection.save();
 
-                var params = this.filemanager.params();
+                let params = this.filemanager.params();
 
                 $('#' + this.opts.element.attr('name') + '-modal')
                     .modal('show')
@@ -41,7 +41,7 @@
 
                 this.selection.save();
 
-                var params = this.filemanager.params();
+                let params = this.filemanager.params();
 
                 $('#' + this.opts.element.attr('name') + '-modal')
                     .modal('show')
@@ -55,7 +55,7 @@
                 this.buffer.set();
                 this.air.collapsed();
 
-                var file = $(e.target).data('entry');
+                let file = $(e.target).data('entry');
 
                 if (file == undefined) {
 
@@ -66,7 +66,7 @@
                     return false;
                 }
 
-                var url = REQUEST_ROOT_PATH + '/files/download/' + $(e.target).data('entry');
+                let url = file.indexOf('http') == 0 ? file : REQUEST_ROOT_PATH + '/files/download/' + file;
 
                 this.insert.node($('<a />').attr('href', url).text(this.selection.is() ? this.selection.text() : url));
 
