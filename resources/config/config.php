@@ -1,19 +1,19 @@
 <?php
 
 return [
-    'buttons'     => [
+    'buttons'       => [
         'type'   => 'anomaly.field_type.checkboxes',
         'config' => [
             'handler' => \Anomaly\WysiwygFieldType\Support\Config\ButtonsHandler::class,
         ],
     ],
-    'plugins'     => [
+    'plugins'       => [
         'type'   => 'anomaly.field_type.checkboxes',
         'config' => [
             'handler' => \Anomaly\WysiwygFieldType\Support\Config\PluginsHandler::class,
         ],
     ],
-    'height'      => [
+    'height'        => [
         'type'     => 'anomaly.field_type.integer',
         'required' => true,
         'config'   => [
@@ -21,7 +21,10 @@ return [
             'min'  => 75,
         ],
     ],
-    'line_breaks' => [
+    'line_breaks'   => [
         'type' => 'anomaly.field_type.boolean',
+    ],
+    'default_value' => [
+        'type' => 'anomaly.field_type.wysiwyg',
     ],
 ];

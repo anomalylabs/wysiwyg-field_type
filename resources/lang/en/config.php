@@ -1,24 +1,28 @@
 <?php
 
 return [
-    'buttons'     => [
+    'buttons'       => [
         'name'         => 'Buttons',
         'instructions' => 'Specify which editor buttons to display.',
     ],
-    'plugins'     => [
+    'plugins'       => [
         'name'         => 'Plugins',
         'instructions' => 'Specify which plugins to display.',
     ],
-    'height'      => [
+    'height'        => [
         'name'         => 'Height',
         'instructions' => 'Specify the editor height in pixels.',
     ],
-    'line_breaks' => [
+    'line_breaks'   => [
         'name'         => 'Line Breaks',
         'instructions' => 'Use line breaks instead of paragraph tags?',
     ],
-    'folders'     => [
+    'folders'       => [
         'name'         => 'Folders',
         'instructions' => 'Which folders are available for files and images?',
+    ],
+    'default_value' => [
+        'name'         => 'Default Value',
+        'instructions' => 'Specify the default value.',
     ],
 ];
