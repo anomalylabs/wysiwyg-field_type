@@ -1,19 +1,19 @@
 <?php
 
 return [
-    'buttons'       => [
+    'buttons'          => [
         'type'   => 'anomaly.field_type.checkboxes',
         'config' => [
             'handler' => \Anomaly\WysiwygFieldType\Support\Config\ButtonsHandler::class,
         ],
     ],
-    'plugins'       => [
+    'plugins'          => [
         'type'   => 'anomaly.field_type.checkboxes',
         'config' => [
             'handler' => \Anomaly\WysiwygFieldType\Support\Config\PluginsHandler::class,
         ],
     ],
-    'height'        => [
+    'height'           => [
         'type'     => 'anomaly.field_type.integer',
         'required' => true,
         'config'   => [
@@ -21,10 +21,19 @@ return [
             'min'  => 75,
         ],
     ],
-    'line_breaks'   => [
-        'type' => 'anomaly.field_type.boolean',
+    'line_breaks'      => [
+        'type'   => 'anomaly.field_type.boolean',
+        'config' => [
+            'default_value' => config('anomaly.field_type.wysiwyg::redactor.line_breaks', false),
+        ],
     ],
-    'default_value' => [
+    'remove_new_lines' => [
+        'type'   => 'anomaly.field_type.boolean',
+        'config' => [
+            'default_value' => config('anomaly.field_type.wysiwyg::redactor.remove_new_lines', false),
+        ],
+    ],
+    'default_value'    => [
         'type' => 'anomaly.field_type.wysiwyg',
     ],
 ];

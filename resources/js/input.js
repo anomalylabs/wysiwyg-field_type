@@ -61,6 +61,8 @@ $(document).on('ajaxComplete ready shown.bs.tab', function () {
             toolbarFixed: false,
             imagePosition: true,
             imageResizable: true,
+            breakline: Boolean(textarea.data('breakline')),
+            removeNewLines: Boolean(textarea.data('remove_new_lines')),
             imageFloatMargin: '20px',
             removeEmpty: ['strong', 'em', 'p'],
 

@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'line_breaks'      => env('WYSIWYG_LINE_BREAKS', false),
+    'remove_new_lines' => env('WYSIWYG_REMOVE_NEW_LINES', false),
+
     'buttons'        => [
         'format'         => [],
         'bold'           => [
