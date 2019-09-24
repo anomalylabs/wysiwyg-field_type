@@ -6,14 +6,13 @@ use Anomaly\FilesModule\Folder\Contract\FolderInterface;
 use Anomaly\FilesModule\Folder\Contract\FolderRepositoryInterface;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\WysiwygFieldType\Table\FileTableBuilder;
-use Anomaly\WysiwygFieldType\Table\ValueTableBuilder;
 
 /**
  * Class FilesController
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class FilesController extends AdminController
 {
@@ -27,7 +26,7 @@ class FilesController extends AdminController
     public function index(FileTableBuilder $table)
     {
         return $table
-            ->setMode($this->request->get('mode', 'file'))
+            ->setMode(request('mode', 'file'))
             ->render();
     }
 
@@ -39,7 +38,7 @@ class FilesController extends AdminController
      */
     public function choose(FolderRepositoryInterface $folders)
     {
-        return $this->view->make(
+        return view(
             'anomaly.field_type.wysiwyg::choose',
             [
                 'folders' => $folders->all(),
@@ -55,7 +54,7 @@ class FilesController extends AdminController
      */
     public function selected(ValueTableBuilder $table)
     {
-        return $table->setUploaded(explode(',', $this->request->get('uploaded')))->make()->getTableContent();
+        return $table->setUploaded(explode(',', request('uploaded')))->make()->getTableContent();
     }
 
     /**
@@ -71,9 +70,9 @@ class FilesController extends AdminController
         $exists  = false;
 
         /* @var FolderInterface|null $folder */
-        $folder = $this->dispatch(new GetFolder($folder));
+        $folder = dispatch_now(new GetFolder($folder));
 
-        if ($folder && $file = $files->findByNameAndFolder($this->request->get('file'), $folder)) {
+        if ($folder && $file = $files->findByNameAndFolder(request('file'), $folder)) {
             $exists = true;
         }
 

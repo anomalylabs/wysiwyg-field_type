@@ -26,5 +26,4 @@ class WysiwygFieldTypeServiceProvider extends AddonServiceProvider
         'streams/wysiwyg-field_type/handle'          => 'Anomaly\WysiwygFieldType\Http\Controller\UploadController@upload',
         'streams/wysiwyg-field_type/recent'          => 'Anomaly\WysiwygFieldType\Http\Controller\UploadController@recent',
     ];
-
 }

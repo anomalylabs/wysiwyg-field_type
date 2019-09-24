@@ -26,7 +26,6 @@ class UploadTableButtons
                 'select' => [
                     'data-select' => $builder->getMode(),
                     'data-entry'  => function (FileInterface $entry) use ($application) {
-
                         if (strpos(asset($application->getAssetsPath('files-module')), $url = $entry->url())) {
                             return $entry->path();
                         }

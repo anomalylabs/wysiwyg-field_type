@@ -1,7 +1,6 @@
 <?php namespace Anomaly\WysiwygFieldType\Support\Config;
 
 use Anomaly\CheckboxesFieldType\CheckboxesFieldType;
-use Illuminate\Contracts\Config\Repository;
 
 /**
  * Class ButtonsHandler
@@ -17,11 +16,10 @@ class ButtonsHandler
      * Handle the options.
      *
      * @param CheckboxesFieldType $fieldType
-     * @param Repository $config
      */
-    public function handle(CheckboxesFieldType $fieldType, Repository $config)
+    public function handle(CheckboxesFieldType $fieldType)
     {
-        $keys = array_keys($config->get('anomaly.field_type.wysiwyg::redactor.buttons'));
+        $keys = array_keys(config('anomaly.field_type.wysiwyg::redactor.buttons'));
 
         $values = array_map(
             function ($value) {

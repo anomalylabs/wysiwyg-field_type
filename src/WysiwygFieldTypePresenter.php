@@ -72,6 +72,17 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     }
 
     /**
+     * Return the parsed content.
+     *
+     * @param  array $payload
+     * @return string
+     */
+    public function parse(array $payload = [])
+    {
+        return $this->render($payload);
+    }
+
+    /**
      * Return the rendered content.
      *
      * @param  array $payload
@@ -84,27 +95,6 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
         } catch (\Exception $e) {
             return $this->object->getValue();
         }
-    }
-
-    /**
-     * Return the parsed content.
-     *
-     * @param  array $payload
-     * @return string
-     */
-    public function parse(array $payload = [])
-    {
-        return $this->render($payload);
-    }
-
-    /**
-     * Return the file contents.
-     *
-     * @return string
-     */
-    public function content()
-    {
-        return $this->object->getValue();
     }
 
     /**
@@ -128,6 +118,16 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     public function text($allowed = null)
     {
         return strip_tags($this->content(), $allowed);
+    }
+
+    /**
+     * Return the file contents.
+     *
+     * @return string
+     */
+    public function content()
+    {
+        return $this->object->getValue();
     }
 
     /**

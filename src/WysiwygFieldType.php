@@ -95,16 +95,6 @@ class WysiwygFieldType extends FieldType
     }
 
     /**
-     * Get the file path.
-     *
-     * @return null|string
-     */
-    public function getFilePath()
-    {
-        return str_replace('storage::', '', $this->template->asset($this->getValue(), 'twig'));
-    }
-
-    /**
      * Get the storage path.
      *
      * @return null|string
@@ -112,6 +102,16 @@ class WysiwygFieldType extends FieldType
     public function getStoragePath()
     {
         return $this->application->getStoragePath($this->getFilePath());
+    }
+
+    /**
+     * Get the file path.
+     *
+     * @return null|string
+     */
+    public function getFilePath()
+    {
+        return str_replace('storage::', '', $this->template->asset($this->getValue(), 'twig'));
     }
 
     /**
@@ -143,5 +143,4 @@ class WysiwygFieldType extends FieldType
     {
         return basename($this->getFilePath());
     }
-
 }

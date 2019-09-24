@@ -25,7 +25,7 @@ class UploadController extends AdminController
      */
     public function index(FolderRepositoryInterface $folders, UploadTableBuilder $table, $folder)
     {
-        return $this->view->make(
+        return view(
             'anomaly.field_type.wysiwyg::upload/index',
             [
                 'folder' => $folders->find($folder),
@@ -37,29 +37,29 @@ class UploadController extends AdminController
     /**
      * Upload a file.
      *
-     * @param  FileUploader                  $uploader
-     * @param  FolderRepositoryInterface     $folders
+     * @param  FileUploader $uploader
+     * @param  FolderRepositoryInterface $folders
      * @return \Illuminate\Http\JsonResponse
      */
     public function upload(FileUploader $uploader, FolderRepositoryInterface $folders)
     {
-        if ($file = $uploader->upload($this->request->file('upload'), $folders->find($this->request->get('folder')))) {
-            return $this->response->json($file->getAttributes());
+        if ($file = $uploader->upload(request()->file('upload'), $folders->find(request('folder')))) {
+            return response()->json($file->getAttributes());
         }
 
-        return $this->response->json(['error' => 'There was a problem uploading the file.'], 500);
+        return response()->json(['error' => 'There was a problem uploading the file.'], 500);
     }
 
     /**
      * Return the recently uploaded files.
      *
-     * @param  FileTableBuilder                           $table
+     * @param  FileTableBuilder $table
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function recent(UploadTableBuilder $table)
     {
-        return $table->setUploaded(explode(',', $this->request->get('uploaded')))
-            ->setMode($this->request->get('mode', 'file'))
+        return $table->setUploaded(explode(',', request('uploaded')))
+            ->setMode(request('mode', 'file'))
             ->make()
             ->getTableContent();
     }

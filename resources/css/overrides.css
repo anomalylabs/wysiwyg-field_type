@@ -1,28 +1,29 @@
 .redactor-toolbar li a:hover {
-  background-color: #2e2e2e;
-  color: #ffffff;
+    background-color: #2e2e2e;
+    color: #ffffff;
 }
 
 .redactor-dropdown li:hover {
-  background-color: #2e2e2e;
+    background-color: #2e2e2e;
 }
 
 #redactor-modal-overlay {
-  background-color: rgba(0, 0, 0, 0.6) !important;
+    background-color: rgba(0, 0, 0, 0.6) !important;
 }
 
 #redactor-modal button#redactor-modal-button-action {
-  background-color: #2e2e2e;
+    background-color: #2e2e2e;
 }
 
 #redactor-modal button#redactor-modal-button-action:hover {
-  color: rgba(255, 255, 255, 0.6);
-  background-color: #373737;
+    color: rgba(255, 255, 255, 0.6);
+    background-color: #373737;
 }
 
 .redactor-styles a {
-  color: #3b99fc;
+    color: #3b99fc;
 }
+
 .redactor-styles a:hover {
-  color: #377ff3;
+    color: #377ff3;
 }
