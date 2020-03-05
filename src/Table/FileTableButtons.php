@@ -27,13 +27,8 @@ class FileTableButtons
             [
                 'select' => [
                     'data-select' => $builder->getMode(),
-                    'data-entry'  => function (FileInterface $entry) use ($segment) {
-
-                        if (strpos($url = $entry->url(), $segment)) {
-                            return $entry->path();
-                        }
-
-                        return $url;
+                    'data-entry'  => function (FileInterface $entry) {
+                        return $entry->path();
                     },
                 ],
             ]
