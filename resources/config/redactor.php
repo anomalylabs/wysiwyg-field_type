@@ -30,6 +30,12 @@ return [
 
     ],
     'plugins'        => [
+        'fontcolor'  => [
+            'button'  => 'fa fa-font',
+            'scripts' => [
+                'anomaly.field_type.wysiwyg::js/plugins/fontcolor.js',
+            ],
+        ],        
         'alignment'    => [
             'icon'    => 'fa fa-align-left',
             'scripts' => [
