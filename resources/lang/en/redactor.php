@@ -24,5 +24,6 @@ return [
         'alignment'    => 'Alignment',
         'fullscreen'   => 'Fullscreen',
         'inlinestyle'  => 'Inline Style',
+        'fontcolor'    => 'Font Color'
     ],
 ];
