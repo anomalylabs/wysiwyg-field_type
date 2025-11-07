@@ -3,6 +3,7 @@
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Application\Application;
 use Anomaly\Streams\Platform\Support\Template;
+use Anomaly\WysiwygFieldType\Validation\IframeValidator;
 
 /**
  * Class WysiwygFieldType
@@ -38,6 +39,28 @@ class WysiwygFieldType extends FieldType
         'line_breaks'      => false,
         'remove_new_lines' => false,
         'height'           => 75,
+    ];
+
+    /**
+     * The field type rules.
+     *
+     * @var array
+     */
+    protected $rules = [
+        'iframe_allowed_domains',
+    ];
+
+    /**
+     * Custom validators.
+     * i.e. 'rule' => ['message', 'handler']
+     *
+     * @var array
+     */
+    protected $validators = [
+        'iframe_allowed_domains' => [
+            'message' => 'anomaly.field_type.wysiwyg::message.invalid_iframes',
+            'handler' => IframeValidator::class,
+        ],
     ];
 
     /**

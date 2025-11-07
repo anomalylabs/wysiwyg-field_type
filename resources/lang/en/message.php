@@ -9,4 +9,5 @@ return [
     'no_uploads'       => 'No files uploaded.',
     'uploading'        => 'Uploading',
     'loading'          => 'Loading',
+    'invalid_iframes'  => 'The :attribute contains iframes from disallowed domains.',
 ];
