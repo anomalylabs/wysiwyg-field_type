@@ -16,7 +16,7 @@ The WYSIWYG field type provides a rich text editing experience with RedactorJS, 
 - **Code View**: Switch between visual and HTML source modes
 - **Customizable Toolbar**: Configure visible buttons and plugins
 - **Multiple Configurations**: Different editor setups for different contexts
-- **Template Parsing**: Support for Twig template syntax
+- **Template Parsing**: Optional Twig template syntax (off by default, see the `parse_twig` setting)
 - **Line Break Control**: Choose between `<p>` tags or `<br>` tags
 - **Validation**: HTML validation and iframe domain whitelisting
 - **Auto-save**: Optional content synchronization

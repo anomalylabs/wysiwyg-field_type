@@ -1,5 +1,6 @@
 <?php namespace Anomaly\WysiwygFieldType;
 
+use Anomaly\SettingsModule\Setting\Contract\SettingRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Support\Str;
 use Anomaly\Streams\Platform\Support\Template;
@@ -37,6 +38,13 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
     protected $template;
 
     /**
+     * The settings repository.
+     *
+     * @var SettingRepositoryInterface
+     */
+    protected $settings;
+
+    /**
      * The decorated field type.
      * This is for IDE hinting.
      *
@@ -50,13 +58,15 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      * @param Str $str
      * @param Factory $view
      * @param Template $template
+     * @param SettingRepositoryInterface $settings
      * @param          $object
      */
-    public function __construct(Str $str, Factory $view, Template $template, $object)
+    public function __construct(Str $str, Factory $view, Template $template, SettingRepositoryInterface $settings, $object)
     {
         $this->str      = $str;
         $this->view     = $view;
         $this->template = $template;
+        $this->settings = $settings;
 
         parent::__construct($object);
     }
@@ -79,6 +89,10 @@ class WysiwygFieldTypePresenter extends FieldTypePresenter
      */
     public function render(array $payload = [])
     {
+        if (!$this->settings->value('anomaly.field_type.wysiwyg::parse_twig')) {
+            return (string)$this->object->getValue();
+        }
+
         try {
             return $this->template->render($this->object->getValue(), $payload)->render();
         } catch (\Exception $e) {
