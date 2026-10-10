@@ -1,5 +1,6 @@
 <?php namespace Anomaly\WysiwygFieldType;
 
+use Anomaly\SettingsModule\Setting\Contract\SettingRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Application\Application;
 use Anomaly\Streams\Platform\Support\Template;
@@ -144,6 +145,23 @@ class WysiwygFieldType extends FieldType
      */
     public function getViewPath()
     {
+        if (!app(SettingRepositoryInterface::class)->value('anomaly.field_type.wysiwyg::parse_twig')) {
+
+            /*
+             * Wrap the value in single-quoted Twig string
+             * literals so the view outputs it without parsing.
+             * Chunked to keep each literal within the lexer's
+             * PCRE stack limit.
+             */
+            $literal = '';
+
+            foreach (str_split((string)$this->getValue(), 2048) as $chunk) {
+                $literal .= "{{ '" . addcslashes($chunk, "\\'") . "'|raw }}";
+            }
+
+            return 'storage::' . str_replace(['storage::', '.twig'], '', $this->template->asset($literal, 'twig'));
+        }
+
         return 'storage::' . str_replace(['.html', '.twig'], '', $this->getFilePath());
     }
 
